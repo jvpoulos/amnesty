@@ -32,6 +32,8 @@ tableContinuous(vars =ipums.50.1[c("slaveholder","n.slaves")], weights=ipums.50.
 sum(ipums.50$realprop >= 20000) /nrow(ipums.50)
 sum(ipums.60.1$realprop >= 20000) /nrow(ipums.60.1)
 
+sum((ipums.60.1$realprop + ipums.60.1$persprop) >= 20000) /nrow(ipums.60.1) # combine w personal prop
+
 # Calc property wealth deciles
 wealth.dec.50 <- subset(ipums.50, select=c("serial","realprop")) %>%
   mutate(quantile = ntile(realprop, 10))
