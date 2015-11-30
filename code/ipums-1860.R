@@ -14,7 +14,7 @@ slave.60 <- ddply(slave.60,~serial,summarise,n.slaves=length(serial))
 
 # Merge slave file
 ipums.60.1 <- merge(ipums.60.1,slave.60,by="serial", all.x=TRUE)
-ipums.60.1$n.slaves[is.na(ipums.60.1$n.slaves)] <- 0
-
-ipums.60.1$slaveholder <- ifelse(ipums.60.1$n.slaves>0,1,0)
+# ipums.60.1$n.slaves[is.na(ipums.60.1$n.slaves)] <- 0
+# 
+# ipums.60.1$slaveholder <- ifelse(ipums.60.1$n.slaves>0,1,0)
 

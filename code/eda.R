@@ -1,17 +1,17 @@
 ## Exploratory data analysis: 1850 and 1860 censuses
 
 library(ggplot2)
-library(xtable)
+library(reporttools)
 library(reshape)
+library(weights)
 
-# Make data for histogram
+# Make density plot for real property
 wealth.dens.plot <- melt(data=data.frame("Census"=c(rep("1850 100%",nrow(ipums.50)), 
                                                     rep("1860 1%",nrow(ipums.60.1))),
                                          "realprop"= c(ipums.50$realprop,
                                                        ipums.60.1$realprop)), 
                          id.vars="Census") 
 
-# Make density plot for real property
 wealth.dens <- ggplot(wealth.dens.plot, aes(x = value, fill=Census)) + 
   geom_density(alpha=.3) + 
   xlim(c(1,30000)) +
@@ -22,13 +22,11 @@ wealth.dens <- ggplot(wealth.dens.plot, aes(x = value, fill=Census)) +
 ggsave(paste0(data.directory,"wealth-dens.png"), wealth.dens, width=11, height=8.5)
 
 # Create summary statistics table.
-ipums.s$literate <- ifelse(ipums.s$LIT==4,1,0) # create variables
-ipums.s$school <- ifelse(ipums.s$SCHOOL==2,1,0)
-ipums.s <- cbind(ipums.s,dummify(as.factor(ipums.s$OCC)))
+ipums.50 <- cbind(ipums.50,dummify(as.factor(ipums.50$occ)))
 
-my.stats <- list("n", "min", "mean", "max", "s") # create table
-tableContinuous(vars =ipums.s[c("surname.length","surname.freq","AGE","REALPROP","literate","school","5","22","39","41","49","54","97","136","157","203","266")], prec = 3,stats=my.stats,cap = "`Surname length' is the character length of surnames. `Surname frequency' is the number of times surnames appear in the sample. `Literate' is a binary variable indicating literacy (can read and write). `In school' is an indicator variable for individuals currently in school. Sample is drawn from the 1850 full--count Census. The occupations dummies indicate contemporary occupational categories. Sample is restricted to male heads of households aged 21 and over who living in Georgia at the time of the census, were born in Georgia, and have non--missing surnames and property value.", lab = "sum-1850")
-
+my.stats <- list("min", "mean", "max", "s") # create table
+tableContinuous(vars =ipums.50[c("age", "realprop","5","22","39","41","48","49","54","65","97","110","136","142","154","157","159","188","197","200","203","205","252","266","310")], prec = 3,stats=my.stats, lab = "census-sum")
+tableContinuous(vars =ipums.50.1[c("slaveholder","n.slaves")], weights=ipums.50.1$perwt,prec = 3,stats=my.stats, lab = "census-sum")
 
 # What % in thirteenth exception?
 sum(ipums.50$realprop >= 20000) /nrow(ipums.50)
