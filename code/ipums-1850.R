@@ -1,4 +1,4 @@
-## Load 1850 100% Census sample. Merge 1% with slave schedule. 
+## Load 1850 1% and 100% Census sample. Merge 1% with slave schedule. 
 
 # Set data directory
 data.directory <- "~/Dropbox/github/amnesty/data/"
@@ -30,10 +30,10 @@ data.directory <- "~/Dropbox/github/amnesty/data/"
 # # Drop obs with missing surnames
 # ipums.50 <- subset(ipums.50, ipums.50$surname.length>2)
 # 
-# write.csv(ipums.50, file = "ipums-1850-sample.csv", row.names = TRUE)
+# write.csv(ipums.50, file = "ipums-1850-100-sample.csv", row.names = TRUE)
 
 # Import 100% sample
-ipums.50 <- read.csv(paste0(data.directory,"ipums-1850-sample.csv"),header=TRUE, sep = ",")
+ipums.50 <- read.csv(paste0(data.directory,"ipums-1850-100-sample.csv"),header=TRUE, sep = ",")
 
 # Import 1% sample
 ipums.50.1 <- read.delim(paste0(data.directory,"ipums-1850-1.csv"), quote="")

@@ -1,0 +1,26 @@
+Codebook for Amnesty project
+
+[Source: Gough and Hume]
+
+——————————
+
+name		Name of delegate
+state		State represented
+region 		Region of state 
+district 	District no.
+per.black	Percent black
+county		County represented
+age 		Age
+native.state	Native state/country
+profession 	Profession
+realprop.60	1860 real property
+persprop.60	1860 personal property
+realprop.70	1870 real property
+persprop.70	1870 personal property
+died		1 if died before 1870 Census; 0 otherwise [Source: author/Gough and Hume]
+slaves 		Number of slaves held by delegate or wife
+slaves.father	Number of slaves held 
+former.office	Former office
+future.office	Future office
+bio		Other biographical data
+												
