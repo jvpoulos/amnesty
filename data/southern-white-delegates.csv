@@ -65,7 +65,7 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,AL,,,,,,,,,,,,,,,,,
 "Martin, John ",AL,B ,14,69.3,Macon ,41,sc ,Lawyer ,,,,,,,,,U.S. auditor ,"Former Democrat, anti-secessionist "
 ,AL,,,,,,,,,,,,,,,,,
-"Masterson, Byron 0. ",AL,TV ,41,43.2,Lawrence ,44,AL ,Physician ,"$3,000","$2,000","$4,000","$1,400",,,,,Republican nominee for Congress ,"Former Whig, Unionist "
+"Masterson, Byron O. ",AL,TV ,41,43.2,Lawrence ,44,AL ,Physician ,"$3,000","$2,000","$4,000","$1,400",,,,,Republican nominee for Congress ,"Former Whig, Unionist "
 ,AL,,,,,,,,,,,,,,,,,
 "Meadors, John* ",AL,p ,19,55.2,Lee ,29,AL ,Lawyer ,,,,,,,,"(State legislator, 1865)","state legislator, 1872",Confederate captain 
 ,AL,,,,,,,,,,,,,,,,,
@@ -208,7 +208,7 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,AR,,,,,,,,,,,,,,,,,
 "Shoppach, James* ",AR,s ,42,5.6,Saline ,23,AR ,Laborer ,$0,$0,$600,$255,,0,,,Circuit court judge ,
 ,AR,,,,,,,,,,,,,,,,,
-"Snyder, 0. P. ",AR,D ,27,72.3,Jefferson ,37,M0-20? ,Lawyer ,"$5,000",$400,$0,$0,,0,,,"State senator, U.S. Congress ",Vocal opponent of secession 
+"Snyder, O. P. ",AR,D ,27,72.3,Jefferson ,37,M0-20? ,Lawyer ,"$5,000",$400,$0,$0,,0,,,"State senator, U.S. Congress ",Vocal opponent of secession 
 ,AR,,,,,,,,,,,,,,,,,
 "VanHook, R. C. ",AR,s ,47,46.4,Union ,50,NC-21 ,Farmer ,"$3,500","$2,500","$1,200",$800,,0,,,Delegate to 1874 const. convention ,"Former overseer, served in Confederate home guard, opposed slavery "
 ,AR,,,,,,,,,,,,,,,,,
@@ -225,41 +225,41 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,AR,,,,,,,,,,,,,,,,,
 "Wyatt, William ",AR,N ,19,1.1,Searcy ,40,TN-? ,Farmer ,"$3,000","$3,000",$0,$0,,2,,,,
 ,AR,,,,,,,,,,,,,,,,,
-"Armistead, L. C. H ",FL,w ,3,53.8,Jackson ,38,VA ,Customs collector ,"$2,500",$300,$0,"$2,000",,0,,(State representative) ,,
+"Armistead, L. C. + &",FL,w ,3,53.8,Jackson ,38,VA ,Customs collector ,"$2,500",$300,$0,"$2,000",,0,,(State representative) ,,
 ,FL,,,,,,,,,,,,,,,,,
-"Bass, A. G.*:f ",FL,N ,7,75.9,Jefferson ,53,GA ,Farmer ,,,$0,$150,,,,,,
+"Bass, A. G.* &",FL,N ,7,75.9,Jefferson ,53,GA ,Farmer ,,,$0,$150,,,,,,
 ,FL,,,,,,,,,,,,,,,,,
-"Campbell, Johnt:f ",FL,w ,2,12,Walton ,36,FL ,Merchant,$0,$0,$300,$100,,0,,(Sheriff) ,,
+"Campbell, John + &",FL,w ,2,12,Walton ,36,FL ,Merchant,$0,$0,$300,$100,,0,,(Sheriff) ,,
 ,FL,,,,,,,,,,,,,,,,,
-"Cone, William*+ ",FL,N ,8,66.7,Madison ,30,FL ,Farmer ,$0,$0,$500,$300,,0,,,,"Confederate deserter, Unionist "
+"Cone, William* +",FL,N ,8,66.7,Madison ,30,FL ,Farmer ,$0,$0,$500,$300,,0,,,,"Confederate deserter, Unionist "
 ,FL,,,,,,,,,,,,,,,,,
-"Davidson, John:f ",FL,N ,4,63.7,Gadsden ,39,FL ,Circuit ct. judge ,"$5,000","$4,000","$3,000",$500,,,,,State senator ,
+"Davidson, John &",FL,N ,4,63.7,Gadsden ,39,FL ,Circuit ct. judge ,"$5,000","$4,000","$3,000",$500,,,,,State senator ,
 ,FL,,,,,,,,,,,,,,,,,
-"Goss, Jesse*:f ",FL,N ,15,62.6,Marion ,38,GA ,Lawyer ,,,"$4,000","$2,700",,,,,State senator ,"Confederate deserter, joined Union army "
+"Goss, Jesse* &",FL,N ,15,62.6,Marion ,38,GA ,Lawyer ,,,"$4,000","$2,700",,,,,State senator ,"Confederate deserter, joined Union army "
 ,FL,,,,,,,,,,,,,,,,,
-"Hart, Ossiant ",FL,N ,14,57,Duval ,47,FL ,Lawyer ,"$1,000","$4,480","$1,900","$2,000",,5,,,Governor of FL ,Freedmen's Bureau agent 
+"Hart, Ossian &",FL,N ,14,57,Duval ,47,FL ,Lawyer ,"$1,000","$4,480","$1,900","$2,000",,5,,,Governor of FL ,Freedmen's Bureau agent 
 ,FL,,,,,,,,,,,,,,,,,
-"Howse, Edwardt ",FL,N ,15,62.6,Marion ,,NC ,Planter ,"$10,000","$15,000",,,,8,,(County commissioner) ,,
+"Howse, Edward +",FL,N ,15,62.6,Marion ,,NC ,Planter ,"$10,000","$15,000",,,,8,,(County commissioner) ,,
 ,FL,,,,,,,,,,,,,,,,,
-"Krimminger, John*t ",FL,N ,10,14,Lafayette ,48,NC ,Physician ,,,$500,$300,,,,,State senator ,"Confederate deserter, joined Union army, assassinated in 1871 "
-,FL,,,,,,,,,,,,,,,,,
-,FL,,,,,,,,,,,,,,,,,
-"McRae, B. M.t:J: ",FL,N ,13,27.3,Clay ,65,GA ,Farmer ,,,$0,$0,,,,(Court clerk) ,,
-,FL,,,,,,,,,,,,,,,,,
-"Mizell, Davidt:J: ",FL,s ,18,16.1,Orange ,61,GA ,Farmer ,"$2,400","$14,200","$1,000","$1,000",,6,,(State representative) ,,
-,FL,,,,,,,,,,,,,,,,,
-"Mobley, Clairbomet:J: ",FL,s ,17,19.1,Hillsborough ,40,KY ,Lawyer ,,,"$3,000","$1,000",,,,(Delegate to Lecompton convention in Kansas) ,,Confederate veteran 
-,FL,,,,,,,,,,,,,,,,,
-"Pearce, Sarnuelt:J: ",FL,s ,16,39.8,Hernando ,44,GA ,Farmer ,,,"$1,500",$530,,,,,Probate judge ,Union officer 
-,FL,,,,,,,,,,,,,,,,,
-"Powell, johnH ",FL,N ,7,75.9,Jefferson ,38,AL ,Blacksmith ,,,$500,$100,,,,,State representative ,Union officer 
-,FL,,,,,,,,,,,,,,,,,
-"Rogers, Washingtont ",FL,N ,15,62.6,Levy ,39,GA ,Customs house official house official ,,,$0,$0,,,,,,
+"Krimminger, John* &",FL,N ,10,14,Lafayette ,48,NC ,Physician ,,,$500,$300,,,,,State senator ,"Confederate deserter, joined Union army, assassinated in 1871 "
 ,FL,,,,,,,,,,,,,,,,,
 ,FL,,,,,,,,,,,,,,,,,
-"Rowley, Lymant:J: ",FL,w ,,54.7,Escambia ,42,vr ,Editor ,$0,$250,$0,"$3,000",,0,,(State representative) ,,Union officer 
+"McRae, B. M. + &",FL,N ,13,27.3,Clay ,65,GA ,Farmer ,,,$0,$0,,,,(Court clerk) ,,
 ,FL,,,,,,,,,,,,,,,,,
-"Ware, Eldridge*t ",FL,s ,19,40.8,Monroe ,50,NY ,Postmaster of Key West ,$0,$0,"$5,000",$200,,0,,(Coroner) ,,
+"Mizell, David + &",FL,s ,18,16.1,Orange ,61,GA ,Farmer ,"$2,400","$14,200","$1,000","$1,000",,6,,(State representative) ,,
+,FL,,,,,,,,,,,,,,,,,
+"Mobley, Clairbome + &",FL,s ,17,19.1,Hillsborough ,40,KY ,Lawyer ,,,"$3,000","$1,000",,,,(Delegate to Lecompton convention in Kansas) ,,Confederate veteran 
+,FL,,,,,,,,,,,,,,,,,
+"Pearce, Sarnuel + &",FL,s ,16,39.8,Hernando ,44,GA ,Farmer ,,,"$1,500",$530,,,,,Probate judge ,Union officer 
+,FL,,,,,,,,,,,,,,,,,
+"Powell, John + &",FL,N ,7,75.9,Jefferson ,38,AL ,Blacksmith ,,,$500,$100,,,,,State representative ,Union officer 
+,FL,,,,,,,,,,,,,,,,,
+"Rogers, Washington &",FL,N ,15,62.6,Levy ,39,GA ,Customs house official house official ,,,$0,$0,,,,,,
+,FL,,,,,,,,,,,,,,,,,
+,FL,,,,,,,,,,,,,,,,,
+"Rowley, Lymant + &",FL,w ,,54.7,Escambia ,42,vr ,Editor ,$0,$250,$0,"$3,000",,0,,(State representative) ,,Union officer 
+,FL,,,,,,,,,,,,,,,,,
+"Ware, Eldridge* &",FL,s ,19,40.8,Monroe ,50,NY ,Postmaster of Key West ,$0,$0,"$5,000",$200,,0,,(Coroner) ,,
 ,FL,,,,,,,,,,,,,,,,,
 "Adkins, Joseph ",GA,B ,19,62.4,Warren ,50,GA ,Farmer ,"$5,000","$11,850",,,1,15,,,State senator ,
 ,GA,,,,,,,,,,,,,,,,,
@@ -270,7 +270,7 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,GA,,,,,,,,,,,,,,,,,
 ,GA,,,,,,,,,,,,,,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"Angier, N edon ",GA,u ,35,40.4,Fulton ,42,NH-28 ,Insurance agent ,$0,$0,"$70,000","$2,500",,3,,(Atlanta City Council),state treasurer ,"Unionist, Douglas Democrat "
+"Angier, Nedon ",GA,u ,35,40.4,Fulton ,42,NH-28 ,Insurance agent ,$0,$0,"$70,000","$2,500",,3,,(Atlanta City Council),state treasurer ,"Unionist, Douglas Democrat "
 ,GA,,,,,,,,,,,,,,,,,
 "Ashburn, George ",GA,B ,24,57.3,Muscogee ,55,TN-50 ,Cotton broker ,$0,$380,,,1,0,,,,Union colonel 
 ,GA,,,,,,,,,,,,,,,,,
@@ -333,7 +333,7 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,GA,,,,,,,,,,,,,,,,,
 "Davis, Charles ",GA,u ,27,45.8,Walton ,66,VT-27 ,Lawyer ,"$4,500","$34,500",,,,9,,,Circuit court judge ,
 ,GA,,,,,,,,,,,,,,,,,
-"Dews[ e), William ",GA,B ,9,72.8,Baker ,31,GA ,Farmer ,"$6,500","$13,000",$0,$0,,10,,,State representative ,
+"Dews, William ",GA,B ,9,72.8,Baker ,31,GA ,Farmer ,"$6,500","$13,000",$0,$0,,10,,,State representative ,
 ,GA,,,,,,,,,,,,,,,,,
 "Dunnegan, Benjamin ",GA,u ,33,25.7,Hall ,71,SC-67 ,Miner ,$112,$250,,,,0,,,Republican state committee ,
 ,GA,,,,,,,,,,,,,,,,,
@@ -388,32 +388,32 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 "Hopkins, Cormac ",GA,s ,,64.2,Chatham ,35,GA ,Customs house official ,$0,$500,"$10,000","$10,000",,0,,(Customs house clerk) ,,
 ,GA,,,,,,,,,,,,,,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"otchkiss, N. P. ",GA,u ,27,45.8,Walton ,,NY-18 ,,,,"$16,000",$0,,,,,Auditor of state railroad ,
+"Hotchkiss, N. P. ",GA,u ,27,45.8,Walton ,,NY-18 ,,,,"$16,000",$0,,,,,Auditor of state railroad ,
 ,GA,,,,,,,,,,,,,,,,,
-"ouston, Samuel ",GA,u ,39,13.6,Cherokee ,55,NC-14 ,Farmer ,"$1,800","$5,000","$1,500",$500,,0,,,,
+"Houston, Samuel ",GA,u ,39,13.6,Cherokee ,55,NC-14 ,Farmer ,"$1,800","$5,000","$1,500",$500,,0,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"owe, William ",GA,B ,22,56.6,Pike ,52,GA ,Farmer ,"$8,250","$15,075","$10,500","$1,500",,26,,,,
+"Howe, William ",GA,B ,22,56.6,Pike ,52,GA ,Farmer ,"$8,250","$15,075","$10,500","$1,500",,26,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"udson, Jno. ",GA,B ,28,65.3,Putnam ,46,GA ,Farmer ,,,"$9,000","$3,600",,,,,,
+"Hudson, Jno. ",GA,B ,28,65.3,Putnam ,46,GA ,Farmer ,,,"$9,000","$3,600",,,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"utcheson, Robert ",GA,u ,38,19.8,Haralson ,41,GA ,Physician ,"$1,600",$800,$800,"$1,600",,0,,(1865 const. convention),state representative ,
+"Hutcheson, Robert ",GA,u ,38,19.8,Haralson ,41,GA ,Physician ,"$1,600",$800,$800,"$1,600",,0,,(1865 const. convention),state representative ,
 ,GA,,,,,,,,,,,,,,,,,
-"ordan, William ",GA,B ,28,65.3,Jasper ,33,GA ,Farmer ,"$5,775","$29,000","$5,000","$2,200",,2,,,State senator ,
+"Jordan, William ",GA,B ,28,65.3,Jasper ,33,GA ,Farmer ,"$5,775","$29,000","$5,000","$2,200",,2,,,State senator ,
 ,GA,,,,,,,,,,,,,,,,,
-"ey,J.M. ",GA,B ,36,47.1,Meriwether ,49,GA ,,,,,,,,,,,
-"ing, Jno. ",GA,N ,43,16.2,Whitfield ,31,GA ,Grocer- merchant ,$600,"$2,400",,,,0,,,,
+"Key, J.M. ",GA,B ,36,47.1,Meriwether ,49,GA ,,,,,,,,,,,
+"King, Jno. ",GA,N ,43,16.2,Whitfield ,31,GA ,Grocer- merchant ,$600,"$2,400",,,,0,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"nox, James ",GA,B ,29,71.3,Columbia ,69,Scotland-40 ,Farmer ,"$1,200",$575,"$1,000",$500,,,,,,
+"Knox, James ",GA,B ,29,71.3,Columbia ,69,Scotland-40 ,Farmer ,"$1,200",$575,"$1,000",$500,,,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"ane, Edward ",GA,w ,16,41.3,Laurens ,43,GA ,Physician ,"$4,400","$4,815","$3,000","$2,750",,0,,,,
+"Lane, Edward ",GA,w ,16,41.3,Laurens ,43,GA ,Physician ,"$4,400","$4,815","$3,000","$2,750",,0,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"ee, W.C. ",GA,N ,35,40.4,Clayton ,48,GA ,,,,,,,,,,,
-"ott, John ",GA,N ,39,13.6,Forsyth ,68,SC-46 ,Farmer ,"$3,000","$12,800","$1,000",$440,,14,,,,
+"Lee, W.C. ",GA,N ,35,40.4,Clayton ,48,GA ,,,,,,,,,,,
+"Lott, John ",GA,N ,39,13.6,Forsyth ,68,SC-46 ,Farmer ,"$3,000","$12,800","$1,000",$440,,14,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"cCay, Henry ",GA,B ,13,66.2,Sumter ,47,PA-27 ,Lawyer ,"$5,000","$18,000",,,,3,,,State supreme court justice ,"Opposed secession, supported Stephen Douglas in 1860, Princeton graduate "
+"McCay, Henry",GA,B ,13,66.2,Sumter ,47,PA-27 ,Lawyer ,"$5,000","$18,000",,,,3,,,State supreme court justice ,"Opposed secession, supported Stephen Douglas in 1860, Princeton graduate "
 ,GA,,,,,,,,,,,,,,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"cHan, Wilkey ",GA,N ,41,4.3,Pickens ,38,NC-19 ,Dry goods merchant ,"$1,200","$1,000","$2,000","$2,000",,0,,,,
+"McHan, Wilkey ",GA,N ,41,4.3,Pickens ,38,NC-19 ,Dry goods merchant ,"$1,200","$1,000","$2,000","$2,000",,0,,,,
 ,GA,,,,,,,,,,,,,,,,,
 "McWhorter, Joseph ",GA,B ,30,52.2,Oglethorpe ,35,GA ,Farmer ,"$3,000","$18,790","$1,200",$700,,30,,,State senator ,
 ,GA,,,,,,,,,,,,,,,,,
@@ -464,7 +464,7 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,GA,,,,,,,,,,,,,,,,,
 "Smith, F. M. ",GA,w ,4,72.1,Charlton ,53,GA ,Physician ,$600,$550,"$3,000","$1,000",,0,,(Secession convention),state representative,Opposed secession 
 ,GA,,,,,,,,,,,,,,,,,
-"Smith,M.C. ",GA,B ,7,62.4,Thomas ,45,GA ,M.E. minister ,$0,"$2,000",,,,0,,,State senator ,
+"Smith, M.C. ",GA,B ,7,62.4,Thomas ,45,GA ,M.E. minister ,$0,"$2,000",,,,0,,,State senator ,
 ,GA,,,,,,,,,,,,,,,,,
 "Smith, W.C. ",GA,B ,36,47.1,Coweta ,32,GA ,,,,"$10,000","$1,200",,,,,State senator ,
 ,GA,,,,,,,,,,,,,,,,,
@@ -484,14 +484,14 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,GA,,,,,,,,,,,,,,,,,
 "Walton, Overton ",GA,B ,23,64.9,Houston ,46,GA ,Grocer ,"$1,400","$19,550",,,,27,,,,
 ,GA,,,,,,,,,,,,,,,,,
-"Welch,F.O. ",GA,B ,10,79.4,Doughtery ,57,ME-37 ,Druggist ,$0,$0,,,,2,,,State senator ,
+"Welch, F.O. ",GA,B ,10,79.4,Doughtery ,57,ME-37 ,Druggist ,$0,$0,,,,2,,,State senator ,
 ,GA,,,,,,,,,,,,,,,,,
 "Whitehead, W. H. ",GA,B ,26,44.4,Butts ,42,VA-12 ,Physician ,"$27,400","$30,000","$2,000","$8,000",,13,,,Republican elector in 1868 ,
 ,GA,,,,,,,,,,,,,,,,,
 "Whiteley, Richard ",GA,B ,8,53.1,Decatur ,36,Ireland-12 ,Lawyer ,$0,"$5,000",$0,$0,,2,,,U.S. congressman ,"Opposed secession, Confederate major "
 ,GA,,,,,,,,,,,,,,,,,
 "Wilbur, George ",GA,B ,22,56.6,Bibb ,45,RI-? ,Commission ,"$5,000","8,000",,,,2,,,Delegate to 1868 Republican ,
-"Woodey, John ",GA,N ,32,12.7,Lumpkin ,47? ,NC-49? ,Farmer ,$800,$400,"$1,000",$500,,0,,,,
+"Woodey, John ",GA,N ,32,12.7,Lumpkin ,47,NC-49? ,Farmer ,$800,$400,"$1,000",$500,,0,,,,
 ,GA,,,,,,,,,,,,,,,,,
 "Wooten, Floyd ",GA,B ,22,56.6,Monroe ,31,GA ,Booter ,$0,$0,$0,$0,,0,,,,
 ,GA,,,,,,,,,,,,,,,,,
@@ -561,8 +561,8 @@ name ,state,region ,district ,per.black,county,age ,native.state,profession ,rea
 ,LA,,,,,,,,,,,,,,,,,
 ,LA,,,,,,,,,,,,,,,,,
 ,LA,,,,,,,,,,,,,,,,,
-"Underwood, ",LA,R ,29,81,St. James ,27,MS ,Painter ,$0,$250,$0,"$1,500",,0,,,Parish judge ,"Confederate deserter, colonel in state militia "
-Napoleon ,LA,,,,,,,,,,,,,,,,,
+"Underwood, Napoleon ",LA,R ,29,81,St. James ,27,MS ,Painter ,$0,$250,$0,"$1,500",,0,,,Parish judge ,"Confederate deserter, colonel in state militia "
+,LA,,,,,,,,,,,,,,,,,
 "Vandergriff, John ",LA,R ,31,58,St. Martin ,51,LA ,Physician ,,,$600,$450,,,,,Justice of the peace ,
 ,LA,,,,,,,,,,,,,,,,,
 "Vidal, Michel ",LA,w ,30,60.4,St. Landry ,43,France ,Editor ,,,,,,,,,U.S. Congress ,Unionist 
@@ -699,7 +699,7 @@ Napoleon ,LA,,,,,,,,,,,,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
 "Bradley, George ",NC,M ,7,10.9,Watauga ,54,NC ,Retail merchant ,$600,"$3,044",$300,"$4,480",,0,,(1865 const. convention) ,,"Peace advocate, 1863-64 "
 ,NC,,,,,,,,,,,,,,,,,
-Bryan. John ,NC,M ,8,18.7,Wilkes ,34,NC ,Farmer ,$500,$450,"$2,000","$1,000",,0,,(1865 const. convention),"state representative, 1875 const. convention","Union captain, placed in charge on NC's western dist. by Gov. Holden "
+"Bryan, John ",NC,M ,8,18.7,Wilkes ,34,NC ,Farmer ,$500,$450,"$2,000","$1,000",,0,,(1865 const. convention),"state representative, 1875 const. convention","Union captain, placed in charge on NC's western dist. by Gov. Holden "
 ,NC,,,,,,...... ,,,,,,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
@@ -722,7 +722,7 @@ Bryan. John ,NC,M ,8,18.7,Wilkes ,34,NC ,Farmer ,$500,$450,"$2,000","$1,000",,0,
 ,NC,,,,,,,,,,,,,,,,,
 "Dowd,Henry ",NC,c ,46,68.5,Edgecombe ,35,NC ,Farmer ,"$12,000","$25,000","$8,000","$1,050",,6,,,,"Secessionist Democrat, Confederate colonel "
 ,NC,,,,,,,,,,,,,,,,,
-"Duckworth, james ",NC,M ,4,15.8,Henderson ,47,NC ,Farmer ,"$1,000",$500,"$1,500",$600,,0,,,Registrar in 1867 ,
+"Duckworth, James ",NC,M ,4,15.8,Henderson ,47,NC ,Farmer ,"$1,000",$500,"$1,500",$600,,0,,,Registrar in 1867 ,
 ,NC,,,,,,,,,,,,,,,,,
 "Durham, Plato ",NC,p ,10,21.2,Cleveland ,27,NC ,Lawyer ,,,$200,"$1,000",,,,,"State representative, 1875 const. convention ","Father pro-secession member of NC secession convention; Confederate captain, KKK leader in Cleveland County along with Leroy McAfee, who was Thomas Dixon's uncle and boyhood idol "
 ,NC,,,,,,,,,,,,,,,,,
@@ -731,10 +731,10 @@ Bryan. John ,NC,M ,8,18.7,Wilkes ,34,NC ,Farmer ,$500,$450,"$2,000","$1,000",,0,
 ,NC,,,,,,,,,,,,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
-"Ellis, )ames ",NC,p ,11,19.3,Catawba ,34,NC ,Physician ,$0,"$2,100","$2,500",$500,,0,,(1865 canst. convention),"state representative,state senator ",
+"Ellis, James ",NC,p ,11,19.3,Catawba ,34,NC ,Physician ,$0,"$2,100","$2,500",$500,,0,,(1865 canst. convention),"state representative,state senator ",
 ,NC,,,,,,,,,,,,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
-"Ethridge, jasper ",NC,c ,65,33.6,Onslow ,62,NC ,Farmer ,"$3,000","$3,000",$200,"$1,200",,4,,(State legislator) ,state senator,"Unionist in secession crisis, perhaps Union veteran "
+"Ethridge, Jasper ",NC,c ,65,33.6,Onslow ,62,NC ,Farmer ,"$3,000","$3,000",$200,"$1,200",,4,,(State legislator) ,state senator,"Unionist in secession crisis, perhaps Union veteran "
 ,NC,,,,,,,,,,,,,,,,,
 "Fisher, Abial ",NC,c ,51,51.7,Bladen ,34,NC ,Adj. general of NC 1870 ,,,$200,"$1,100",,,,,State representative ,"Sometimes classified as carpetbagger, Union veteran "
 ,NC,,,,,,,,,,,,,,,,,
@@ -786,7 +786,7 @@ Bryan. John ,NC,M ,8,18.7,Wilkes ,34,NC ,Farmer ,$500,$450,"$2,000","$1,000",,0,
 ,NC,,,,,,,,,,,,,,,,,
 "Holt, Edwin ",NC,p ,28,39.8,Orange ,36,NC ,Physician ,$0,"$2,000","$1,000","$1,200",,4,,,,
 ,NC,,,,,,,,,,,,,,,,,
-Ing. Jacob ,NC,c ,43,45.3,Nash ,82,NC ,Farmer ,"$1,273","$8,780",,,,2,,,,
+"Ing, Jacob ",NC,c ,43,45.3,Nash ,82,NC ,Farmer ,"$1,273","$8,780",,,,2,,,,
 ,NC,,,,,,,,,,,,,,,,,
 "Jones, Calvin ",NC,M ,8,18.7,Caldwell ,55,NC ,Farmer ,"$5,400","$2,767",$0,$300,,2,,,,
 ,NC,,,,,,,,,,,,,,,,,
@@ -838,9 +838,9 @@ Ing. Jacob ,NC,c ,43,45.3,Nash ,82,NC ,Farmer ,"$1,273","$8,780",,,,2,,,,
 "Parker, Roswell ",NC,c ,45,61.4,Northampton ,,,,,,,,,,,,State representative ,
 "Parks, John ",NC,M ,,25.6,Burke ,69,NC ,Farmer ,"$1,800","$1,400","$1,100",$500,,0,,(State representative in 1862) ,,
 ,NC,,,,,,,,,,,,,,,,,
-"Patrick, john ",NC,c ,41,50.1,Greene ,38,NC ,Farmer ,"$6,500","$20,500","$3,000","$1,000",,15,,,"Superior court clerk, county commissioner ",
+"Patrick, John ",NC,c ,41,50.1,Greene ,38,NC ,Farmer ,"$6,500","$20,500","$3,000","$1,000",,15,,,"Superior court clerk, county commissioner ",
 ,NC,,,,,,,,,,,,,,,,,
-"Peterson, )no. ",NC,c ,53,40.7,Duplin ,36,NC ,Farmer ,"$2,000","$2,000",$800,$560,,2,,,,Sometimes classified as black 
+"Peterson, Jno. ",NC,c ,53,40.7,Duplin ,36,NC ,Farmer ,"$2,000","$2,000",$800,$560,,2,,,,Sometimes classified as black 
 ,NC,,,,,,,,,,,,,,,,,
 "Petree, Riley ",NC,p ,19,24.1,Stokes ,48,NC ,Farmer ,,,$800,$750,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
@@ -868,15 +868,15 @@ Ing. Jacob ,NC,c ,43,45.3,Nash ,82,NC ,Farmer ,"$1,273","$8,780",,,,2,,,,
 ,NC,,,,,,,,,,,,,,,,,
 "Stilwell, Silas ",NC,p ,14,47.3,Mecklenburg ,56,NC ,Farmer ,$800,$400,"$3,000",$625,,0,,,,
 ,NC,,,,,,,,,,,,,,,,,
-"Taylor, William ",NC,c ,52,48.2,Camden ,51,Ireland ,Farmer ,"$30,000","$40,000","$5,000","$1,000",,55,,,,
-Matchet ,NC,,,,,,,,,,,,,,,,,
+"Taylor, William Matchet ",NC,c ,52,48.2,Camden ,51,Ireland ,Farmer ,"$30,000","$40,000","$5,000","$1,000",,55,,,,
+,NC,,,,,,,,,,,,,,,,,
 "Teague, Elijah ",NC,p ,20,25,Forsyth ,51,NC ,Farmer ,"$4,500","$4,000","$3,700","$2,900",,0,,(State legislator) ,,
 ,NC,,,,,,,,,,,,,,,,,
 "Trogden, Rueben ",NC,p ,22,17.1,Randolph ,37,NC ,Farm laborer ,$0,$0,"$5,000","$1,000",,0,,,Sheriff ,Family produced a privately published family history
 ,NC,,,,,,,,,,,,,,,,,
 "Tucker, George ",NC,p ,18,49.7,Anson ,54,NC ,Farmer ,"$1,400","$1,200","$1,500",$100,,0,,,,
 ,NC,,,,,,,,,,,,,,,,,
-"Turner, James ",NC,p ,35,38.6,Harnett ,so ,NC ,Farmer ,"$10,000","$10,000","$4,000",$500,,,,,,
+"Turner, James ",NC,p ,35,38.6,Harnett ,50,NC ,Farmer ,"$10,000","$10,000","$4,000",$500,,,,,,
 ,NC,,,,,,,,,,,,,,,,,
 "Watts, Samuel ",NC,c ,56,45,Martin ,46,NC ,Lawyer ,"$3,000","$2,000","$2,500","$1,000",,,,,Superior court judge ,Douglas Democrat in 1860 
 ,NC,,,,,,,,,,,,,,,,,
@@ -921,7 +921,7 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 ,SC,,,,,,,,,,,,,,,,,
 "Duncan, B. Odell ",SC,MT ,23,66.6,Newberry ,58,sc ,Farmer ,,,"$20,000","$3,000",,,,(U.S. consul to Duchy of Baden) ,,Opposed secession 
 ,SC,,,,,,,,,,,,,,,,,
-"Gentry, John ",SC,MT ,27,35.2,Spartanburg ,60? ,SC? ,,,,,,,,,,,
+"Gentry, John ",SC,MT ,27,35.2,Spartanburg ,60,SC? ,,,,,,,,,,,
 "Goss, James ",SC,MT ,29,57,Union ,47,sc ,Merchant ,"$8,000","$55,000",,,,18,,,U.S. Congress ,"Confederate veteran, testified in KKK hearings "
 ,SC,,,,,,,,,,,,,,,,,
 "Hunter, John ",SC,MT ,,66.1,Abbeville ,,sc ,Merchant ,,,,,,,,,Registrar in 1867 ,
@@ -990,7 +990,7 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
-"Board, N. V. t ",TX,E ,13,65.2,Harrison ,65,VA ,Farmer ,"$2,000","$3,475","$4,500","$1,500",,6,,,County judge ,
+"Board, N. V. +",TX,E ,13,65.2,Harrison ,65,VA ,Farmer ,"$2,000","$3,475","$4,500","$1,500",,6,,,County judge ,
 ,TX,,,,,,,,,,,,,,,,,
 "Boyd, John ",TX,c ,38,65.7,Robertson ,33,TN ,Lawyer ,$0,$0,,,,0,,(State senator) ,,"Confederate veteran, secessionist "
 ,TX,,,,,,,,,,,,,,,,,
@@ -1006,14 +1006,14 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 "Caldwell, Colbert ",TX,NE ,,55.3,Marion ,46,TN ,Lawyer ,,,"$3,000","$2,500",,11,,,Judge on TX Supreme Court ,"Anti-secessionist, threatened by KKK "
 ,TX,,,,,,,,,,,,,,,,,
-"Carter, W. Frank*t ",TX,NE ,17,25.6,Parker ,46,MA ,Miller ,"$32,360","$3,725","$4,000","$1,000",,0,,(County judge),mayor of Weatherford,"A ""loyal man"" "
+"Carter, W. Frank* +",TX,NE ,17,25.6,Parker ,46,MA ,Miller ,"$32,360","$3,725","$4,000","$1,000",,0,,(County judge),mayor of Weatherford,"A ""loyal man"" "
 ,TX,,,,,,,,,,,,,,,,,
 "Cole, David Washington* ",TX,NE ,6,17.9,Hopkins ,47,KY ,Farmer ,"$4,050","$3,875",$0,$0,,2,,,State senator ,
 ,TX,,,,,,,,,,,,,,,,,
-"Davis, Edmund*t ",TX,w ,62,16.3,Nueces ,41,FL ,Lawyer ,$0,$0,$0,$0,,0,,"(District judge, delegate to 1866 canst. convention)",governor of TX ,"Union general, probably held property "
+"Davis, Edmund* +",TX,w ,62,16.3,Nueces ,41,FL ,Lawyer ,$0,$0,$0,$0,,0,,"(District judge, delegate to 1866 canst. convention)",governor of TX ,"Union general, probably held property "
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
-"Degener, Edwardt ",TX,w ,56,22.5,Bexar ,58,Germany ,Merchant ,,,"$5,000","$1,000",,,,"(Frankfurt assembly in 1848,delegate to 1866 canst. convention)",U.S. Congress ,"Imprisoned during war because of Unionist sympathy, two sons executed by Confederates for treason "
+"Degener, Edward +",TX,w ,56,22.5,Bexar ,58,Germany ,Merchant ,,,"$5,000","$1,000",,,,"(Frankfurt assembly in 1848,delegate to 1866 canst. convention)",U.S. Congress ,"Imprisoned during war because of Unionist sympathy, two sons executed by Confederates for treason "
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
@@ -1060,7 +1060,7 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 "Hamilton, Andrew* ",TX,w ,52,56.7,Travis ,53,AL ,Lawyer ,,,$0,$0,,,,"(State attorney general, U.S. Congress, military governor, provisional governor) ",,"Anti-secessionist, pro-Douglas in 1860, Union general, probably had property "
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
-"Hamilton, Morgant ",TX,w ,50,52.2,Bastrop ,59,AL ,Retired merchant ,,,,,,,,"(Secretary of war, Republic of Texas)",U.S. Senate,"Constitutional Unionist in secession crisis, brother of A. J.Hamilton "
+"Hamilton, Morgan +",TX,w ,50,52.2,Bastrop ,59,AL ,Retired merchant ,,,,,,,,"(Secretary of war, Republic of Texas)",U.S. Senate,"Constitutional Unionist in secession crisis, brother of A. J.Hamilton "
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 "Harris, Loring* ",TX,E ,12,38.5,Upshur ,57,MA ,"Police judge, 1870",,,$300,$500,,,,,Justice of the peace ,
@@ -1069,12 +1069,12 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 "Johnson, Samuel ",TX,w ,60,45.5,Calhoun ,25,TX ,Hide and wool dealer ,,,"$20,000","$1,000",,,,,County commissioner ,Some problems with middle initial (M or W) 
 ,TX,,,,,,,,,,,,,,,,,
-"Jordan, A. P. H. t ",TX,w ,61,18.5,Goliad ,,,Physician ,,,,,,,,,County commissioner ,
+"Jordan, A. P. H. +",TX,w ,61,18.5,Goliad ,,,Physician ,,,,,,,,,County commissioner ,
 "Kealey, Thomas* ",TX,NE ,10,13.3,Denton ,59,NY ,Mechanic ,"$2,500","$4,000","$5,000",$830,,0,,,,
 ,TX,,,,,,,,,,,,,,,,,
 "Keigwin, William* ",TX,c ,36,52.5,Leon ,47,KY ,Farmer ,"$10,000","$4,475",,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
-"Keuchler, Jacobt ",TX,w ,54,5.5,Gillespie ,45,Hesse- Darmstadt ,County surveyor ,$200,$320,"$2,000",$200,,0,,,State land commissioner ,"Unionist, founded Tusculum Utopian, attacked by Confederates (Battle of Nueces) while attempting to flee state "
+"Keuchler, Jacob +",TX,w ,54,5.5,Gillespie ,45,Hesse- Darmstadt ,County surveyor ,$200,$320,"$2,000",$200,,0,,,State land commissioner ,"Unionist, founded Tusculum Utopian, attacked by Confederates (Battle of Nueces) while attempting to flee state "
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
@@ -1085,7 +1085,7 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 ,TX,,,,,,,,,,,,,,,,,
 "Lindsay, Livingston ",TX,w ,49,43,Fayette ,59,VA ,Lawyer ,"$3,500","$8,000","$15,000","$2,000",,10,,,Justice on TX Supreme Court ,Unionist 
 ,TX,,,,,,,,,,,,,,,,,
-"Lippard, Johnt ",TX,c ,39,67.3,Freestone ,44,NC ,Farmer ,"$4,150","$5,900","$8,000","$2,000",,0,,,,Union veteran 
+"Lippard, John +",TX,c ,39,67.3,Freestone ,44,NC ,Farmer ,"$4,150","$5,900","$8,000","$2,000",,0,,,,Union veteran 
 ,TX,,,,(lived in ,,,,,,,,,,,,,
 ,TX,,,,Hill) ,,,,,,,,,,,,,
 "McCormick, Andrew* ",TX,c ,33,86.1,Brazoria ,36,TX ,Farmer ,"$11,334","$11,970","$15,000","$3,000",,7,,(1866 canst. convention),"district judge, state senator, circuit judge ",Confederate veteran 
@@ -1163,7 +1163,7 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 ,VA,,,,,,,,,,,,,,,,,
 ,VA,,,,,,,,,,,,,,,,,
 ,VA,,,,,,,,,,,,,,,,,
-"Broadus, john* ",VA,p ,16,47.5,Amherst ,62,VA ,"Inspector, city of Lynchburg ","$10,000","$3,250","$1,500",$420,,4,,(Magistrate) ,,
+"Broadus, John* ",VA,p ,16,47.5,Amherst ,62,VA ,"Inspector, city of Lynchburg ","$10,000","$3,250","$1,500",$420,,4,,(Magistrate) ,,
 ,VA,,,,,,,,,,,,,,,,,
 "Campbell, joseph* ",VA,M ,52,20.3,Washington ,39,VA ,Lawyer ,"$14,000","$18,100","$25,000","$1,000",,7,,(County attorney) ,,Confederate colonel 
 ,VA,,,,,,,,,,,,,,,,,
@@ -1187,7 +1187,7 @@ Matchet ,NC,,,,,,,,,,,,,,,,,
 ,VA,,,,,,,,,,,,,,,,,
 "Gibboney, James* ",VA,M ,39,23.3,Wythe ,50,VA ,Physician ,"$5,000","$5,000","$5,000","$1,000",,0,,,,Claimed to have been loyal during war 
 ,VA,,,,,,,,,,,,,,,,,
-Gibson Eustace* ,VA,M ,62,24.9,Giles ,26,VA ,Lawyer ,$0,$0,"$2,500",$800,,104,9,,U.S. Congress representing wv,Confederate captain 
+"Gibson, Eustace* ",VA,M ,62,24.9,Giles ,26,VA ,Lawyer ,$0,$0,"$2,500",$800,,104,9,,U.S. Congress representing wv,Confederate captain 
 ,VA,,,,,,,,,,,,,,,,,
 "Gibson, Jonathan* ",VA,p ,45,38,Fauquier ,31,VA ,Lawyer ,,,$0,$0,,,,,,"Brother of Eustace Gibson, Confederate colonel "
 ,VA,,,,,,,,,,,,,,,,,
@@ -1204,7 +1204,7 @@ Gibson Eustace* ,VA,M ,62,24.9,Giles ,26,VA ,Lawyer ,$0,$0,"$2,500",$800,,104,9,
 ,VA,,,,,,,,,,,,,,,,,
 "Hunter, Frederick* ",VA,T ,41,48.2,King George ,31,VA ,Lawyer ,$0,$0,$0,$0,,0,22,,,Confederate captain 
 ,VA,,,,,,,,,,,,,,,,,
-Kennerly Joseph* ,VA,M ,55,28.8,Clarke ,41,VA ,Farmer ,"$14,000","$11,000","$14,000","$2,500",,12,,,,"Confederate captain, secessionist "
+"Kennerly, Joseph* ",VA,M ,55,28.8,Clarke ,41,VA ,Farmer ,"$14,000","$11,000","$14,000","$2,500",,12,,,,"Confederate captain, secessionist "
 ,VA,,,,,,,,,,,,,,,,,
 "Lee, Hugh* ",VA,M ,53,28.7,Roanoke ,31,VA ,Lawyer ,"$9,000","$3,000",,,,0,8,,,Confederate captain 
 ,VA,,,,,,,,,,,,,,,,,
@@ -1216,8 +1216,8 @@ Kennerly Joseph* ,VA,M ,55,28.8,Clarke ,41,VA ,Farmer ,"$14,000","$11,000","$14,
 ,VA,,,,,,,,,,,,,,,,,
 "Lydick, William ",VA,p ,69,54.9,Campbell ,60,VA ,Merchant ,,,"$5,000",$0,,,,,,Loyal during war 
 ,VA,,,,,,,,,,,,,,,,,
-"McLaughlin, ",VA,M ,43,27.7,Rockbridge ,37,VA ,Lawyer ,"$17,000","$8,000","$12,000","$8,000",,0,,,"State representative, circuit court judge ","Confederate colonel, trustee of Washington and Lee College "
-William* ,VA,,,,,,,,,,,,,,,,,
+"McLaughlin, William* ",VA,M ,43,27.7,Rockbridge ,37,VA ,Lawyer ,"$17,000","$8,000","$12,000","$8,000",,0,,,"State representative, circuit court judge ","Confederate colonel, trustee of Washington and Lee College "
+,VA,,,,,,,,,,,,,,,,,
 ,VA,,,,,,,,,,,,,,,,,
 "Marye, John, Jr.* ",VA,T ,41,48.2,Spotsylvania ,43,VA ,Lawyer ,"$6,000","$11,700","$3,000",$500,,11,,,Lt. governor of VA ,"Former Whig, father was member of secession convention and voted for secession "
 ,VA,,,,,,,,,,,,,,,,,
