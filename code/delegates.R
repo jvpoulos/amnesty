@@ -3,6 +3,9 @@
 require(reshape2)
 require(RecordLinkage)
 
+# Set data directory
+data.directory <- "~/Dropbox/github/amnesty/data/"
+
 source("votes.R")
 
 # Import southern white delegates
@@ -57,8 +60,10 @@ votes$vid <- 1:nrow(votes) # create unique votes identifier
 r.pairs <- compare.linkage(delegates[c("first.name", "surname", "state", "sound.first","sound.surname")],
                           votes[c("first.name", "surname", "state", "sound.first","sound.surname")])
 
-min.train <- getMinimalTrain(r.pairs,nEx=5)
-min.train <- editMatch(min.train)
+#min.train <- getMinimalTrain(r.pairs,nEx=10) 
+#min.train <- editMatch(min.train)
+#saveRDS(min.train, paste0(data.directory,"min_train_delegates.rds"))
+min.train <- readRDS(paste0(data.directory,"min_train_delegates.rds"))
 
 model <- trainSupv(min.train, method = "svm")
 result <- classifySupv(model, newdata = r.pairs)
