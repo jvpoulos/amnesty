@@ -1,11 +1,11 @@
-Name ,Misc. ,Econ. ,Gov. structure ,Race ,Suff. ,Overall ,Bloc ,Faction,State
+name,misc,econ,gov,race,suffrage,overall,bloc,faction,state
 "Carr, David ",1,1,1,,1,5,S. White ,Radicals ,VA
 "Cox, Joseph ",1,1,1,1,1,5,Black ,Radicals ,VA
 "Hodges, Willis ",1,1,1,1,1,5,Black ,Radicals ,VA
 "James, William ",1,1,1,1,1,5,0. White ,Radicals ,VA
 "Jones, Peter ",1,1,1,1,1,5,Black ,Radicals ,VA
 "Massey, Edward ",1,1,,1,1,5,S. White ,Radicals ,VA
-"Moss, Francis \""Frank"" ",1,1,1,1,1,5,Black ,Radicals ,VA
+"Moss, Francis",1,1,1,1,1,5,Black ,Radicals ,VA
 "Porter, Charles ",1,1,1,1,1,5,O.White ,Radicals ,VA
 "Teamoh, George ",1,1,1,1,1,5,Black ,Radicals ,VA
 "Toler, Burwell ",1,1,1,1,1,5,Black ,Radicals ,VA
@@ -54,7 +54,7 @@ Name ,Misc. ,Econ. ,Gov. structure ,Race ,Suff. ,Overall ,Bloc ,Faction,State
 "Milbourn, Andrew ",1,0.57,0.71,0.73,0.93,3.94,S. White ,Radicals ,VA
 "Clements, James ",0.83,0.86,0.71,0.75,0.77,3.92,0. White ,Radicals ,VA
 "Allan, Edgar ",1,0.6,0.86,0.82,0.64,3.92,0. White ,Radicals ,VA
-"Staley, David ",1,0.71,1,O.Sf ,0.58,3.85,S. White ,Radicals ,VA
+"Staley, David ",1,0.71,1,0.56,0.58,3.85,S. White ,Radicals ,VA
 "Lydick, William ",1,0.17,1,0.8,0.79,3.75,S. White ,Radicals ,VA
 "Nash, Ephraim ",1,0.4,0.86,0.8,0.62,3.67,0. White ,Radicals ,VA
 "Wicker, Herbert ",1,0.43,0.86,0.7,0.64,3.63,S. White ,Radicals ,VA
@@ -67,16 +67,16 @@ Name ,Misc. ,Econ. ,Gov. structure ,Race ,Suff. ,Overall ,Bloc ,Faction,State
 "Gibson, Jonathan ",0,0.5,0,0.17,,0.83,S. White ,Conservatives ,VA
 "Lee, Hugh ",0,0.25,0.2,0.11,0,0.56,S. White ,Conservatives ,VA
 "Owen, William ",0,0,0,0.1,0.18,0.28,S.White ,Conservatives ,VA
-"Wilson, Norval ",0,0.20 0.00 ,,0,- ,0.25,S. White ,Conservatives ,VA
-"Thompson, John ",0,0.20 0.00 ,,0,0,0.2,S. White ,Conservatives ,VA
-"Gibson, Eustace ",0,0.14 - ,,0,0,0.18,S. White ,Conservatives ,VA
-"Seay, Samuel ",- ,0.00 0.00 ,,0.14,0,0.18,S. White ,Conservatives ,VA
-"Rust, George ",0,0.14 0.00 ,,0,0,0.14,S. White ,Conservatives ,VA
-"Harris, Adolphus ",- ,0.00 0.00 ,,0.11,0,0.14,S. White ,Conservatives ,VA
-"Robertson, William ",0,0,,- ,O.D7 ,0.12,S. White ,Conservatives ,VA
+"Wilson, Norval ",0,0.2,0,0,- ,0.25,S. White ,Conservatives ,VA
+"Thompson, John ",0,0.2,0,0,0,0.2,S. White ,Conservatives ,VA
+"Gibson, Eustace ",0,0.14,- ,0,0,0.18,S. White ,Conservatives ,VA
+"Seay, Samuel ",- ,0,0,0.14,0,0.18,S. White ,Conservatives ,VA
+"Rust, George ",0,0.14,0,0,0,0.14,S. White ,Conservatives ,VA
+"Harris, Adolphus ",- ,0,0,0.11,0,0.14,S. White ,Conservatives ,VA
+"Robertson, William ",0,0,,- ,0.07,0.12,S. White ,Conservatives ,VA
 "Harrison, Powell ",0,0,0,0.11,0,0.11,S. White ,Conservatives ,VA
 "Williams, J. Henry ",0,0,0,0,0.09,0.09,0. White ,Conservatives ,VA
-"McLaughlin, William ",0,0,-,0,O.D7 ,0.08,S. White ,Conservatives ,VA
+"McLaughlin, William ",0,0,-,0,0.07,0.08,S. White ,Conservatives ,VA
 "Berkeley, Norborne ",0,0,0,0,0,0,S. White ,Conservatives ,VA
 "Broadus, John ",0,0,0,0,0,0,S. White ,Conservatives ,VA
 "Cowan, George ",0,0,0,0,0,0,S.White ,Conservatives ,VA

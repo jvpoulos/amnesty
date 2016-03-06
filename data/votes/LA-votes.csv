@@ -1,4 +1,4 @@
-Name ,Econ. ,Misc. ,Race ,Gov. structure ,Suff.,Overall ,Bloc ,Faction,State
+name ,econ,misc,race,gov,suffrage,overall,bloc,faction,state
 "Gardner, R. G. ",1,1,1,1,1,5,Black ,Radicals ,LA
 "Ingrahm, James ",1,1,1,1,1,5,Black ,Radicals ,LA
 "Jones, Simeon ",1,1,1,1,1,5,S. White ,Radicals ,LA
@@ -15,16 +15,16 @@ Name ,Econ. ,Misc. ,Race ,Gov. structure ,Suff.,Overall ,Bloc ,Faction,State
 "Murren, William ",1,0.8,1,1,1,4.8,Black ,Radicals ,LA
 "Moses, Solomon ",1,1,1,0.88,0.91,4.78,Black ,Radicals ,LA
 "Vidal, Michel ",,1,1,1,0.8,4.75,S. White ,Radicals ,LA
-"CromweJI, Robert ",1,0.83,1,1,0.9,4.73,Black ,Radicals ,LA
+"CromwelI, Robert ",1,0.83,1,1,0.9,4.73,Black ,Radicals ,LA
 "Francois, Louis ",1,0.83,1,1,0.9,4.73,Black ,Radicals ,LA
-Leroy; Charles ,1,1,0.86,0.86,1,4.71,Black ,Radicals ,LA
-"Marie, Frederique \""Fred"" ",1,1,1,0.86,0.86,4.71,S. White ,Radicals ,LA
+"Leroy, Charles ",1,1,0.86,0.86,1,4.71,Black ,Radicals ,LA
+"Marie, Frederique ",1,1,1,0.86,0.86,4.71,S. White ,Radicals ,LA
 "Dupart, Ulger ",1,1,1,0.88,0.71,4.59,Black ,Radicals ,LA
 "Scott, John ",1,,1,0.75,,4.58,Black ,Radicals ,LA
 "Valfroit, P. F. ",1,0.83,1,0.83,0.91,4.58,Black ,Radicals ,LA
 "Massicot, Jules ",1,1,0.6,1,0.89,4.49,Black ,Radicals ,LA
 "Beldon, Simeon ",1,1,1,0.86,0.6,4.46,S. White ,Radicals ,LA
-"BurreJI, Dennis ",1,1,1,0.6,0.82,4.42,Black ,Radicals ,LA
+"BurrelI, Dennis ",1,1,1,0.6,0.82,4.42,Black ,Radicals ,LA
 "Lewis, Richard ",1,1,0.83,0.8,0.71,4.35,Black ,Radicals ,LA
 "Hempstead, Orlando ",1,1,0.5,0.83,1,4.33,O.Wbite ,Radicals ,LA
 "Oliver, Joseph ",1,0.6,1,0.86,,4.32,Black ,Radicals ,LA
@@ -63,8 +63,8 @@ Leroy; Charles ,1,1,0.86,0.86,1,4.71,Black ,Radicals ,LA
 "Snider, Gelderoy ",1,0.67,0,0.5,,2.71,S. White ,Swing voters ,LA
 "Douglas, David ",0,0.4,0.71,1,0.56,2.67,,Swing voters ,LA
 "Riard, Fortune ",0.5,0.2,1,0.57,0.3,2.57,Black ,Swing voters ,LA
-"Vandergriff, John ",0,,0.75,o.1sf ,,2.5,S. White ,Swing voters ,LA
-Bertonneau Arnold ,0,0.33,0.88,0.71,0.55,2.47,Black ,Swing voters ,LA
+"Vandergriff, John ",0,,0.75,0.75,,2.5,S. White ,Swing voters ,LA
+"Bertonneau, Arnold ",0,0.33,0.88,0.71,0.55,2.47,Black ,Swing voters ,LA
 "Durpart, Gustave ",0,0.5,1,0.33,0.5,2.33,Black ,Swing voters ,LA
 "Butler, William ",0,0.33,0.71,0.5,0.75,2.3,Black ,Swing voters ,LA
 "Rodriguez, Lazard ",0,0.33,1,0.43,0.5,2.26,Black ,Swing voters ,LA
