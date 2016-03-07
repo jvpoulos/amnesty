@@ -2,7 +2,7 @@
 
 require(rdrobust)
 
-#source("delegates.R") # Run delegates first
+source("delegates.R") # Run delegates first
 
 options(scipen=999) # turn of scientific notation
 
@@ -31,7 +31,8 @@ RdPlot <- function(data=delegates.rd,y.var,x.var="taxprop.60",xlab="",poly=3,
          cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
    box(bty='L')
    axis(side=1, at=axTicks(1), labels=formatC(axTicks(1), format="d", big.mark=','))
-   axis(side=2, at=axTicks(1), labels=formatC(axTicks(1), format="d", big.mark=','))
+   axis(side=2, at=axTicks(2), labels=formatC(axTicks(2), format="d", big.mark=','))
+   text(x=10,y=-upper, paste("N=", nrow(data[!is.na(data[,y.var]),]), sep=""),cex=1.5)
    } else{
      rdplot(y=data[,y.var],
             x=data[,x.var],
@@ -46,26 +47,33 @@ RdPlot <- function(data=delegates.rd,y.var,x.var="taxprop.60",xlab="",poly=3,
             cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
      box(bty='L')
      axis(side=1, at=axTicks(1), labels=formatC(axTicks(1), format="d", big.mark=','))
+     text(x=10,y=0, paste("N=", nrow(data[!is.na(data[,y.var]),]), sep=""),cex=1.5)
   }
-  text(x=0.10,y=1, paste("N=", nrow(data[!is.na(data[,y.var]),]), sep=""),cex=1.5)
 }
 
-pdf(paste0(data.directory,"plots/realprop_70.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="realprop.70",
-       ylab="Real estate value in 1870 (1860$)",
-       ylim = c(0,upper)) 
+pdf(paste0(data.directory,"plots/realprop_d.pdf"), width=11.69, height=8.27)
+RdPlot(y.var="realprop.d",
+       ylab="Change in real estate value, 1860-1870 (1860$)",
+       ylim = c(-upper,upper)) 
 dev.off() 
 
-pdf(paste0(data.directory,"plots/persprop_70.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="persprop.70",
-       ylab="Personal property value in 1870 (1860$)",
-       ylim = c(0,upper)) 
+pdf(paste0(data.directory,"plots/persprop_d.pdf"), width=11.69, height=8.27)
+RdPlot(y.var="persprop.d",
+       ylab="Change in personal property value, 1860-1870 (1860$)",
+       ylim = c(-upper,upper)) 
 dev.off() 
 
-pdf(paste0(data.directory,"plots/taxprop_70.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="taxprop.70",
-       ylab="Taxable property in 1870 (1860$)",
-       ylim = c(0,upper)) 
+# pdf(paste0(data.directory,"plots/taxprop_d.pdf"), width=11.69, height=8.27)
+# RdPlot(y.var="taxprop.d",
+#        ylab="Change in taxable property value, 1860-1870 (1860$)",
+#        ylim = c(-upper,upper)) 
+# dev.off() 
+
+pdf(paste0(data.directory,"plots/future.pdf"), width=11.69, height=8.27)
+RdPlot(y.var="future",
+       ylab="Future officeholder",
+       ylim= c(0,1),
+       continuous=FALSE)
 dev.off() 
 
 pdf(paste0(data.directory,"plots/overall.pdf"), width=11.69, height=8.27)

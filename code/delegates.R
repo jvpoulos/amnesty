@@ -64,6 +64,17 @@ delegates$taxprop.70 <- delegates$taxprop.70/(8.06/12.65)
 delegates$realprop.70 <- delegates$realprop.70/(8.06/12.65)
 delegates$persprop.70 <- delegates$persprop.70/(8.06/12.65)
 
+# Create measure of change in wealth between Censuses
+delegates$taxprop.d <- delegates$taxprop.70-delegates$taxprop.60
+delegates$realprop.d <- delegates$realprop.70 - delegates$realprop.60
+delegates$persprop.d <- delegates$persprop.70 - delegates$persprop.60
+
+# Create former/future office dummies
+delegates$former <- ifelse(delegates$former.office=="",0,1)
+delegates$future <- ifelse(delegates$future.office=="",0,1)
+
+
+
 # Merge delegates with votes
 delegates$did <- 1:nrow(delegates) # create unique delegate identifier
 votes$vid <- 1:nrow(votes) # create unique votes identifier
