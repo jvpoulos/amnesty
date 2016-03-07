@@ -34,7 +34,7 @@ votes$sound.first <- soundex(votes$first.name) # soundex of first name
 votes$sound.surname <- soundex(votes$surname) # soundex of surname name
 
 # Make vote scores numeric
-vote.vars <- c("gov","suffrage", "race",  "misc", "overall")
+vote.vars <- c("gov","econ","suffrage", "race",  "misc", "overall")
 for(var in vote.vars){
   votes[,var] <- gsub("[^[:alnum:].]", "", votes[,var])
   votes[,var] <- as.numeric(votes[,var])

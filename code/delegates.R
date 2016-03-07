@@ -27,6 +27,12 @@ delegates$d.dagger[grep("[&]", delegates$name)] <- 1
 delegates$name <- gsub("[^[:alnum:],. ]", "", delegates$name) # remove footnotes
 delegates$name <- trimws(delegates$name) # trim name
 
+# Create response var for protest adoption of const. (asterisk: AL,AR, VA; dagger: TX)
+delegates$protest <- NA
+delegates$protest[delegates$state=="AL" | delegates$state=="AR" | delegates$state=="VA" | delegates$state=="TX"] <- 0
+delegates$protest[delegates$asterisk==1 & (delegates$state=="AL" | delegates$state=="AR" | delegates$state=="VA")] <-1 
+delegates$protest[delegates$dagger==1 & (delegates$state=="TX")] <-1 
+
 # Split name
 names.delegates <- colsplit(delegates$name,",",c("surname","first.name"))
 
@@ -52,6 +58,11 @@ delegates$died[is.na(delegates$died)] <- 0
 # Create taxable property variable
 delegates$taxprop.60 <- delegates$realprop.60 + delegates$persprop.60
 delegates$taxprop.70 <- delegates$realprop.70 + delegates$persprop.70
+
+# Chain 1870 values to 1860 $
+delegates$taxprop.70 <- delegates$taxprop.70/(8.06/12.65)
+delegates$realprop.70 <- delegates$realprop.70/(8.06/12.65)
+delegates$persprop.70 <- delegates$persprop.70/(8.06/12.65)
 
 # Merge delegates with votes
 delegates$did <- 1:nrow(delegates) # create unique delegate identifier
