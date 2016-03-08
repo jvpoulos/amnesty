@@ -6,13 +6,7 @@ source("delegates.R") # Run delegates first
 
 options(scipen=999) # turn of scientific notation
 
-# Subset data to nonmissing taxable property values 
-delegates.rd <- subset(delegates, !is.na(taxprop.60))
-
 # Data-driven plots
-cutoff <- 20000 # define cutoff
-upper <- 2*cutoff # define upper margin
-
 RdPlot <- function(data=delegates.rd,y.var,x.var="taxprop.60",xlab="",poly=3,
                    ylab,upperend=upper,ylim=NULL,continuous=TRUE){
   # Data-driven regression discontinuity plots

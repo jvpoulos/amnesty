@@ -73,7 +73,99 @@ delegates$persprop.d <- delegates$persprop.70 - delegates$persprop.60
 delegates$former <- ifelse(delegates$former.office=="",0,1)
 delegates$future <- ifelse(delegates$future.office=="",0,1)
 
+# Create profession dummies
+delegates$profession<- trimws(delegates$profession)
+delegates$profession[delegates$profession=="Commission merchant" |
+                       delegates$profession=="Commission"|
+                       delegates$profession=="Clothing merchant"|
+                       delegates$profession=="Flour merchant"|
+                       delegates$profession=="Grocer- merchant"|
+                       delegates$profession=="Grocery merchant"|
+                       delegates$profession=="Retail merchant"|
+                       delegates$profession=="Retired merchant"|
+                       delegates$profession=="Dry goods merchant"|
+                       delegates$profession=="Cotton broker"|
+                       delegates$profession=="Cotton dealer"|
+                       delegates$profession=="Dry goods merchant"|
+                       delegates$profession=="Hide and wool dealer"] <- "Merchant" 
 
+delegates$profession[delegates$profession=="Baptist minister" |
+                       delegates$profession=="M.E. minister"|
+                       delegates$profession=="Methodist minister"|
+                       delegates$profession=="Presbyterian minister"] <- "Minister" 
+
+delegates$profession[delegates$profession=="Planter" |
+                       delegates$profession=="Rancher"] <- "Farmer" 
+
+delegates$profession[delegates$profession=="Circuit ct. judge" |
+                       delegates$profession=="Circuit ct. judge in 1868"|
+                       delegates$profession=="Clerk"|
+                       delegates$profession=="Court clerk"|
+                       delegates$profession=="Judge of ordinary"|
+                       delegates$profession=="Justice of peace"|
+                       delegates$profession=="Justice of peace in 1850s"|
+                       delegates$profession=="Law student"|
+                       delegates$profession=="Police judge, 1870"|
+                       delegates$profession=="U.S. marshal"|
+                       delegates$profession=="Inspector of naval stores"|
+                       delegates$profession=="Mayor of Augusta"|
+                       delegates$profession=="Mayor of Corinth"|
+                       delegates$profession=="Notary public"|
+                       delegates$profession=="Postmaster of Key West"|
+                       delegates$profession=="County treasurer, 1870"|
+                       delegates$profession=="Customs house official"|
+                       delegates$profession=="Customs house official house official"|
+                       delegates$profession=="Customs collector"|
+                       delegates$profession=="Registrar of bankruptcy"] <- "Law/Government Professional"
+
+
+delegates$farmer <-ifelse(delegates$profession == "Farmer",1,0) 
+
+delegates$lawyer <-ifelse(delegates$profession == "Lawyer"|
+                            delegates$profession == "Law/Government Professional",1,0) # lawyer/law Professional
+
+delegates$merchant <-ifelse(delegates$profession == "Merchant",1,0)
+
+delegates$physician <-ifelse(delegates$profession == "Physician"|
+                               delegates$profession == "Dentist"|
+                               delegates$profession == "Druggist",1,0) #physician/dentist/druggist
+
+delegates$minister <-ifelse(delegates$profession == "Minister",1,0) 
+
+# Create bio dummies
+
+unionist <- c(grep("Union",delegates$bio,T), grep("loyal",delegates$bio,T),
+                  grep("Anti-secessionist",delegates$bio,T),grep("Unionist",delegates$bio,T), 
+                  grep("Freedmen's Bureau",delegates$bio,T),
+                  grep("Peace advocate",delegates$bio,T), grep("carpetbagger",delegates$bio,T),
+                  grep("opponent of secession",delegates$bio,T),
+                  grep("ariti-secessionist",delegates$bio,T),
+                  grep("Pro-North",delegates$bio,T), grep("antipsecessionist",delegates$bio,T),
+                  grep("red string",delegates$bio,T), grep("Republican",delegates$bio,T),
+                  grep("Union",delegates$bio,T)) #unionist/union veteran/Republican/claimed loyalty during war
+
+dem <- c(grep("Whig",delegates$bio,T), grep("Democrat",delegates$bio,T),
+         grep("Democratic",delegates$bio,T),grep("pro-Douglas",delegates$bio,T),
+         grep("Douglas",delegates$bio,T)) # former whig/Democrat
+
+confederate <- c(grep("Confederate veteran",delegates$bio,T),
+                 grep("Confederate captain",delegates$bio,T),grep("Confederate colonel",delegates$bio,T),
+                 grep("Confederate officer",delegates$bio,T), grep("Confederate surgeon",delegates$bio,T),
+                 grep("pro-secession",delegates$bio,T), grep("favored secession",delegates$bio,T),
+                 grep("Confederate cavalry",delegates$bio,T), 
+                 grep("Confederate lieutenant",delegates$bio,T), grep("Confederate It. colonel",delegates$bio,T),
+                 grep("Confederate it. colonel",delegates$bio,T), grep("Confederate major",delegates$bio,T),
+                 grep("Confederate veterao",delegates$bio,T), 
+                 grep("served in Confederate",delegates$bio,T)) # confederate/secessionist
+
+delegates$unionist <- 0
+delegates$unionist[rownames(delegates) %in% unionist] <- 1
+
+delegates$dem <- 0
+delegates$dem[rownames(delegates) %in% dem] <- 1
+
+delegates$confederate <- 0
+delegates$confederate[rownames(delegates) %in% confederate] <- 1
 
 # Merge delegates with votes
 delegates$did <- 1:nrow(delegates) # create unique delegate identifier
@@ -98,3 +190,8 @@ delegates <- merge(delegates, links, by.x="did",by.y="id1", all.x=TRUE)
 delegates <- merge(delegates, votes, by.x="id2",by.y="vid", all.x=TRUE)
 colnames(delegates)[1] <- "vid"
 
+# Subset data to nonmissing taxable property values 
+delegates.rd <- subset(delegates, !is.na(taxprop.60))
+
+cutoff <- 20000 # define cutoff
+upper <- 2*cutoff # define upper margin
