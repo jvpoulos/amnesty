@@ -19,9 +19,9 @@ ForestPlot <- function(d, xlab, ylab){
 }
 
 # Create vector for pretreatment variables
-pretreat.vars <- c("per.black","age", "former", 
+pretreat.vars <- c("per.black","age", 
                    "farmer","lawyer","merchant","physician", "minister",
-                   "unionist","dem","confederate")
+                   "former","unionist","dem","confederate")
 
 # Apply rdrobust over characteristics
 cct.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
@@ -42,9 +42,9 @@ cv.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i],
                                                           all=TRUE,
                                                           bwselect="CV")) 
 # Create data for plot
-balance.dat <- data.frame(x = c("Percent black", "Age", "Former officeholder",
-                                "Farmer", "Lawyer","Merchant","Physician",
-                                "Minister", "Unionist", "Democrat", "Confederate"),
+balance.dat <- data.frame(x = c("Percent black", "Age", 
+                                "Farmer", "Lawyer","Merchant","Physician", "Minister",
+                                "Former officeholder", "Unionist", "Democrat", "Confederate"),
                         y = c(sapply(cct.pretreat, "[[", "coef")[1,],
                               sapply(ik.pretreat, "[[", "coef")[1,],
                               sapply(cv.pretreat, "[[", "coef")[1,]),
@@ -58,7 +58,7 @@ balance.dat <- data.frame(x = c("Percent black", "Age", "Former officeholder",
 
 # balance.dat$Estimate<- c(rep("Conv. (conv. CI)",11),
 #                          rep("Bias-corrected (conv. CI)",11),
-#                          rep("Bias-corrected (robust CI)",11))
+#                          rep("Bias-corrected (robust CI)",11)
 
 balance.dat$Bandwidth <- c(rep("CCT bandwidth",11),
                             rep("IK bandwidth",11),
@@ -68,5 +68,14 @@ balance.dat$Bandwidth <- c(rep("CCT bandwidth",11),
 suppressWarnings(balance.dat$x <- factor(balance.dat$x, levels=rev(balance.dat$x))) # reverse order
 
 pdf(paste0(data.directory,"plots/rd_balance.pdf"), width=11.69, height=8.27)
-ForestPlot(balance.dat,xlab="Regression discontinuity estimate",ylab="")  + facet_grid(.~Bandwidth)
+ForestPlot(balance.dat[balance.dat$x != "Percent black" & balance.dat$x != "Age",],
+           xlab="Regression discontinuity estimate",ylab="") +
+  scale_y_continuous(breaks = c(-1,0,1), labels = c("-1", "0", "1")) + 
+  facet_grid(.~Bandwidth)
+dev.off() 
+
+pdf(paste0(data.directory,"plots/rd_balance_cont.pdf"), width=11.69, height=8.27)
+ForestPlot(balance.dat[balance.dat$x== "Percent black" | balance.dat$x== "Age",],
+           xlab="Regression discontinuity estimate",ylab="") +
+  facet_grid(.~Bandwidth)
 dev.off() 

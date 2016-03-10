@@ -57,11 +57,11 @@ RdPlot(y.var="persprop.d",
        ylim = c(-upper,upper)) 
 dev.off() 
 
-# pdf(paste0(data.directory,"plots/taxprop_d.pdf"), width=11.69, height=8.27)
-# RdPlot(y.var="taxprop.d",
-#        ylab="Change in taxable property value, 1860-1870 (1860$)",
-#        ylim = c(-upper,upper)) 
-# dev.off() 
+pdf(paste0(data.directory,"plots/taxprop_d.pdf"), width=11.69, height=8.27)
+RdPlot(y.var="taxprop.d",
+       ylab="Change in taxable property value, 1860-1870 (1860$)",
+       ylim = c(-upper,upper)) 
+dev.off() 
 
 pdf(paste0(data.directory,"plots/future.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="future",
@@ -72,42 +72,42 @@ dev.off()
 
 pdf(paste0(data.directory,"plots/overall.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="overall",
-       ylab="Overall",
-       ylim= c(0,5),
+       ylab="RSS: overall",
+       ylim= c(0,1),
        continuous=FALSE)
 dev.off() 
 
 pdf(paste0(data.directory,"plots/race.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="race",
-       ylab="Race",
+       ylab="RSS: race",
        ylim= c(0,1),
        continuous=FALSE)
 dev.off() 
 
 pdf(paste0(data.directory,"plots/misc.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="misc",
-       ylab="Misc.",
+       ylab="RSS: misc.",
        ylim= c(0,1),
        continuous=FALSE)
 dev.off() 
 
 pdf(paste0(data.directory,"plots/gov.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="gov",
-       ylab="Gov. structure",
+       ylab="RSS: gov. structure",
        ylim= c(0,1),
        continuous=FALSE)
 dev.off() 
 
 pdf(paste0(data.directory,"plots/suffrage.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="suffrage",
-       ylab="Suffrage",
+       ylab="RSS: suffrage",
        ylim= c(0,1),
        continuous=FALSE)
 dev.off() 
 
 pdf(paste0(data.directory,"plots/econ.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="econ",
-       ylab="Economic",
+       ylab="RSS: economics",
        ylim= c(0,1),
        continuous=FALSE)
 dev.off() 

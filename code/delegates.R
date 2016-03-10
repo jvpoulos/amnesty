@@ -195,3 +195,6 @@ delegates.rd <- subset(delegates, !is.na(taxprop.60))
 
 cutoff <- 20000 # define cutoff
 upper <- 2*cutoff # define upper margin
+
+# Normalize overall RSS to 0-1
+delegates.rd$overall[!is.na(delegates.rd$overall)] <- (delegates.rd$overall[!is.na(delegates.rd$overall)]-min(delegates.rd$overall[!is.na(delegates.rd$overall)]))/(max(delegates.rd$overall[!is.na(delegates.rd$overall)])-min(delegates.rd$overall[!is.na(delegates.rd$overall)]))
