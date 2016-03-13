@@ -8,7 +8,7 @@ options(scipen=999) # turn of scientific notation
 
 # Data-driven plots
 RdPlot <- function(data=delegates.rd,y.var,x.var="taxprop.60",xlab="",poly=3,
-                   ylab,upperend=upper,ylim=NULL,continuous=TRUE){
+                   ylab,upperend=upper,ylim=NULL,continuous=FALSE){
   # Data-driven regression discontinuity plots
   if(continuous){
   rdplot(y=data[,y.var],
@@ -48,73 +48,68 @@ RdPlot <- function(data=delegates.rd,y.var,x.var="taxprop.60",xlab="",poly=3,
 pdf(paste0(data.directory,"plots/realprop_d.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="realprop.d",
        ylab="Change in real estate value, 1860-1870 (1860$)",
-       ylim = c(-upper,upper)) 
+       ylim = c(-upper,upper),
+       continuous=TRUE) 
 dev.off() 
 
 pdf(paste0(data.directory,"plots/persprop_d.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="persprop.d",
        ylab="Change in personal property value, 1860-1870 (1860$)",
-       ylim = c(-upper,upper)) 
+       ylim = c(-upper,upper),
+       continuous=TRUE) 
 dev.off() 
 
 pdf(paste0(data.directory,"plots/taxprop_d.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="taxprop.d",
        ylab="Change in taxable property value, 1860-1870 (1860$)",
-       ylim = c(-upper,upper)) 
+       ylim = c(-upper,upper),
+       continuous=TRUE) 
 dev.off() 
 
 pdf(paste0(data.directory,"plots/future.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="future",
        ylab="Future officeholder",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 
 
 pdf(paste0(data.directory,"plots/overall.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="overall",
        ylab="RSS: overall",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 
 
 pdf(paste0(data.directory,"plots/race.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="race",
        ylab="RSS: race",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 
 
 pdf(paste0(data.directory,"plots/misc.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="misc",
        ylab="RSS: misc.",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 
 
 pdf(paste0(data.directory,"plots/gov.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="gov",
        ylab="RSS: gov. structure",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 
 
 pdf(paste0(data.directory,"plots/suffrage.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="suffrage",
        ylab="RSS: suffrage",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 
 
 pdf(paste0(data.directory,"plots/econ.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="econ",
        ylab="RSS: economics",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 
 
 pdf(paste0(data.directory,"plots/protest.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="protest",
        ylab="Protested adoption of state constitution",
-       ylim= c(0,1),
-       continuous=FALSE)
+       ylim= c(0,1))
 dev.off() 

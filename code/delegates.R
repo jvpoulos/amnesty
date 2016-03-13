@@ -135,14 +135,14 @@ delegates$minister <-ifelse(delegates$profession == "Minister",1,0)
 # Create bio dummies
 
 unionist <- c(grep("Union",delegates$bio,T), grep("loyal",delegates$bio,T),
-                  grep("Anti-secessionist",delegates$bio,T),grep("Unionist",delegates$bio,T), 
-                  grep("Freedmen's Bureau",delegates$bio,T),
-                  grep("Peace advocate",delegates$bio,T), grep("carpetbagger",delegates$bio,T),
-                  grep("opponent of secession",delegates$bio,T),
-                  grep("ariti-secessionist",delegates$bio,T),
-                  grep("Pro-North",delegates$bio,T), grep("antipsecessionist",delegates$bio,T),
-                  grep("red string",delegates$bio,T), grep("Republican",delegates$bio,T),
-                  grep("Union",delegates$bio,T)) #unionist/union veteran/Republican/claimed loyalty during war
+              grep("Anti-secessionist",delegates$bio,T),grep("Unionist",delegates$bio,T), 
+              grep("Freedmen's Bureau",delegates$bio,T),
+              grep("Peace advocate",delegates$bio,T), grep("carpetbagger",delegates$bio,T),
+              grep("opponent of secession",delegates$bio,T),
+              grep("ariti-secessionist",delegates$bio,T),
+              grep("Pro-North",delegates$bio,T), grep("antipsecessionist",delegates$bio,T),
+              grep("red string",delegates$bio,T), grep("Republican",delegates$bio,T),
+              grep("Union",delegates$bio,T)) #unionist/union veteran/Republican/claimed loyalty during war
 
 dem <- c(grep("Whig",delegates$bio,T), grep("Democrat",delegates$bio,T),
          grep("Democratic",delegates$bio,T),grep("pro-Douglas",delegates$bio,T),
@@ -172,7 +172,7 @@ delegates$did <- 1:nrow(delegates) # create unique delegate identifier
 votes$vid <- 1:nrow(votes) # create unique votes identifier
 
 r.pairs <- compare.linkage(delegates[c("first.name", "surname", "state", "sound.first","sound.surname")],
-                          votes[c("first.name", "surname", "state", "sound.first","sound.surname")])
+                           votes[c("first.name", "surname", "state", "sound.first","sound.surname")])
 
 #min.train <- getMinimalTrain(r.pairs,nEx=10) 
 #min.train <- editMatch(min.train)
@@ -185,16 +185,25 @@ summary(result)
 
 links <- result$pairs[result$prediction=="L",][c("id1","id2")]
 links <- links[!duplicated(links$id1),] # remove duplicates
-                          
+
 delegates <- merge(delegates, links, by.x="did",by.y="id1", all.x=TRUE)
 delegates <- merge(delegates, votes, by.x="id2",by.y="vid", all.x=TRUE)
 colnames(delegates)[1] <- "vid"
 
-# Subset data to nonmissing taxable property values 
+# Subset data to nonmissing taxable property values
 delegates.rd <- subset(delegates, !is.na(taxprop.60))
 
+# Normalize continuous variables to 0-1
+NormalizeIt <- function(x){
+  x[!is.na(x)] <- (x[!is.na(x)]-min(x[!is.na(x)]))/(max(x[!is.na(x)])-min(x[!is.na(x)]))
+  return(x)
+}
+
+vars.cont <- c("overall","per.black","age")
+delegates.rd[,vars.cont]<- sapply(vars.cont, function(i){
+  NormalizeIt(delegates.rd[,i])
+})
+
+# RD parameters
 cutoff <- 20000 # define cutoff
 upper <- 2*cutoff # define upper margin
-
-# Normalize overall RSS to 0-1
-delegates.rd$overall[!is.na(delegates.rd$overall)] <- (delegates.rd$overall[!is.na(delegates.rd$overall)]-min(delegates.rd$overall[!is.na(delegates.rd$overall)]))/(max(delegates.rd$overall[!is.na(delegates.rd$overall)])-min(delegates.rd$overall[!is.na(delegates.rd$overall)]))
