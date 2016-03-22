@@ -1,9 +1,6 @@
-# RD estimates for summary figures
-
-require(ggplot2)
-require(rdrobust)
-
-#source("delegates.R") 
+########################
+### RD estimates     ###
+########################
 
 # Summary figure for estimates
 ForestPlot <- function(d, xlab, ylab){

@@ -1,7 +1,8 @@
-## Load 1850 1% and 100% Census sample. Merge 1% with slave schedule. 
+#####################################
+### 1850 Census                   ###
+#####################################
 
-# Set data directory
-data.directory <- "~/Dropbox/github/amnesty/data/"
+### Load 1850 1% and 100% Census sample. Merge 1% with slave schedule. ###
 
 # # Import Census data
 # ipums.50 <- read.csv(paste0(data.directory,"ipums-1850-all.csv"),header=TRUE, sep = ",")
@@ -36,30 +37,46 @@ data.directory <- "~/Dropbox/github/amnesty/data/"
 ipums.50 <- read.csv(paste0(data.directory,"ipums-1850-100-sample.csv"),header=TRUE, sep = ",")
 
 # Import 1% sample
-ipums.50.1 <- read.delim(paste0(data.directory,"ipums-1850-1.csv"), quote="")
+ipums.50.1 <- read.delim(paste0(data.directory,"ipums-1850-1-sample.csv"))
 
-CleanIpums1 <- function(ipums) {
-  # Clean 1% sample
+CleanIpums <- function(ipums,one.perc=TRUE) {
+  # Clean IPUMS 1% /slavepums (one.perc=FALSE)
   
-  # Subset to individuals with nonzero and nonmissing real property 
-  ipums <- subset(ipums, realprop>0)
+  if(one.perc){
+    # Subset to individuals with nonzero and nonmissing real property 
+    ipums <- subset(ipums, realprop>0)
+    
+    # Remove non-alphabetic characters from name and make all uppercase
+    ipums$surname<- trimws(toupper(gsub("[^[:alpha:] ]", "",ipums$namelast))) 
+    ipums$first <- trimws(toupper(gsub("[^[:alpha:] ]", "",ipums$namefrst))) 
+  }
   
-  # Remove non-alphabetic characters from surname and make all uppercase
-  ipums$surname<- trimws(toupper(gsub("[^[:alnum:] ]", "",ipums$namelast))) 
-  
-  # Trim spaces
+  # Trim spaces in surname
   ipums$surname <- gsub(" ","",ipums$surname)
+  ipums$first <- gsub("  ", " ",ipums$first)
+
+  # Split first and middle name
+  ipums$first <- trimws(unlist(lapply(strsplit(ipums$first," "), function(x) x[1])))
+  ipums$middle.name <- trimws(unlist(lapply(strsplit(ipums$first," "), function(x) x[2])))
   
-  # Create variable for length of surname
+  # Drop obs with missing names
   ipums$surname.length <- nchar(ipums$surname)
+  ipums$first.length <- nchar(ipums$first)
+  ipums <- subset(ipums, surname.length>2 & first.length>0)
   
-  # Drop obs with missing surnames
-  ipums <- subset(ipums, ipums$surname.length>2)
+  # Standardize first name
+  ipums$first <- StFirst(ipums$first)
+  
+  # Create soundex of first and surnames
+  ipums$sound.surname <- soundex(ipums$surname)
+  ipums$sound.first <- soundex(ipums$first)
+  
+  return(ipums)
 }
-ipums.50.1 <- CleanIpums1(ipums.50.1)
+ipums.50.1 <- CleanIpums(ipums.50.1)
 
 # Import slave file
-slave.50 <- read.csv(paste0(data.directory,"ipums-1850-slave-linked.csv"),header=TRUE, sep = ",")
+slave.50 <- read.csv(paste0(data.directory,"slavepums-1850-linked.csv"),header=TRUE, sep = ",")
 
 # Count # slaves by serial
 slave.50$is.slave <- ifelse(slave.50$slave=="Slave",1,0)

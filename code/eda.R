@@ -1,9 +1,6 @@
-## Exploratory data analysis: 1850 and 1860 censuses
-
-library(ggplot2)
-library(reporttools)
-library(reshape)
-library(weights)
+#####################################
+### Exploratory data analysis     ###
+#####################################
 
 # Make density plot for real property
 wealth.dens.plot <- melt(data=data.frame("Census"=c(rep("1850 100%",nrow(ipums.50)), 

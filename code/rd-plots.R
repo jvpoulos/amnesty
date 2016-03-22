@@ -1,8 +1,6 @@
-# Create RD plots
-
-require(rdrobust)
-
-source("delegates.R") # Run delegates first
+########################
+### RD plots     ###
+########################
 
 options(scipen=999) # turn of scientific notation
 

@@ -1,12 +1,6 @@
-# Clean and merge southern white delegates with vote scores
-
-require(reshape2)
-require(RecordLinkage)
-
-# Set data directory
-data.directory <- "~/Dropbox/github/amnesty/data/"
-
-source("votes.R")
+###################################################
+### Merge southern white delegates with votes   ###
+###################################################
 
 # Import southern white delegates
 delegates <- read.csv(paste0(data.directory,"southern-white-delegates.csv"),header=TRUE, sep = ",")

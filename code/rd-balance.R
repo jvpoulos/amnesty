@@ -1,10 +1,6 @@
-# RD balance plots
-
-require(ggplot2)
-require(rdrobust)
-
-source("delegates.R") # 1
-source("rd-plots.R") # 2
+########################
+### RD balance plots ###
+########################
 
 # Create vector for pretreatment variables
 pretreat.vars <- c("age","confederate","dem","former","unionist",
@@ -38,7 +34,7 @@ ThemeBw1 <- function(base_size = 11, base_family = "") {
       axis.text.y =       element_text(size = base_size, colour = "black", hjust = 0 , vjust=.5 ), # changes position of X axis text
       axis.ticks =        element_blank(),
       axis.title.y =      element_text(size = base_size,angle=90,vjust=.01,hjust=.1),
-     legend.position = "right"
+      legend.position = "right"
     )
 }
 
@@ -90,9 +86,7 @@ p <- ggplot(covars,aes(y=p.cct,x=covars)) +
 
 ggsave(paste0(data.directory,"plots/balance-plot.pdf"), p, width=8.5, height=11)
 
-#################
-
-# RD plots for pretreatment variables
+### RD plots for pretreatment variables ###
 
 pdf(paste0(data.directory,"plots/age.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="age",
@@ -154,4 +148,31 @@ RdPlot(y.var="unionist",
        ylim= c(0,1))
 dev.off() 
 
-# Density of the forcing variable plot
+### Density of the forcing variable plot ###
+
+# Source functions
+source(paste0(code.directory,"rddensity/rddensity.R")) # http://www-personal.umich.edu/~cattaneo/software/rddensity/R/
+
+# Apply manipulation test over range of cutoff values
+cutoff.range <- quantile(log(delegates.rd$taxprop.60), seq(0.15,0.95,0.025)) # put in log
+
+dens.range <- lapply(cutoff.range, function(x) rddensity(X = log(delegates.rd$taxprop.60[delegates.rd$taxprop.60>0]), 
+                                                         c=x, 
+                                                         vce="jackknife", 
+                                                         print.screen=FALSE))
+# Create data for plot
+dens.dat <- data.frame(cutoff = cutoff.range,
+                       y = unlist(sapply(dens.range, "[[", "test")[4,]))
+
+# Plot p values
+dens.plot <- ggplot(dens.dat, aes(x=cutoff, y=y)) + 
+  geom_point(size=3, alpha=0.8) + 
+  geom_hline(aes(x=0), lty=2) +
+  geom_hline(yintercept = 0.05,size=.5,colour="blue",linetype="dotted") +
+  geom_vline(xintercept = log(cutoff),size=.5,colour="red",linetype="dashed") +
+  coord_flip() +
+  xlim(6, 12) +
+  scale_y_continuous(name="p value for manipulation test ",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) +
+  xlab("Log value of 1860 taxable property used as cutoff")
+
+ggsave(paste0(data.directory,"plots/density-plot.pdf"), dens.plot, width=8.5, height=11)

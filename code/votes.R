@@ -1,4 +1,6 @@
-# Combine and clean delegate vote scores
+########################
+### Delegate votes   ###
+########################
 
 require(doParallel)
 require(data.table)
