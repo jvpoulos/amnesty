@@ -75,6 +75,9 @@ CleanIpums <- function(ipums,one.perc=TRUE) {
 }
 ipums.50.1 <- CleanIpums(ipums.50.1)
 
+# Chain 1850 values to 1860$
+ipums.50.1$realprop <- ipums.50.1$realprop/(7.57/8.06)
+
 # Import slave file
 slave.50 <- read.csv(paste0(data.directory,"slavepums-1850-linked.csv"),header=TRUE, sep = ",")
 
@@ -82,9 +85,10 @@ slave.50 <- read.csv(paste0(data.directory,"slavepums-1850-linked.csv"),header=T
 slave.50$is.slave <- ifelse(slave.50$slave=="Slave",1,0)
 slave.50 <- ddply(slave.50,~serial,summarise,n.slaves=sum(is.slave))
 
+slave.50$slave.value <- (slave.50$n.slaves * 377)/(7.57/8.06) # estimate avg. values of slaves in 1850 (1860$)
+
 # Merge slave file
 ipums.50.1 <- merge(ipums.50.1,slave.50,by="serial", all.x=TRUE)
 ipums.50.1$n.slaves[is.na(ipums.50.1$n.slaves)] <- 0
 
-ipums.50.1$slaveholder <- ifelse(ipums.50.1$n.slaves>0,1,0)
-
+ipums.50.1$slaveholder <- ifelse(ipums.50.1$n.slaves>0,1,0) # slaveholder dummy
