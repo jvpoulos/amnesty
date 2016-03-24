@@ -62,9 +62,16 @@ tableContinuous(vars =delegates[c("realprop.60","persprop.60","taxprop.60","real
                                   pretreat.vars,response.vars)], 
                 prec = 2,stats=my.stats, lab = "delegates-sum")
 
-
-# Create estimates for data table
-
-#What % in thirteenth exception?
+# What % in thirteenth exception?
 sum(ipums.60.1$taxprop >= 20000) /nrow(ipums.60.1) #1860 1%
 sum(delegates$taxprop.60 >= 20000, na.rm=TRUE) /nrow(delegates) #1860 delegates
+
+60000/nrow(ipums.60)
+80000/nrow(ipums.60)
+
+150000/nrow(ipums.60)
+200000/nrow(ipums.60)
+
+12470/nrow(ipums.60[ipums.60$state=="Georgia",])
+15000/nrow(ipums.60[ipums.60$state=="Georgia",])
+20000/nrow(ipums.60[ipums.60$state=="Georgia",])

@@ -1,4 +1,5 @@
-run.descriptive <- TRUE
+run.descriptive <- FALSE
+run.power <-FALSE
 
 # Libraries
 require(reshape2)
@@ -32,4 +33,8 @@ if(run.descriptive){
   source("ipums-1850.R")
   source("ipums-1860.R")
   source("descriptive.R")
+}
+
+if(run.power){
+  source("power.R")
 }

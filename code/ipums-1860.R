@@ -14,6 +14,7 @@ ipums.60.1 <- CleanIpums(ipums.60.1)
 ipums.60.1$taxprop <- ipums.60.1$realprop + ipums.60.1$persprop # create taxable property variable
 
 # Load complete count slave file 
+unzip(paste0(data.directory, "slavepums-1860-complete.csv.zip"), exdir=data.directory) # unzip sample
 slave.60 <- read.csv(paste0(data.directory,"slavepums-1860-complete.csv"),header=TRUE, sep = ",")
 
 # Remove non-alphabetic characters from name and make all uppercase
