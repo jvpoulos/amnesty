@@ -59,9 +59,9 @@ balance.dat.r <- data.frame(x = c("Change in personal property value, 1860-1870 
                                    sapply(cv.response, "[[", "ci")[4,]),
                           N = c(rep(sapply(cct.response, "[[", "N"),3))) 
 
-balance.dat.r$Bandwidth <- c(rep("CCT bandwidth",11),
-                           rep("IK bandwidth",11),
-                           rep("CV bandwidth",11)) # all use conventional estimates with robust CIs
+balance.dat.r$Bandwidth <- c(rep("CCT",11),
+                           rep("IK",11),
+                           rep("CV",11)) # all use conventional estimates with robust CIs
 
 # Plot forest plot
 suppressWarnings(balance.dat.r$x <- factor(balance.dat.r$x, levels=rev(balance.dat.r$x))) # reverse order

@@ -4,13 +4,14 @@
 
 require(rdrobust)
 
+load("power.RData")
+
 # Define simulation parameters
 alpha <- 0.05
 L <- 100 # no. iterations 
-r.prob <- c(0.03, 0.06, 0.09, 0.12) # probability of success in Bernouli trial
-sd <- round(sd(delegates.rd$realprop.d, TRUE))
-delta <- c(100, 1000, 10000,20000)
-s.size <- c(500, 1000, 5000, 10000, 100000, 200000) # sample size
+r.prob <- c(0.06, 0.1, 0.14) # probability of success in Bernouli trial
+delta <- c(100, 1000, 10000)
+s.size <- c(1000, 5000, 10000, 50000,100000) # sample size
 
 # Define RD parameters
 rv <- ipums.60.1$taxprop # running variable to sample from 
@@ -26,7 +27,7 @@ SimRD <- function(r.prob,delta, c.prob, s.size, rv, cutoff){
   design$response <- rbinom(s.size, 1, r.prob)
   }
   if(!is.null(delta)){
-    design$response <- rnorm(s.size, delta, sd)
+    design$response <- rnorm(s.size, delta, sd=delta/10)
   } 
   # Fit the model
   fit <- rdrobust(design$response, 
@@ -39,6 +40,15 @@ SimRD <- function(r.prob,delta, c.prob, s.size, rv, cutoff){
   return(summary(fit)$coef[10])
 }
 
+p.vals.wealth <- replicate(L,
+                           sapply(delta, function(d){ 
+                             sapply(s.size, function(s){
+                               SimRD(r.prob=NULL,d,c.prob, s, rv, cutoff)})
+                           }))
+
+p.vals.wealth.array <- t(sapply(1:L, function(i) array(p.vals.wealth[,,i]))) 
+saveRDS(p.vals.wealth.array, "power_p_values_wealth.rds")
+
 p.vals.bin <- replicate(L,
   sapply(r.prob, function(r){ # columns:r.prob, rows: s.size
     sapply(s.size, function(s){
@@ -46,15 +56,8 @@ p.vals.bin <- replicate(L,
   }))
 
 p.vals.bin.array <- t(sapply(1:L, function(i) array(p.vals.bin[,,i]))) # rows: iterations
-saveRDS(p.vals.bin.array, paste0(data.directory,"power_p_values_bin.rds"))
+saveRDS(p.vals.bin.array, "power_p_values_bin.rds")
+#p.vals.bin.array<- readRDS(paste0(data.directory,"power_p_values_bin.rds"))
 
-p.vals.wealth <- replicate(L,
-                        sapply(delta, function(d){ 
-                          sapply(s.size, function(s){
-                            SimRD(r.prob=NULL,d,c.prob, s, rv, cutoff)})
-                        }))
-
-p.vals.wealth.array <- t(sapply(1:L, function(i) array(p.vals.wealth[,,i]))) 
-saveRDS(p.vals.wealth.array, paste0(data.directory,"power_p_values_wealth.rds"))
-
+save.image("power.RData")
 #power <- apply(p.vals.bin.array, 2, function (x) length(which(x < alpha))/L)
