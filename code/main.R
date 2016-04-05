@@ -17,7 +17,6 @@ if(run.descriptive){
 # Set directories
 data.directory <- "~/Dropbox/github/amnesty/data/"
 code.directory <- "~/Dropbox/github/amnesty/code/"
-#options(fftempdir = data.directory)
 
 setwd(code.directory)
 

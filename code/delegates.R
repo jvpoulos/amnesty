@@ -63,6 +63,9 @@ delegates$taxprop.d <- delegates$taxprop.70-delegates$taxprop.60
 delegates$realprop.d <- delegates$realprop.70 - delegates$realprop.60
 delegates$persprop.d <- delegates$persprop.70 - delegates$persprop.60
 
+# Estimate avg. values of slaves in 1860
+delegates$slave.value <- delegates$slaves * 778
+
 # Create former/future office dummies
 delegates$former <- ifelse(delegates$former.office=="",0,1)
 delegates$future <- ifelse(delegates$future.office=="",0,1)
