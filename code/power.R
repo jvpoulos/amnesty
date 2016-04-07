@@ -86,7 +86,7 @@ power.plot.bin <- ggplot(data=grid.bin, aes(x=s.size,
                                                   group = as.factor(r.prob), 
                                                   colour = as.factor(r.prob))) +
   geom_line() +
-  scale_colour_discrete(name = "Probability", labels=c("5%","25%", "50%")) +
+  scale_colour_discrete(name = "Effect size", labels=c("5%","25%", "50%")) +
   scale_x_continuous(breaks=s.size, labels = c("1,000", "10,000", "20,000", "50,000")) +
   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
