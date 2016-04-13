@@ -44,7 +44,7 @@ taxprop.plot <- ggplot(wealth.dens[wealth.dens$variable=="taxprop",],
   geom_density(alpha=.3) + 
   scale_x_continuous(limits = c(1,50000), labels = c("0", "10,000", "20,000", "30,000", "40,000", "50,000")) +
   ylab("") +
-  xlab("Taxable property value (1860$)") +
+  xlab("Total census wealth (1860$)") +
   geom_vline(xintercept = 20000, colour="red", linetype = "longdash")
 
 ggsave(paste0(data.directory,"plots/taxprop-plot.pdf"), taxprop.plot + ylab("Scaled density"), width=8.5, height=11)

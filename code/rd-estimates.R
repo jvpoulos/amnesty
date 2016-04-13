@@ -23,24 +23,27 @@ cct.response <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i],
                                                            delegates.rd$taxprop.60,
                                                            c=cutoff,
                                                            all=TRUE,
-                                                           bwselect="CCT")) 
+                                                           bwselect="CCT",
+                                                           kernel="uniform")) 
 
 ik.response <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i], 
                                                           delegates.rd$taxprop.60,
                                                           c=cutoff,
                                                           all=TRUE,
-                                                          bwselect="IK")) 
+                                                          bwselect="IK",
+                                                          kernel="uniform")) 
 
 cv.response <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i], 
                                                           delegates.rd$taxprop.60,
                                                           c=cutoff,
                                                           all=TRUE,
-                                                          bwselect="CV")) 
+                                                          bwselect="CV",
+                                                          kernel="uniform")) 
 # Create data for plot
-balance.dat.r <- data.frame(x = c("Change in personal property value, 1860-1870 (1860$)",
+response.dat <- data.frame(x = c("Change in personal property value, 1860-1870 (1860$)",
                                   "Change in real estate value, 1860-1870 (1860$)",
-                                  "Change in taxable property value, 1860-1870 (1860$)",
-                                  "Future officeholder",
+                                  "Change in total census wealth, 1860-1870 (1860$)",
+                                  "Ex-post officeholder",
                                   "Protested adoption of constitution",
                                   "RSS: overall",
                                   "RSS: economics",
@@ -59,27 +62,27 @@ balance.dat.r <- data.frame(x = c("Change in personal property value, 1860-1870 
                                    sapply(cv.response, "[[", "ci")[4,]),
                           N = c(rep(sapply(cct.response, "[[", "N"),3))) 
 
-balance.dat.r$Bandwidth <- c(rep("CCT",11),
+response.dat$Bandwidth <- c(rep("CCT",11),
                            rep("IK",11),
                            rep("CV",11)) # all use conventional estimates with robust CIs
 
 # Plot forest plot
-suppressWarnings(balance.dat.r$x <- factor(balance.dat.r$x, levels=rev(balance.dat.r$x))) # reverse order
+suppressWarnings(response.dat$x <- factor(response.dat$x, levels=rev(response.dat$x))) # reverse order
 
 pdf(paste0(data.directory,"plots/rd_estimates_bin.pdf"), width=11.69, height=8.27)
-ForestPlot(balance.dat.r[balance.dat.r$x != "Change in real estate value, 1860-1870 (1860$)" & 
-                           balance.dat.r$x != "Change in personal property value, 1860-1870 (1860$)" &
-                           balance.dat.r$x != "Change in taxable property value, 1860-1870 (1860$)",],
-           xlab="Regression discontinuity estimate",ylab="") +
+ForestPlot(response.dat[response.dat$x != "Change in real estate value, 1860-1870 (1860$)" & 
+                           response.dat$x != "Change in personal property value, 1860-1870 (1860$)" &
+                           response.dat$x != "Change in total census wealth, 1860-1870 (1860$)",],
+           xlab="RD estimate",ylab="") +
  # scale_y_continuous(breaks = c(-1,0,1), labels = c("-1", "0", "1")) + 
   facet_grid(.~Bandwidth)
 dev.off() 
 
 pdf(paste0(data.directory,"plots/rd_estimates_wealth.pdf"), width=11.69, height=8.27)
-ForestPlot(balance.dat.r[balance.dat.r$x == "Change in real estate value, 1860-1870 (1860$)" | 
-                           balance.dat.r$x == "Change in personal property value, 1860-1870 (1860$)" |
-                           balance.dat.r$x == "Change in taxable property value, 1860-1870 (1860$)",],
-           xlab="Regression discontinuity estimate",ylab="") +
+ForestPlot(response.dat[response.dat$x == "Change in real estate value, 1860-1870 (1860$)" | 
+                           response.dat$x == "Change in personal property value, 1860-1870 (1860$)" |
+                           response.dat$x == "Change in total census wealth, 1860-1870 (1860$)",],
+           xlab="RD estimate",ylab="") +
   scale_y_continuous(breaks = c(-10000,0,20000), labels = c("-10,000", "0", "20,000")) + 
   facet_grid(.~Bandwidth)
 dev.off() 

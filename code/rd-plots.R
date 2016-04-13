@@ -66,7 +66,7 @@ dev.off()
 
 pdf(paste0(data.directory,"plots/future.pdf"), width=11.69, height=8.27)
 RdPlot(y.var="future",
-       ylab="Future officeholder",
+       ylab="Ex-post officeholder",
        ylim= c(0,1))
 dev.off() 
 

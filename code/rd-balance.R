@@ -12,19 +12,22 @@ cct.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i],
                                                            delegates.rd$taxprop.60,
                                                            c=cutoff,
                                                            all=TRUE,
-                                                           bwselect="CCT")) 
+                                                           bwselect="CCT",
+                                                           kernel="uniform")) 
 
 ik.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
                                                           delegates.rd$taxprop.60,
                                                           c=cutoff,
                                                           all=TRUE,
-                                                          bwselect="IK")) 
+                                                          bwselect="IK",
+                                                          kernel="uniform")) 
 
 cv.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
                                                           delegates.rd$taxprop.60,
                                                           c=cutoff,
                                                           all=TRUE,
-                                                          bwselect="CV")) 
+                                                          bwselect="CV",
+                                                          kernel="uniform")) 
 
 # Create function for plot theme
 ThemeBw1 <- function(base_size = 11, base_family = "") {
@@ -161,7 +164,7 @@ dens.range <- lapply(cutoff.range, function(x) rddensity(X = log(delegates.rd$ta
                                                          vce="jackknife", 
                                                          print.screen=FALSE))
 # Create data for plot
-dens.dat <- data.frame(cutoff = cutoff.range,
+dens.dat <- data.frame(cutoff = quantile(delegates.rd$taxprop.60, seq(0.15,0.95,0.025)), # no log for labels
                        y = unlist(sapply(dens.range, "[[", "test")[4,]))
 
 # Plot p values
@@ -169,10 +172,9 @@ dens.plot <- ggplot(dens.dat, aes(x=cutoff, y=y)) +
   geom_point(size=3, alpha=0.8) + 
   geom_hline(aes(x=0), lty=2) +
   geom_hline(yintercept = 0.05,size=.5,colour="blue",linetype="dotted") +
-  geom_vline(xintercept = log(cutoff),size=.5,colour="red",linetype="dashed") +
+  geom_vline(xintercept = cutoff,size=.5,colour="red",linetype="dashed") +
   coord_flip() +
-  xlim(6, 12) +
-  scale_y_continuous(name="p value for manipulation test ",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) +
-  xlab("Log value of 1860 taxable property used as cutoff")
+  scale_x_continuous(name="Value of total census wealth used as cutoff (1860$)",breaks=c(0,cutoff,cutoff*2,cutoff*3),labels=c("0","20,000","30,000","40,000")) +
+  scale_y_continuous(name="p value for manipulation test",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) 
 
 ggsave(paste0(data.directory,"plots/density-plot.pdf"), dens.plot, width=8.5, height=11)
