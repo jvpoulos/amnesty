@@ -9,7 +9,7 @@
 
 ###################################################################
 
-source('rdlocrand_fun.R')
+# source('rdlocrand_fun.R')
 
 rdrbounds = function(Y,R,
                      cutoff = 0,

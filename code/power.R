@@ -37,7 +37,7 @@ SimRD <- function(r.prob,delta, s.size, rv, cutoff){
                   c=cutoff,
                   bwselect="CCT")
   # Return p value
-  return(summary(fit)$coef[11])
+  return(summary(fit)$coef[12]) # changed this from bias-corrected to Robust
 }
 
 # p.vals.wealth <- replicate(L,

@@ -9,7 +9,7 @@
 
 ###################################################################
 
-source('rdlocrand_fun.R')
+# source('rdlocrand_fun.R')
 
 rdsensitivity = function(Y,R,
                          cutoff = 0,

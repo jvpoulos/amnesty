@@ -9,7 +9,7 @@
 
 ###################################################################
 
-source('rdlocrand_fun.R')
+# source('rdlocrand_fun.R')
 
 rdwinselect = function(R, X, 
                        cutoff=0, 

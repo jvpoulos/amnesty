@@ -9,10 +9,10 @@
 
 ###################################################################
 
-source('rdlocrand_fun.R')
+# source('rdlocrand_fun.R')
 
-library(sandwich)
-library(AER)
+# library(sandwich)
+# library(AER)
 
 rdrandinf = function(Y,R,
                      cutoff = 0,

@@ -37,7 +37,7 @@ ThemeBw1 <- function(base_size = 11, base_family = "") {
       axis.text.y =       element_text(size = base_size, colour = "black", hjust = 0 , vjust=.5 ), # changes position of X axis text
       axis.ticks =        element_blank(),
       axis.title.y =      element_text(size = base_size,angle=90,vjust=.01,hjust=.1),
-      legend.position = "right"
+      legend.position = "top"
     )
 }
 
@@ -47,7 +47,7 @@ covars.names <- c("Age","Confederate","Democrat","Former officeholder","Unionist
                   "Farmer","Lawyer","Merchant","Physician")
 
 covars <- data.frame("covars"=covars.names,
-                     "p.cct"=sapply(cct.pretreat, "[[", "pv")[2,], # CCT: bias-corrected 
+                     "p.cct"=sapply(cct.pretreat, "[[", "pv")[3,], # CCT: robust 
                      "p.ik"= sapply(ik.pretreat, "[[", "pv")[1,],  # IK: conventional 
                      "p.cv"= sapply(cv.pretreat, "[[", "pv")[1,])  # CV: conventional 
 

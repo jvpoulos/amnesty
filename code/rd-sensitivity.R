@@ -21,15 +21,15 @@ range.future <- lapply(cutoff.range, function(x) rdrobust(delegates.rd$future,
                                                           kernel="uniform"))
 # Create data for plot
 realprop.dat <- data.frame(cutoff = cutoff.range,
-                           y = sapply(range.realprop, "[[", "coef")[2,], # CCT: bias-corrected estimates
-                           y.lo = sapply(range.realprop, "[[", "ci")[2,], # CCT: bias-corrected CIs
-                           y.hi = sapply(range.realprop, "[[", "ci")[5,],
+                           y = sapply(range.realprop, "[[", "coef")[3,], # CCT: robust estimates
+                           y.lo = sapply(range.realprop, "[[", "ci")[3,], # CCT: robust CIs
+                           y.hi = sapply(range.realprop, "[[", "ci")[6,],
                            N = sapply(range.realprop, "[[", "N"))
 
 future.dat <- data.frame(cutoff = cutoff.range,
-                         y = sapply(range.future, "[[", "coef")[2,], # CCT: bias-corrected estimates
-                         y.lo = sapply(range.future, "[[", "ci")[2,], # CCT: bias-corrected CIs
-                         y.hi = sapply(range.future, "[[", "ci")[5,],
+                         y = sapply(range.future, "[[", "coef")[3,], # CCT: robust estimates
+                         y.lo = sapply(range.future, "[[", "ci")[3,], # CCT: robust CIs
+                         y.hi = sapply(range.future, "[[", "ci")[6,],
                          N = sapply(range.future, "[[", "N"))
 
 # Plot estimates
