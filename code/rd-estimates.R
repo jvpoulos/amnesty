@@ -68,7 +68,7 @@ cv.response <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i],
 #                                                            rdwreps= 10000,
 #                                                            level = .1,
 #                                                            quietly = TRUE,
-#                                                            ci = c(0.05, seq(-12000, 25000, by=1), 10000)))
+#                                                            ci = c(0.05, seq(-12000, 25000, by=1)))) 
 
 #saveRDS(rand.wealth, "rand_wealth.rds")
 rand.wealth <- readRDS(paste0(data.directory,"rand_wealth.rds"))
