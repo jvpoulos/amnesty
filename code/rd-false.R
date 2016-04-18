@@ -1,5 +1,5 @@
 ########################
-### RD sensitivity   ###
+### RD falsification ###
 ########################
 
 # Create range of cutoff values 

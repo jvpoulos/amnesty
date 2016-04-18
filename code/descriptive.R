@@ -2,7 +2,7 @@
 ### Descriptive statistics         ###
 #####################################
 
-# Make density plot for real property
+## Make density plot for real property
 wealth.dens <- melt(data=data.frame("Sample"=c(rep("1850 100%",nrow(ipums.50)),
                                                rep("1850 slaveholders",nrow(slave.50)),
                                                rep("1860 1%",nrow(ipums.60.1)),
@@ -55,15 +55,50 @@ print(grid.arrange(realprop.plot, persprop.plot,taxprop.plot,
                    ncol=1, nrow=3, left="Scaled density", bottom="")) 
 dev.off() 
 
-# Create summary table for delegates
+## Create summary table for delegates
 my.stats <- list("n", "min", "median", "mean", "max", 
                  "s", "na") # create table
 tableContinuous(vars =delegates[c("realprop.60","persprop.60","taxprop.60","realprop.70","persprop.70","taxprop.70",
                                   pretreat.vars,response.vars)], 
                 prec = 2,stats=my.stats, lab = "delegates-sum")
 
+## Create stacked bar plot for 13th exception state totals
+
+ipums.60.1$thr <- ifelse(ipums.60.1$taxprop >= 20000, 1, 0) # create dummy for thirteenth exception
+
+# Create data for table
+exception.dat <- data.frame("State"= c("VA","GA","NC","TX","MS","LA","TN","AL","SC","AR","FL"),
+                            "Pardons"=c(2070,1228,482,269,765,142,93,1361,638,41,22),
+                            "Total"=c(round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Virginia"])/nrow(ipums.60.1[ipums.60.1$statefip=="Virginia",])*nrow(ipums.60[ipums.60$state=="Virginia",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Georgia"])/nrow(ipums.60.1[ipums.60.1$statefip=="Georgia",])*nrow(ipums.60[ipums.60$state=="Georgia",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="North Carolina"])/nrow(ipums.60.1[ipums.60.1$statefip=="North Carolina",])*nrow(ipums.60[ipums.60$state=="North Carolina",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Texas"])/nrow(ipums.60.1[ipums.60.1$statefip=="Texas",])*nrow(ipums.60[ipums.60$state=="Texas",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Mississippi"])/nrow(ipums.60.1[ipums.60.1$statefip=="Mississippi",])*nrow(ipums.60[ipums.60$state=="Mississippi",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Louisiana"])/nrow(ipums.60.1[ipums.60.1$statefip=="Louisiana",])*nrow(ipums.60[ipums.60$state=="Louisiana",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Tennessee"])/nrow(ipums.60.1[ipums.60.1$statefip=="Tennessee",])*nrow(ipums.60[ipums.60$state=="Tennessee",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Alabama"])/nrow(ipums.60.1[ipums.60.1$statefip=="Alabama",])*nrow(ipums.60[ipums.60$state=="Alabama",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="South Carolina"])/nrow(ipums.60.1[ipums.60.1$statefip=="South Carolina",])*nrow(ipums.60[ipums.60$state=="South Carolina",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Arkansas"])/nrow(ipums.60.1[ipums.60.1$statefip=="Arkansas",])*nrow(ipums.60[ipums.60$state=="Arkansas",])),
+                                      round(sum(ipums.60.1$thr[ipums.60.1$statefip=="Florida"])/nrow(ipums.60.1[ipums.60.1$statefip=="Florida",])*nrow(ipums.60[ipums.60$state=="Florida",]))))
+
+#exception.dat$Pardons[exception.dat$State=="CSA"] <- sum(exception.dat$Pardons,na.rm=TRUE)
+#exception.dat$Est[exception.dat$State=="CSA"] <- sum(exception.dat$Est,na.rm=TRUE)                                
+
+exception.dat.m <- melt(exception.dat, id.vars = "State")
+
+colnames(exception.dat.m) <- c("State","Variable","value")
+
+pdf(paste0(data.directory,"plots/pardon-plot.pdf"), width=8.27, height=11.69)
+ggplot(exception.dat.m, aes(State, value, fill = Variable)) +
+  scale_y_continuous(labels = c("0", "10,000", "20,000", "30,000", "40,000")) +
+  geom_bar(stat="identity") +
+  xlab("State") +
+  ylab("Count")
+dev.off()
+
+
 # What % in thirteenth exception?
-sum(ipums.60.1$taxprop >= 20000) /nrow(ipums.60.1) #1860 1%
+sum(ipums.60.1$thr==1) /nrow(ipums.60.1) #1860 1%
 sum(delegates$taxprop.60 >= 20000, na.rm=TRUE) /nrow(delegates) #1860 delegates
 
 60000/nrow(ipums.60)

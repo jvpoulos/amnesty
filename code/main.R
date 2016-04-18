@@ -26,7 +26,7 @@ source("delegates.R")
 source("rd-plots.R") 
 source("rd-balance.R") # req. rddensity.R, rddensity_fun.R, and rdbwdensity.R
 source("rd-estimates.R") # req. rdlocalrand functions
-source("rd-sensitivity.R")
+source("rd-false.R")
 
 if(run.descriptive){
   source("StFirst.R") # standardize first names fn
