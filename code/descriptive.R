@@ -62,6 +62,37 @@ tableContinuous(vars =delegates[c("realprop.60","persprop.60","taxprop.60","real
                                   pretreat.vars,response.vars)], 
                 prec = 2,stats=my.stats, lab = "delegates-sum")
 
+## Descriptive plot: overall RSS vs 1860 taxable property
+
+pdf(paste0(data.directory,"plots/rss-wealth.pdf"), width=8.27, height=11.69)
+ggplot(delegates, aes(y=overall, x=taxprop.60)) + 
+  geom_point(shape=19, alpha=1/4) + 
+  xlab("Total census wealth in 1860 (1860$)") + 
+  ylab("Overall RSS") +
+  #geom_vline(aes(xintercept=20000), colour="red", linetype = "longdash") + 
+  stat_smooth(method = "lm", formula = y ~ poly(x, 4),se=FALSE) + 
+  scale_x_continuous(limit=c(0,40000),labels = c("0", "10,000", "20,000", "30,000", "40,000"))
+dev.off()
+
+## Descriptive plot: binary background variables box plot
+
+bin.melt <- melt(delegates[c("taxprop.60","former","unionist","dem","confederate")],
+                  id.vars="taxprop.60")
+
+pdf(paste0(data.directory,"plots/bin-wealth.pdf"), width=8.27, height=11.69)
+ggplot(data=bin.melt,aes(x=value,y= taxprop.60,colour=variable))+
+  scale_y_continuous(limit=c(0,40000),labels = c("0", "10,000", "20,000", "30,000", "40,000")) +
+  scale_x_continuous(breaks=c(0,1), labels=c("No","Yes")) +
+  geom_boxplot(aes(group=value)) +
+  facet_wrap(~variable,  nrow=1) +
+  theme(strip.background = element_blank(),
+        strip.text.x = element_blank()) +
+  #theme(axis.ticks = element_blank(), axis.text.x = element_blank()) +
+  labs(y="Total census wealth in 1860 (1860$)",x="") +
+  scale_color_discrete("Pretreatment variable",
+                       labels=c("Former officeholder", "Unionist", "Democrat", "Confederate"))
+dev.off()
+
 ## Create stacked bar plot for 13th exception state totals
 
 ipums.60.1$thr <- ifelse(ipums.60.1$taxprop >= 20000, 1, 0) # create dummy for thirteenth exception
