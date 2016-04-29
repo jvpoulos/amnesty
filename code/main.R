@@ -6,6 +6,8 @@ require(reshape2)
 require(RecordLinkage)
 require(ggplot2)
 require(rdrobust)
+require(doParallel)
+require(data.table)
 
 if(run.descriptive){
   require(reporttools)
@@ -21,6 +23,8 @@ code.directory <- "~/Dropbox/github/amnesty/code/"
 setwd(code.directory)
 
 # Source scripts (in order)
+source("StFirst.R") # standardize first names fn
+source("pardons")
 source("votes.R")
 source("delegates.R") 
 source("rd-plots.R") 

@@ -1,6 +1,6 @@
-###################################################
-### Merge southern white delegates with votes   ###
-###################################################
+##############################################################
+### Merge southern white delegates with votes and pardons   ###
+##############################################################
 
 # Import southern white delegates
 delegates <- read.csv(paste0(data.directory,"southern-white-delegates.csv"),header=TRUE, sep = ",")
@@ -30,8 +30,9 @@ delegates$protest[delegates$dagger==1 & (delegates$state=="TX")] <-1
 # Split name
 names.delegates <- colsplit(delegates$name,",",c("surname","first.name"))
 
-delegates$surname <- trimws(names.delegates$surname) 
-delegates$first.name <- trimws(names.delegates$first.name) 
+# Remove non-alphabetic characters from name and make all uppercase
+delegates$surname<- trimws(toupper(gsub("[^[:alpha:] ]", "",names.delegates$surname))) 
+delegates$first.name <- trimws(toupper(gsub("[^[:alpha:] ]", "",names.delegates$first.name))) 
 
 delegates$sound.first <- soundex(delegates$first.name) # soundex of first name
 delegates$sound.surname <- soundex(delegates$surname) # soundex of surname
@@ -184,8 +185,38 @@ links <- result$pairs[result$prediction=="L",][c("id1","id2")]
 links <- links[!duplicated(links$id1),] # remove duplicates
 
 delegates <- merge(delegates, links, by.x="did",by.y="id1", all.x=TRUE)
-delegates <- merge(delegates, votes, by.x="id2",by.y="vid", all.x=TRUE)
+delegates <- merge(delegates, votes, by.x="id2",by.y="vid", all.x=TRUE,suffixes=c(".del",".votes"))
 colnames(delegates)[1] <- "vid"
+colnames(delegates)[3] <- "name"
+colnames(delegates)[4] <- "state"
+colnames(delegates)[26] <- "surname"
+colnames(delegates)[27] <- "first.name"
+colnames(delegates)[28] <- "sound.first"
+colnames(delegates)[29] <- "sound.surname"
+
+# Merge delegates/votes with pardons
+pardons$pid <- 1:nrow(pardons) # create unique pardons identifier
+
+r.pairs.pardons <- compare.linkage(delegates[c("first.name", "surname", "state","sound.first","sound.surname")],
+                                   pardons[c("first.name", "surname", "state", "sound.first","sound.surname")])
+
+# min.train.pardons <- getMinimalTrain(r.pairs.pardons,nEx=20) 
+# min.train.pardons$pairs$is_match <- 0
+# min.train.pardons <- editMatch(min.train.pardons)
+# saveRDS(min.train.pardons, paste0(data.directory,"min_train_pardons.rds"))
+
+min.train.pardons <- readRDS(paste0(data.directory,"min_train_pardons.rds"))
+
+model.pardons <- trainSupv(min.train.pardons, method = "svm")
+result.pardons <- classifySupv(model.pardons , newdata = r.pairs.pardons)
+summary(result.pardons)
+
+links.pardons <- result.pardons$pairs[result.pardons$prediction=="L",][c("id1","id2")]
+links.pardons <- links.pardons[!duplicated(links.pardons$id1),] # remove duplicates
+
+delegates <- merge(delegates, links.pardons, by.x="did",by.y="id1", all.x=TRUE)
+delegates <- merge(delegates, pardons, by.x="id2",by.y="pid", all.x=TRUE,suffixes=c(".del",".par"))
+colnames(delegates)[1] <- "pid"
 
 # Subset data to nonmissing taxable property values
 delegates.rd <- subset(delegates, !is.na(taxprop.60))

@@ -2,10 +2,6 @@
 ### Delegate votes   ###
 ########################
 
-require(doParallel)
-require(data.table)
-require(RecordLinkage)
-
 # Register cores for parallel processing
 registerDoParallel(4)
 # Ensure random number generation for parallel processing
@@ -29,8 +25,9 @@ votes <- ImportData(vote.directory,vote.files)
 # Split name
 names.votes <- colsplit(votes$name,",",c("surname","first.name"))
 
-votes$surname <- trimws(names.votes$surname) 
-votes$first.name <- trimws(names.votes$first.name) 
+# Remove non-alphabetic characters from name and make all uppercase
+votes$surname<- trimws(toupper(gsub("[^[:alpha:] ]", "",names.votes$surname))) 
+votes$first.name <- trimws(toupper(gsub("[^[:alpha:] ]", "",names.votes$first.name))) 
 
 votes$sound.first <- soundex(votes$first.name) # soundex of first name
 votes$sound.surname <- soundex(votes$surname) # soundex of surname name
