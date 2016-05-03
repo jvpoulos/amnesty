@@ -8,26 +8,36 @@ pretreat.vars <- c("age","confederate","dem","former","unionist",
                    "farmer","lawyer","merchant","physician")
 
 # Apply rdrobust over characteristics
-cct.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
-                                                           delegates.rd$taxprop.60,
-                                                           c=cutoff,
-                                                           all=TRUE,
-                                                           bwselect="CCT",
-                                                           kernel="uniform")) 
 
-ik.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
-                                                          delegates.rd$taxprop.60,
-                                                          c=cutoff,
-                                                          all=TRUE,
-                                                          bwselect="IK",
-                                                          kernel="uniform")) 
+cct.pretreat.srd <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
+                                                               delegates.rd$taxprop.60,
+                                                               c=cutoff,
+                                                               all=TRUE,
+                                                               bwselect="CCT",
+                                                               kernel="uniform")) 
 
-cv.pretreat <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
-                                                          delegates.rd$taxprop.60,
-                                                          c=cutoff,
-                                                          all=TRUE,
-                                                          bwselect="CV",
-                                                          kernel="uniform")) 
+# cct.pretreat.frd <- lapply(1:length(pretreat.vars), function(i){
+#   iv.result <- ivreg(delegates.rd[,pretreat.vars[i]] ~ tot | treat, subset= ((realprop.60 >= cutoff & realprop.60 <= (cutoff+cct.pretreat.srd[[i]]$h)) |
+#                                                                                (realprop.60 < cutoff & realprop.60 >= (cutoff-cct.pretreat.srd[[i]]$h))),
+#                      data=delegates.rd)
+#   return(list("CI"= c(confint(iv.result)[2],confint(iv.result)[4]),
+#               "TOT.ATE"=iv.result$coefficients[[2]],
+#               "wald.p"=summary(iv.result)$coefficients[8]))})
+
+
+ik.pretreat.srd <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
+                                                              delegates.rd$taxprop.60,
+                                                              c=cutoff,
+                                                              all=TRUE,
+                                                              bwselect="IK",
+                                                              kernel="uniform")) 
+
+cv.pretreat.srd <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
+                                                              delegates.rd$taxprop.60,
+                                                              c=cutoff,
+                                                              all=TRUE,
+                                                              bwselect="CV",
+                                                              kernel="uniform")) 
 
 # Create function for plot theme
 ThemeBw1 <- function(base_size = 11, base_family = "") {
@@ -47,9 +57,10 @@ covars.names <- c("Age","Confederate","Democrat","Former officeholder","Unionist
                   "Farmer","Lawyer","Merchant","Physician")
 
 covars <- data.frame("covars"=covars.names,
-                     "p.cct"=sapply(cct.pretreat, "[[", "pv")[3,], # CCT: robust 
-                     "p.ik"= sapply(ik.pretreat, "[[", "pv")[1,],  # IK: conventional 
-                     "p.cv"= sapply(cv.pretreat, "[[", "pv")[1,])  # CV: conventional 
+                     "p.cct.srd"=sapply(cct.pretreat.srd, "[[", "pv")[3,], # CCT: robust 
+                     #                   "p.cct.frd"=sapply(cct.pretreat.frd, "[[", "pv")[3,])
+                     "p.ik.srd"= sapply(ik.pretreat.srd, "[[", "pv")[1,],  # IK: conventional 
+                     "p.cv.srd"= sapply(cv.pretreat.srd, "[[", "pv")[1,])  # CV: conventional 
 
 Biographical  <- covars.names[1:5] # group vars
 District    <- covars.names[6]
@@ -69,25 +80,29 @@ order <- data.frame(covars= c("Biographical:",
                               "District characteristics:",
                               "   ",
                               "Occupations:"),
-                    order=c(.5,5.1,5.5,6.1,6.5), p.cct=NA, p.ik=NA,p.cv=NA,group=NA)
+                     order=c(.5,5.1,5.5,6.1,6.5), p.cct.srd=NA, p.ik.srd=NA,p.cv.srd=NA,group=NA)
+                   # order=c(.5,5.1,5.5,6.1,6.5), p.cct.srd=NA, p.cct.frd=NA, group=NA)
 covars <- rbind(covars,order)
 covars <-covars[order(covars$order),]
 covars$covars <- factor(covars$covars,levels=unique(covars$covars)[length(covars$covars):1])
 
 # Create plot 
 
-p <- ggplot(covars,aes(y=p.cct,x=covars)) +  
+p <- ggplot(covars,aes(y=p.cct.srd,x=covars)) +  
   coord_flip(ylim = c(0, 1)) + 
   geom_hline(yintercept = 0.05,size=.5,colour="blue",linetype="dotted") +
-  scale_colour_manual(name="Estimator", values =c("CV"="orange", "IK"="blue", "CCT"="red")) +
+  scale_colour_manual(name="Bandwidth selector", values =c("CV"="orange", "IK"="blue", "CCT"="red")) +
+  #scale_colour_manual(name="Estimator", values =c("SRD"="orange", "FRD"="blue")) +
   geom_point(aes(colour ='CCT'),size=2) + 
-  geom_point(aes(y=p.ik,x=covars,colour ='IK'), size=2) +
-  geom_point(aes(y=p.cv,x=covars,colour ='CV'), size=2) +
-  scale_y_continuous(name="p value",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) + 
+  geom_point(aes(y=p.ik.srd,x=covars,colour ='IK'), size=2) +
+  geom_point(aes(y=p.cv.srd,x=covars,colour ='CV'), size=2) +
+  #geom_point(aes(colour ='SRD'),size=2) + 
+  #geom_point(aes(y=p.cct.frd,x=covars,colour ='FRD'), size=2) +
+  scale_y_continuous(name="SRD p-value",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) + 
   scale_x_discrete(name="") + 
   ThemeBw1()
 
-ggsave(paste0(data.directory,"plots/balance-plot.pdf"), p, width=8.5, height=11)
+ggsave(paste0(data.directory,"plots/balance-plot.pdf"), p, width=8.27, height=11.69)
 
 ### RD plots for pretreatment variables ###
 
@@ -175,6 +190,6 @@ dens.plot <- ggplot(dens.dat, aes(x=cutoff, y=y)) +
   geom_vline(xintercept = cutoff,size=.5,colour="red",linetype="dashed") +
   coord_flip() +
   scale_x_continuous(name="Value of total census wealth used as cutoff (1860$)",breaks=c(0,cutoff,cutoff*2,cutoff*3),labels=c("0","20,000","30,000","40,000")) +
-  scale_y_continuous(name="p value for manipulation test",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) 
+  scale_y_continuous(name="p-value for manipulation test",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) 
 
-ggsave(paste0(data.directory,"plots/density-plot.pdf"), dens.plot, width=8.5, height=11)
+ggsave(paste0(data.directory,"plots/density-plot.pdf"), dens.plot, width=8.27, height=11.69)

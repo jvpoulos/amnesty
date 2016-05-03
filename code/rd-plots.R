@@ -43,23 +43,23 @@ RdPlot <- function(data=delegates.rd,y.var,x.var="taxprop.60",xlab="",poly=3,
   }
 }
 
-pdf(paste0(data.directory,"plots/realprop_d.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="realprop.d",
-       ylab="Change in real estate value, 1860-1870 (1860$)",
+pdf(paste0(data.directory,"plots/realprop_70.pdf"), width=11.69, height=8.27)
+RdPlot(y.var="realprop.70",
+       ylab="1870 real estate value (1860$)",
        ylim = c(-upper,upper),
        continuous=TRUE) 
 dev.off() 
 
-pdf(paste0(data.directory,"plots/persprop_d.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="persprop.d",
-       ylab="Change in personal property value, 1860-1870 (1860$)",
+pdf(paste0(data.directory,"plots/persprop_70.pdf"), width=11.69, height=8.27)
+RdPlot(y.var="persprop.70",
+       ylab="1870 personal property value (1860$)",
        ylim = c(-upper,upper),
        continuous=TRUE) 
 dev.off() 
 
-pdf(paste0(data.directory,"plots/taxprop_d.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="taxprop.d",
-       ylab="Change in taxable property value, 1860-1870 (1860$)",
+pdf(paste0(data.directory,"plots/taxprop_70.pdf"), width=11.69, height=8.27)
+RdPlot(y.var="taxprop.70",
+       ylab="1870 taxable property value (1860$)",
        ylim = c(-upper,upper),
        continuous=TRUE) 
 dev.off() 

@@ -9,6 +9,7 @@ require(rdrobust)
 require(doParallel)
 require(data.table)
 require(caret)
+require(AER)
 
 if(run.descriptive){
   require(reporttools)
@@ -25,7 +26,8 @@ setwd(code.directory)
 
 # Source scripts (in order)
 source("StFirst.R") # standardize first names fn
-source("SuperLearner.R") # standardize first names fn
+source("SuperLearner.R")
+source("IvCI.R")
 source("pardons")
 source("votes.R")
 source("delegates.R") 

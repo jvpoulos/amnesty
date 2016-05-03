@@ -185,14 +185,8 @@ links <- result$pairs[result$prediction=="L",][c("id1","id2")]
 links <- links[!duplicated(links$id1),] # remove duplicates
 
 delegates <- merge(delegates, links, by.x="did",by.y="id1", all.x=TRUE)
-delegates <- merge(delegates, votes, by.x="id2",by.y="vid", all.x=TRUE,suffixes=c(".del",".votes"))
+delegates <- merge(delegates, votes[c("vid","name","gov","suffrage","race","misc","overall","bloc","faction","econ")], by.x="id2",by.y="vid", all.x=TRUE)
 colnames(delegates)[1] <- "vid"
-colnames(delegates)[3] <- "name"
-colnames(delegates)[4] <- "state"
-colnames(delegates)[26] <- "surname"
-colnames(delegates)[27] <- "first.name"# for RLBigDataLinkage
-colnames(delegates)[28] <- "sound.first"
-colnames(delegates)[29] <- "sound.surname"
 
 ## Merge delegates/votes with pardons
 pardons$pid <- 1:nrow(pardons) # create unique pardons identifier
@@ -258,7 +252,7 @@ Y.train <- as.matrix(df.train$is.match)
 #                            family="binomial") # glmnet response is 2-level factor
 
 # Save prediciton model
-saveRDS(fitSL.link, file = paste0(data.directory,"pardon_link.rds"))
+#saveRDS(fitSL.link, file = paste0(data.directory,"pardon_link.rds"))
 
 # Print summary table
 fitSL.link <- readRDS(paste0(data.directory,"pardon_link.rds"))
@@ -268,14 +262,19 @@ link.pred.test <- predict(fitSL.link, data.frame(X.test))$pred
 
 # Add predictions to test data
 X.test$match.prob <- as.numeric(link.pred.test) # match probability 
-X.test$match <- ifelse(X.test$match.prob>0.2,1,0) # 7 duplicates
+X.test$match <- ifelse(X.test$match.prob>0.5,1,0) 
 
 # Merge training, test matches to delegates
-train.matches <- df.train$did[df.train$is.match==1]
-test.matches <- df.test$did[X.test$match==1]
+train.matches.did <- df.train$did[df.train$is.match==1]
+test.matches.did <- unique(df.test$did[X.test$match==1]) # duplicates
 
 delegates$pardon <- 0
-delegates$pardon[delegates$did %in% c(train.matches, test.matches)] <- 1
+delegates$pardon[delegates$did %in% c(train.matches.did, test.matches.did)] <- 1
+
+delegates <- merge(delegates, rbind(df.train[df.train$is.match==1,][c("pid","did")], # merge pardon id
+                                    df.test[X.test$match==1,][c("pid","did")]),
+                   by="did",
+                   all.x=TRUE)
 
 ## Preprocess matched data
 
@@ -296,3 +295,9 @@ delegates.rd[,vars.cont]<- sapply(vars.cont, function(i){
 # RD parameters
 cutoff <- 20000 # define cutoff
 upper <- 2*cutoff # define upper margin
+
+# Treatment status variable
+delegates.rd$treat <- ifelse(delegates.rd$realprop.60>=cutoff,1,0)
+
+delegates.rd$tot <- delegates.rd$treat
+delegates.rd$tot[delegates.rd$pardon==1] <-0
