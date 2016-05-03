@@ -9,13 +9,13 @@ require(rdrobust)
 require(doParallel)
 require(data.table)
 require(caret)
-require(AER)
 
 if(run.descriptive){
   require(reporttools)
   require(weights)
   require(plyr)
   require(gridExtra)
+  require(reshape)
 }
 
 # Set directories
@@ -32,7 +32,7 @@ source("votes.R")
 source("delegates.R") 
 source("rd-plots.R") 
 source("rd-balance.R") # req. rddensity.R, rddensity_fun.R, and rdbwdensity.R
-source("rd-estimates.R") # req. rdlocalrand functions
+source("rd-estimates.R") 
 
 if(run.descriptive){
   source("StFirst.R") # standardize first names fn
