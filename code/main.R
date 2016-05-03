@@ -8,6 +8,7 @@ require(ggplot2)
 require(rdrobust)
 require(doParallel)
 require(data.table)
+require(caret)
 
 if(run.descriptive){
   require(reporttools)
@@ -24,6 +25,7 @@ setwd(code.directory)
 
 # Source scripts (in order)
 source("StFirst.R") # standardize first names fn
+source("SuperLearner.R") # standardize first names fn
 source("pardons")
 source("votes.R")
 source("delegates.R") 

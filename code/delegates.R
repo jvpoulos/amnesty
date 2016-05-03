@@ -165,7 +165,7 @@ delegates$dem[rownames(delegates) %in% dem] <- 1
 delegates$confederate <- 0
 delegates$confederate[rownames(delegates) %in% confederate] <- 1
 
-# Merge delegates with votes
+## Merge delegates with votes
 delegates$did <- 1:nrow(delegates) # create unique delegate identifier
 votes$vid <- 1:nrow(votes) # create unique votes identifier
 
@@ -190,33 +190,94 @@ colnames(delegates)[1] <- "vid"
 colnames(delegates)[3] <- "name"
 colnames(delegates)[4] <- "state"
 colnames(delegates)[26] <- "surname"
-colnames(delegates)[27] <- "first.name"
+colnames(delegates)[27] <- "first.name"# for RLBigDataLinkage
 colnames(delegates)[28] <- "sound.first"
 colnames(delegates)[29] <- "sound.surname"
 
-# Merge delegates/votes with pardons
+## Merge delegates/votes with pardons
 pardons$pid <- 1:nrow(pardons) # create unique pardons identifier
 
-r.pairs.pardons <- compare.linkage(delegates[c("first.name", "surname", "state","sound.first","sound.surname")],
-                                   pardons[c("first.name", "surname", "state", "sound.first","sound.surname")])
+# Merge by soundex surname and state
+pardons.match <- merge(delegates,pardons,by=c("sound.surname","state")) 
 
-# min.train.pardons <- getMinimalTrain(r.pairs.pardons,nEx=20) 
-# min.train.pardons$pairs$is_match <- 0
-# min.train.pardons <- editMatch(min.train.pardons)
-# saveRDS(min.train.pardons, paste0(data.directory,"min_train_pardons.rds"))
+#resort by delegate id
+pardons.match <- pardons.match[order(pardons.match$did),]
 
-min.train.pardons <- readRDS(paste0(data.directory,"min_train_pardons.rds"))
+# create match id
+pardons.match$match.id <- 1:nrow(pardons.match)
 
-model.pardons <- trainSupv(min.train.pardons, method = "svm")
-result.pardons <- classifySupv(model.pardons , newdata = r.pairs.pardons)
-summary(result.pardons)
+# Create Jaro similarity measure on first name and surname
+pardons.match$jaro.surname <- jarowinkler(pardons.match$surname.x,pardons.match$surname.y) 
+pardons.match$jaro.first <- jarowinkler(pardons.match$first.name.x,pardons.match$first.name.y)
 
-links.pardons <- result.pardons$pairs[result.pardons$prediction=="L",][c("id1","id2")]
-links.pardons <- links.pardons[!duplicated(links.pardons$id1),] # remove duplicates
+# Create exact match variables
+pardons.match$exact.surname <- ifelse(pardons.match$surname.x==pardons.match$surname.y,1,0)
+pardons.match$exact.first.name <- ifelse(pardons.match$first.name.x==pardons.match$first.name.y,1,0)
 
-delegates <- merge(delegates, links.pardons, by.x="did",by.y="id1", all.x=TRUE)
-delegates <- merge(delegates, pardons, by.x="id2",by.y="pid", all.x=TRUE,suffixes=c(".del",".par"))
-colnames(delegates)[1] <- "pid"
+# Scale and center continuous vars
+preProcValues <- preProcess(pardons.match[c("jaro.surname","jaro.first")], method = c("center", "scale")) 
+pardons.match[c("jaro.surname","jaro.first")] <- predict(preProcValues, pardons.match[c("jaro.surname","jaro.first")])
+
+# Split 1/3 
+bound <- floor((nrow(pardons.match))*0.1)         #define % of training and test set
+
+set.seed(42) # set seed for reproducibility
+df <- pardons.match[sample(nrow(pardons.match)), ]           #sample rows 
+df.train <- df[1:bound, ]              #get training set
+df.test <- df[(bound+1):nrow(df), ]    #get test set
+
+df.train$is.match <- 0
+train.matches <- c(424,31,289,130,147,747) #match id
+df.train$is.match[df.train$match.id %in% train.matches] <-1
+
+# Create features vector
+X.train <-df.train[c("jaro.surname","jaro.first","exact.surname","exact.first.name")]
+X.test <-df.test[c("jaro.surname","jaro.first","exact.surname","exact.first.name")]
+
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+jaro.first.mode <- Mode(X.train$jaro.first) # impute missing data with training mode
+exact.first.mode <- Mode(X.train$exact.first.name)
+X.train$jaro.first[is.na(X.train$jaro.first)] <- jaro.first.mode
+X.train$exact.first.name[is.na(X.train$exact.first)] <- exact.first.mode
+
+X.test$jaro.first[is.na(X.test$jaro.first)] <- jaro.first.mode
+X.test$exact.first.name[is.na(X.test$exact.first)] <- exact.first.mode
+
+# Create outcomes vector
+Y.train <- as.matrix(df.train$is.match)
+
+# Train 
+# set.seed(42)
+# fitSL.link <- SuperLearner(Y=Y.train[,1],
+#                            X=data.frame(X.train),
+#                            SL.library=SL.library.class,
+#                            family="binomial") # glmnet response is 2-level factor
+
+# Save prediciton model
+saveRDS(fitSL.link, file = paste0(data.directory,"pardon_link.rds"))
+
+# Print summary table
+fitSL.link <- readRDS(paste0(data.directory,"pardon_link.rds"))
+
+# Use response model to predict test
+link.pred.test <- predict(fitSL.link, data.frame(X.test))$pred
+
+# Add predictions to test data
+X.test$match.prob <- as.numeric(link.pred.test) # match probability 
+X.test$match <- ifelse(X.test$match.prob>0,1,0) 
+
+# Merge training, test matches to delegates
+train.matches <- df.train$did[df.train$is.match==1]
+test.matches <- df.test$did[X.test$match==1]
+
+delegates$pardon <- 0
+delegates$pardon[delegates$did %in% c(train.matches, test.matches)] <- 1
+
+## Preprocess matched data
 
 # Subset data to nonmissing taxable property values
 delegates.rd <- subset(delegates, !is.na(taxprop.60))
