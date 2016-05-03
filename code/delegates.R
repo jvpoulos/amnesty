@@ -268,7 +268,7 @@ link.pred.test <- predict(fitSL.link, data.frame(X.test))$pred
 
 # Add predictions to test data
 X.test$match.prob <- as.numeric(link.pred.test) # match probability 
-X.test$match <- ifelse(X.test$match.prob>0,1,0) 
+X.test$match <- ifelse(X.test$match.prob>0.2,1,0) # 7 duplicates
 
 # Merge training, test matches to delegates
 train.matches <- df.train$did[df.train$is.match==1]
