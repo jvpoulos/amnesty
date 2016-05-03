@@ -59,6 +59,12 @@ print(grid.arrange(realprop.plot, persprop.plot,taxprop.plot,
 dev.off() 
 
 ## Create summary table for delegates
+pretreat.vars <- c("age","confederate","dem","former","unionist",
+                   "per.black",
+                   "farmer","lawyer","merchant","physician")
+
+response.vars <- c("persprop.70","realprop.70","taxprop.70","future","protest","overall","econ","gov","misc","race","suffrage")
+
 my.stats <- list("n", "min", "median", "mean", "max", 
                  "s", "na") # create table
 tableContinuous(vars =delegates[c("realprop.60","persprop.60","taxprop.60","realprop.70","persprop.70","taxprop.70",
@@ -67,7 +73,7 @@ tableContinuous(vars =delegates[c("realprop.60","persprop.60","taxprop.60","real
 
 ## Descriptive plot: overall RSS vs 1860 taxable property
 
-pdf(paste0(data.directory,"plots/rss-wealth.pdf"), width=8.27, height=11.69)
+pdf(paste0(data.directory,"plots/rss-wealth.pdf"), width=11.69, height=8.27)
 ggplot(delegates, aes(y=overall, x=taxprop.60)) + 
   geom_point(shape=19, alpha=1/4) + 
   xlab("Total census wealth in 1860 (1860$)") + 
@@ -82,7 +88,7 @@ dev.off()
 bin.melt <- melt(delegates[c("taxprop.60","former","unionist","dem","confederate")],
                   id.vars="taxprop.60")
 
-pdf(paste0(data.directory,"plots/bin-wealth.pdf"), width=8.27, height=11.69)
+pdf(paste0(data.directory,"plots/bin-wealth.pdf"), width=11.69, height=8.27)
 ggplot(data=bin.melt,aes(x=value,y= taxprop.60,colour=variable))+
   scale_y_continuous(limit=c(0,40000),labels = c("0", "10,000", "20,000", "30,000", "40,000")) +
   scale_x_continuous(breaks=c(0,1), labels=c("No","Yes")) +
@@ -122,7 +128,7 @@ exception.dat.m <- melt(exception.dat, id.vars = "State")
 
 colnames(exception.dat.m) <- c("State","Variable","value")
 
-pdf(paste0(data.directory,"plots/pardon-plot.pdf"), width=8.27, height=11.69)
+pdf(paste0(data.directory,"plots/pardon-plot.pdf"), width=11.69, height=8.27)
 ggplot(exception.dat.m, aes(State, value, fill = Variable)) +
   scale_y_continuous(labels = c("0", "10,000", "20,000", "30,000", "40,000")) +
   geom_bar(stat="identity") +

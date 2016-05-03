@@ -301,3 +301,6 @@ delegates.rd$treat <- ifelse(delegates.rd$realprop.60>=cutoff,1,0)
 
 delegates.rd$tot <- delegates.rd$treat
 delegates.rd$tot[delegates.rd$pardon==1] <-0
+
+# Compliance rate
+beta <- sum(delegates.rd$tot)/sum(delegates.rd$treat)

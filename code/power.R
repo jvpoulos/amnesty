@@ -2,24 +2,30 @@
 ### Power analysis                ###
 #####################################
 
-require(rdrobust)
+#require(rdrobust)
 
 # Define simulation parameters
 alpha <- 0.05
 L <- 100 # no. iterations 
-r.prob <- c(0.05, 0.25, 0.5) # effect size for binary
-delta <- c(5000, 10000, 20000) # effect size for continuous 
-s.size <- c(1000, 10000, 20000, 50000) # sample size
+# r.prob <- c(0.05, 0.25, 0.5) # effect size for binary
+# delta <- c(5000, 10000, 20000) # effect size for continuous 
+r.prob <- c(0.01,0.05,0.1,0.2,0.3,0.4,0.5)
+delta <- c(100,500,1000,5000,10000,20000,30000)
+#s.size <- c(1000, 10000, 20000, 50000) # sample size
+s.size <- c(35000) # sample size
+c.rate <- round(sum(delegates.rd$tot)/sum(delegates.rd$treat),digits=1)
+treat.rate <- round(sum(delegates.rd$treat)/nrow(delegates.rd),digits=1)
 
 # Create grid for parameters
-grid.wealth <- expand.grid("delta"=delta, "s.size"=s.size)
-grid.bin <- expand.grid("r.prob"=r.prob, "s.size"=s.size)
+grid.wealth <- expand.grid("delta"=delta, "s.size"=s.size, "c.rate"=c.rate,"treat.rate"=treat.rate)
+grid.bin <- expand.grid("r.prob"=r.prob, "s.size"=s.size,"c.rate"=c.rate,"treat.rate"=treat.rate)
+
 
 # Define RD parameters
-rv <- delegates.rd$taxprop.60 # running variable to sample from 
-cutoff <- 20000 # define cutoff
+#rv <- delegates.rd$taxprop.60 # running variable to sample from 
+c#utoff <- 20000 # define cutoff
 
-SimRD <- function(r.prob,delta, s.size, rv, cutoff){
+SimRD <- function(r.prob,delta, s.size,c.rate, rv, cutoff){
   # Simulate data
   design <-data.frame("rv"=sample(rv, s.size, replace=TRUE),
                       "response"=NA)
