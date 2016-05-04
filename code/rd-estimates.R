@@ -6,7 +6,7 @@
 ForestPlot <- function(d, xlab, ylab){
   # Forest plot for summary figure
   p <- ggplot(d, aes(x=x, y=y, ymin=y.lo, ymax=y.hi,colour=Analysis)) + 
-    geom_pointrange(size=1, alpha=0.5) + 
+    geom_pointrange(size=1, alpha=0.4) + 
     coord_flip() +
     geom_hline(aes(x=0), lty=2) +
     theme(legend.position="top") +

@@ -139,7 +139,7 @@ dev.off()
 
 # What % in thirteenth exception?
 sum(ipums.60.ex$thr==1) /nrow(ipums.60.ex) #1860 1%
-sum(delegates$taxprop.60 >= 20000, na.rm=TRUE) /nrow(delegates) #1860 delegates
+sum(delegates.rd$treat) /nrow(delegates.rd) #1860 delegates
 
 60000/nrow(ipums.60)
 80000/nrow(ipums.60)

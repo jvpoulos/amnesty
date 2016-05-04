@@ -16,15 +16,6 @@ cct.pretreat.srd <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i],
                                                                bwselect="CCT",
                                                                kernel="uniform")) 
 
-# cct.pretreat.frd <- lapply(1:length(pretreat.vars), function(i){
-#   iv.result <- ivreg(delegates.rd[,pretreat.vars[i]] ~ tot | treat, subset= ((realprop.60 >= cutoff & realprop.60 <= (cutoff+cct.pretreat.srd[[i]]$h)) |
-#                                                                                (realprop.60 < cutoff & realprop.60 >= (cutoff-cct.pretreat.srd[[i]]$h))),
-#                      data=delegates.rd)
-#   return(list("CI"= c(confint(iv.result)[2],confint(iv.result)[4]),
-#               "TOT.ATE"=iv.result$coefficients[[2]],
-#               "wald.p"=summary(iv.result)$coefficients[8]))})
-
-
 ik.pretreat.srd <- lapply(pretreat.vars, function(i) rdrobust(delegates.rd[,i], 
                                                               delegates.rd$taxprop.60,
                                                               c=cutoff,
@@ -58,7 +49,6 @@ covars.names <- c("Age","Confederate","Democrat","Former officeholder","Unionist
 
 covars <- data.frame("covars"=covars.names,
                      "p.cct.srd"=sapply(cct.pretreat.srd, "[[", "pv")[3,], # CCT: robust 
-                     #                   "p.cct.frd"=sapply(cct.pretreat.frd, "[[", "pv")[3,])
                      "p.ik.srd"= sapply(ik.pretreat.srd, "[[", "pv")[1,],  # IK: conventional 
                      "p.cv.srd"= sapply(cv.pretreat.srd, "[[", "pv")[1,])  # CV: conventional 
 
@@ -91,7 +81,7 @@ covars$covars <- factor(covars$covars,levels=unique(covars$covars)[length(covars
 p <- ggplot(covars,aes(y=p.cct.srd,x=covars)) +  
   coord_flip(ylim = c(0, 1)) + 
   geom_hline(yintercept = 0.05,size=.5,colour="blue",linetype="dotted") +
-  scale_colour_manual(name="Bandwidth selector", values =c("CV"="orange", "IK"="blue", "CCT"="red")) +
+  scale_colour_manual(name="Estimator/bandwidth selector", values =c("CV"="orange", "IK"="blue", "CCT"="red")) +
   #scale_colour_manual(name="Estimator", values =c("SRD"="orange", "FRD"="blue")) +
   geom_point(aes(colour ='CCT'),size=2) + 
   geom_point(aes(y=p.ik.srd,x=covars,colour ='IK'), size=2) +
@@ -190,6 +180,6 @@ dens.plot <- ggplot(dens.dat, aes(x=cutoff, y=y)) +
   geom_vline(xintercept = cutoff,size=.5,colour="red",linetype="dashed") +
   coord_flip() +
   scale_x_continuous(name="Value of total census wealth used as cutoff (1860$)",breaks=c(0,cutoff,cutoff*2,cutoff*3),labels=c("0","20,000","30,000","40,000")) +
-  scale_y_continuous(name="p-value for manipulation test",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) 
+  scale_y_continuous(name="SRD p-value",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) 
 
 ggsave(paste0(data.directory,"plots/density-plot.pdf"), dens.plot, width=8.27, height=11.69)

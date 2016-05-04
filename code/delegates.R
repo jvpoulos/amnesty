@@ -262,7 +262,7 @@ link.pred.test <- predict(fitSL.link, data.frame(X.test))$pred
 
 # Add predictions to test data
 X.test$match.prob <- as.numeric(link.pred.test) # match probability 
-X.test$match <- ifelse(X.test$match.prob>0.5,1,0) 
+X.test$match <- ifelse(X.test$match.prob>0,1,0) 
 
 # Merge training, test matches to delegates
 train.matches.did <- df.train$did[df.train$is.match==1]
@@ -270,11 +270,6 @@ test.matches.did <- unique(df.test$did[X.test$match==1]) # duplicates
 
 delegates$pardon <- 0
 delegates$pardon[delegates$did %in% c(train.matches.did, test.matches.did)] <- 1
-
-delegates <- merge(delegates, rbind(df.train[df.train$is.match==1,][c("pid","did")], # merge pardon id
-                                    df.test[X.test$match==1,][c("pid","did")]),
-                   by="did",
-                   all.x=TRUE)
 
 ## Preprocess matched data
 
@@ -297,7 +292,7 @@ cutoff <- 20000 # define cutoff
 upper <- 2*cutoff # define upper margin
 
 # Treatment status variable
-delegates.rd$treat <- ifelse(delegates.rd$realprop.60>=cutoff,1,0)
+delegates.rd$treat <- ifelse(delegates.rd$taxprop.60>=cutoff,1,0)
 
 delegates.rd$tot <- delegates.rd$treat
 delegates.rd$tot[delegates.rd$pardon==1] <-0
