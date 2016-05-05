@@ -132,6 +132,7 @@ pdf(paste0(data.directory,"plots/pardon-plot.pdf"), width=11.69, height=8.27)
 ggplot(exception.dat.m, aes(State, value, fill = Variable)) +
   scale_y_continuous(labels = c("0", "10,000", "20,000", "30,000", "40,000")) +
   geom_bar(stat="identity") +
+  geom_text(aes(label = value), size = 3, hjust = 0.5, vjust = 3, position =     "stack") +
   xlab("State") +
   ylab("Count")
 dev.off()

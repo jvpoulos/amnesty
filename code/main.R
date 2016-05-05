@@ -16,6 +16,7 @@ if(run.descriptive){
   require(plyr)
   require(gridExtra)
   require(reshape)
+  require(scales)
 }
 
 # Set directories
