@@ -33,50 +33,22 @@
 # 
 # write.csv(ipums.50, file = "ipums-1850-100-sample.csv", row.names = TRUE)
 
+## 1850 100% sample
+
 # Import 100% sample
 ipums.50 <- read.csv(paste0(data.directory,"ipums-1850-100-sample.csv"),header=TRUE, sep = ",")
+
+## 1850 1% sample
 
 # Import 1% sample
 ipums.50.1 <- read.delim(paste0(data.directory,"ipums-1850-1-sample.csv"))
 
-CleanIpums <- function(ipums,one.perc=TRUE) {
-  # Clean IPUMS 1% /slavepums (one.perc=FALSE)
-  
-  if(one.perc){
-    # Subset to individuals with nonzero and nonmissing real property 
-    ipums <- subset(ipums, realprop>0)
-    
-    # Remove non-alphabetic characters from name and make all uppercase
-    ipums$surname<- trimws(toupper(gsub("[^[:alpha:] ]", "",ipums$namelast))) 
-    ipums$first <- trimws(toupper(gsub("[^[:alpha:] ]", "",ipums$namefrst))) 
-  }
-  
-  # Trim spaces in surname
-  ipums$surname <- gsub(" ","",ipums$surname)
-  ipums$first <- gsub("  ", " ",ipums$first)
-
-  # Split first and middle name
-  ipums$first <- trimws(unlist(lapply(strsplit(ipums$first," "), function(x) x[1])))
-  ipums$middle.name <- trimws(unlist(lapply(strsplit(ipums$first," "), function(x) x[2])))
-  
-  # Drop obs with missing names
-  ipums$surname.length <- nchar(ipums$surname)
-  ipums$first.length <- nchar(ipums$first)
-  ipums <- subset(ipums, surname.length>2 & first.length>0)
-  
-  # Standardize first name
-  ipums$first <- StFirst(ipums$first)
-  
-  # Create soundex of first and surnames
-  ipums$sound.surname <- soundex(ipums$surname)
-  ipums$sound.first <- soundex(ipums$first)
-  
-  return(ipums)
-}
 ipums.50.1 <- CleanIpums(ipums.50.1)
 
 # Chain 1850 values to 1860$
 ipums.50.1$realprop <- ipums.50.1$realprop/(7.57/8.06)
+
+## 1850 Slavepums
 
 # Import slave file
 slave.50 <- read.csv(paste0(data.directory,"slavepums-1850-linked.csv"),header=TRUE, sep = ",")

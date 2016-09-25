@@ -26,7 +26,7 @@ code.directory <- "~/Dropbox/github/amnesty/code/"
 setwd(code.directory)
 
 # Source scripts (in order)
-source("StFirst.R") # standardize first names fn
+source("utils.R")
 source("SuperLearner.R")
 source("pardons")
 source("votes.R")
@@ -36,7 +36,6 @@ source("rd-balance.R") # req. rddensity.R, rddensity_fun.R, and rdbwdensity.R
 source("rd-estimates.R") 
 
 if(run.descriptive){
-  source("StFirst.R") # standardize first names fn
   source("ipums-1850.R")
   source("ipums-1860.R")
   source("descriptive.R")
