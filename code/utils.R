@@ -1,3 +1,19 @@
+Capwords <- function(s, strict = FALSE) {
+  cap <- function(s) paste(toupper(substring(s, 1, 1)),
+                           {s <- substring(s, 2); if(strict) tolower(s) else s},
+                           sep = "", collapse = " " )
+  sapply(strsplit(s, split = " "), cap, USE.NAMES = !is.null(names(s)))
+}
+
+FreqFunc <- function(x, n){
+  tail(sort(table(unlist(strsplit(as.character(x), ", ")))), n)
+}
+
+Mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
 StFirst <- function(first) {
   first  <-gsub("PAT$","PATRICK", first)
   first  <-gsub("DANL$","DANIEL", first)
@@ -79,9 +95,16 @@ StFirst <- function(first) {
   first  <-gsub("ALFREDWARD$","ALFRED", first)
 }
 
-CleanIpums <- function(ipums,one.perc=TRUE) {
-  # Clean IPUMS 1% /slavepums (one.perc=FALSE)
+StCounty <- function(county) {
+  county <- gsub("[[:punct:]]", " ", county)
+  county <- gsub("Petersburg  Independent City", "Petersburg", county)
+  county <- gsub("Portsmouth  Independent City", "Portsmouth", county)
+  county <- gsub("Alexandria  Independent City", "Alexandria", county)
   
+  county <- Capwords(county)
+}
+
+CleanIpums <- function(ipums,one.perc=FALSE,complete=TRUE) {
   if(one.perc){
     # Subset to individuals with nonzero and nonmissing real property 
     ipums <- subset(ipums, realprop>0)
@@ -99,22 +122,26 @@ CleanIpums <- function(ipums,one.perc=TRUE) {
   ipums$first <- trimws(unlist(lapply(strsplit(ipums$first," "), function(x) x[1])))
   ipums$middle.name <- trimws(unlist(lapply(strsplit(ipums$first," "), function(x) x[2])))
   
+  # Standardize first name
+  ipums$first <- StFirst(ipums$first)
+  
   # Drop obs with missing names
   ipums$surname.length <- nchar(ipums$surname)
   ipums$first.length <- nchar(ipums$first)
   ipums <- subset(ipums, surname.length>2 & first.length>0)
   
-  # Standardize first name
-  ipums$first <- StFirst(ipums$first)
+  if(complete){
+
+  # Standardize county
+  ipums$county <- StCounty(ipums$county)
+  }
   
   # Create soundex of first and surnames
   ipums$sound.surname <- soundex(ipums$surname)
   ipums$sound.first <- soundex(ipums$first)
   
+  # Create first name initial
+  ipums$first.initial <- substring(ipums$first, 1, 1) 
+  
   return(ipums)
-}
-
-Mode <- function(x) {
-  ux <- unique(x)
-  ux[which.max(tabulate(match(x, ux)))]
 }

@@ -38,6 +38,8 @@ source("rd-estimates.R")
 if(run.descriptive){
   source("ipums-1850.R")
   source("ipums-1860.R")
+  source("ipums-1870.R")
+  source("record-link.R")
   source("descriptive.R")
 }
 
