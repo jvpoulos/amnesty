@@ -44,5 +44,6 @@ if(run.descriptive){
 }
 
 if(run.power){
-  source("power.R")
+  source("power-indiv.R")
+  source("power-county.R")
 }

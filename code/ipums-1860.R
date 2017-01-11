@@ -70,3 +70,9 @@ slave.60 <- subset(slave.60[!duplicated(slave.60$id),], select=c("id","surname",
 
 colnames(slave.60) <- c("slavepums.id","surname","first","middle.name","surname.length",
                         "first.length","first.initial","sound.surname","sound.first","n.slaves","state","county")
+
+## Counties
+census.county.1860 <- read.csv(paste0(data.directory,"census-county-1860.csv"), stringsAsFactors=FALSE)
+icpsrcnt <- read.delim(paste0(data.directory,"icpsrcnt.txt"), comment.char="#")
+
+census.county.1860 <- merge(census.county.1860,icpsrcnt, by.x =c("state","county"), by.y = c("STATEICP","County.cod"))

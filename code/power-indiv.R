@@ -2,10 +2,6 @@
 ### Power analysis                ###
 #####################################
 
-load("delegates.RData")
-
-require(rdrobust)
-
 # Define simulation parameters
 alpha <- 0.05
 L <- 100 # no. iterations 
@@ -51,8 +47,8 @@ p.vals.wealth <- replicate(L,
                                    rv, cutoff)}))
 
 p.vals.wealth.array <- t(sapply(1:L, function(i) array(p.vals.wealth[,i])))  # rows: iterations
-saveRDS(p.vals.wealth.array, "power_p_values_wealth.rds")
-# p.vals.wealth.array <- readRDS(paste0(data.directory,"power_p_values_wealth_fixed.rds"))
+saveRDS(p.vals.wealth.array, "power_p_values_wealth_indiv.rds")
+# p.vals.wealth.array <- readRDS(paste0(data.directory,"power_p_values_wealth_indiv.rds"))
 
 grid.wealth$power <- apply(p.vals.wealth.array, 2, function (x) length(which(x < alpha))/L)
 
@@ -65,7 +61,7 @@ p.vals.bin <- replicate(L,
 
 p.vals.bin.array <- t(sapply(1:L, function(i) array(p.vals.bin[,i])))
 saveRDS(p.vals.bin.array, "power_p_values_bin.rds")
-# p.vals.bin.array<- readRDS(paste0(data.directory,"power_p_values_bin_fixed.rds"))
+# p.vals.bin.array<- readRDS(paste0(data.directory,"power_p_values_bin_indiv.rds"))
 
 grid.bin$power <- apply(p.vals.bin.array, 2, function (x) length(which(x < alpha))/L)
 
@@ -75,8 +71,8 @@ power.plot.wealth <- ggplot(data=grid.wealth, aes(x=s.size,
                                                   group = as.factor(delta), 
                                                   colour = as.factor(delta))) +
   geom_line() +
-  scale_colour_discrete(name = "Effect size", labels=c("$5,000","$10,000", "$20,000")) +
-  scale_x_continuous(breaks=s.size, labels = c("1,000", "10,000", "20,000", "50,000")) +
+  scale_colour_discrete(name = "Effect size", labels=c("$100","$500","$1,000","$5,000","$10,000")) +
+  scale_x_continuous(breaks=s.size, labels = c("1,000", "5,000", "13,000", "35,000")) +
   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
   ylab("") +
@@ -88,8 +84,8 @@ power.plot.bin <- ggplot(data=grid.bin, aes(x=s.size,
                                                   group = as.factor(r.prob), 
                                                   colour = as.factor(r.prob))) +
   geom_line() +
-  scale_colour_discrete(name = "Effect size", labels=c("5%","25%", "50%")) +
-  scale_x_continuous(breaks=s.size, labels = c("1,000", "10,000", "20,000", "50,000")) +
+  scale_colour_discrete(name = "Effect size", labels=c("1.25%","5%", "2.5%","5%","10%")) +
+  scale_x_continuous(breaks=s.size, labels = c("1,000", "5,000", "13,000", "35,000")) +
   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
   geom_vline(xintercept = 35000, colour="red", linetype = 2) +
@@ -102,33 +98,3 @@ pdf(paste0(data.directory,"plots/power-indiv.pdf"), width=8.27, height=11.69)
 print(grid.arrange(power.plot.wealth, power.plot.bin,
                    ncol=1, nrow=2, left="Power", bottom="Sample size")) 
 dev.off() 
-
-# # Fixed sample size
-# # Create plots
-# power.plot.wealth <- ggplot(data=grid.wealth, aes(x=delta, 
-#                                                   y=power)) +
-#   geom_line() +
-#   scale_x_continuous(breaks=delta, labels = c("100","500","1,000","5,000","10,000","20,000")) +
-#   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
-#   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-#   ylab("") +
-#   xlab("") +
-#   ggtitle("Continuous response (N=35,000)")
-# 
-# power.plot.bin <- ggplot(data=grid.bin, aes(x=r.prob, 
-#                                                y=power)) +
-#   geom_line() +
-#   scale_x_continuous(breaks=r.prob, labels = c("0.025", "0.05", "0.1", "0.2", "0.4", "0.5")) +
-#   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
-#   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-#   ylab("") +
-#   xlab("") +
-#   ggtitle("Binary response (N=35,000)")
-# 
-# # Combine plots
-# pdf(paste0(data.directory,"plots/power-plots-fixed.pdf"), width=8.27, height=11.69)
-# print(grid.arrange(power.plot.wealth, power.plot.bin,
-#                    ncol=1, nrow=2, left="Power", bottom="Effect size")) 
-# dev.off() 

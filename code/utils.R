@@ -145,3 +145,49 @@ CleanIpums <- function(ipums,one.perc=FALSE,complete=TRUE) {
   
   return(ipums)
 }
+
+SimRD <- function(r.prob,delta, s.size, rv, cutoff){
+  # Simulate data
+  design <-data.frame("rv"=sample(rv, s.size, replace=TRUE),
+                      "response"=NA)
+  if(!is.null(r.prob)){
+    design$response[design$rv >= cutoff] <- rbinom(nrow(design[design$rv >= cutoff,]), 1, 0.1 + r.prob)
+    design$response[design$rv < cutoff] <- rbinom(nrow(design[design$rv < cutoff,]), 1, 0.1)
+  }
+  if(!is.null(delta)){
+    design$response[design$rv >= cutoff] <- rnorm(nrow(design[design$rv >= cutoff,]), 3000+delta, sd=25000)
+    design$response[design$rv < cutoff] <- rnorm(nrow(design[design$rv < cutoff,]), 3000, sd=25000)
+  } 
+  # Fit the model
+  fit <- rdrobust(design$response, 
+                  design$rv,
+                  c=cutoff,
+                  bwselect="CCT",
+                  kernel="uniform")
+  # Return p value
+  return(summary(fit)$coef[12]) 
+}
+
+normalize <- function(x){
+  (x-min(x))/(max(x)-min(x))
+}
+
+SimRegression <- function(delta, county.df){
+  # Simulate data
+  design <-data.frame("county"=county.df$county,
+                      "state"=county.df$state,
+                      "county.state" = paste(county.df$county,county.df$state),
+                      "excepted"=normalize(county.df$excepted.p),
+                      "beta"=county.df$beta,
+                      "response"=NA)
+  
+  design$response <- rnorm(nrow(design), 2*design$excepted*delta,0.1)
+  
+  design$response <- normalize(design$response) # make sure 0 to 1
+  
+  # Fit the model
+  fit <- lm(response ~ excepted + beta + factor(county), data = design)
+  
+  # Return p value
+  return(summary(fit)$coef[,4]['excepted']) 
+}
