@@ -67,12 +67,12 @@ Alabama	41	1	1270	Walker
 Alabama	41	1	1290	Washington
 Alabama	41	1	1310	Wilcox
 Alabama	41	1	1330	Winston/Hancock
-Alaska	81	2	2900	Northern District
-Alaska	81	2	2950	Southern District
-Alaska	81	2	3000	First Judicial District
-Alaska	81	2	3100	Second Judicial District
-Alaska	81	2	3200	Third Judicial District
-Alaska	81	2	3300	Fourth Judicial District
+Alaska	99	2	2900	Northern District
+Alaska	99	2	2950	Southern District
+Alaska	99	2	3000	First Judicial District
+Alaska	99	2	3100	Second Judicial District
+Alaska	99	2	3200	Third Judicial District
+Alaska	99	2	3300	Fourth Judicial District
 Arizona	61	4	10	Apache
 Arizona	61	4	30	Cochise
 Arizona	61	4	50	Coconino
@@ -299,7 +299,8 @@ Connecticut	1	9	150	Windham
 Delaware	11	10	10	Kent
 Delaware	11	10	30	New Castle
 Delaware	11	10	50	Sussex
-District of Columbia	98	11	10	District of Columbia
+District of				
+Columbia	99	11	10	District of Columbia
 Florida	43	12	10	Alachua
 Florida	43	12	30	Baker
 Florida	43	12	50	Bay
@@ -527,15 +528,15 @@ Georgia	44	13	3150	Wilcox
 Georgia	44	13	3170	Wilkes
 Georgia	44	13	3190	Wilkinson
 Georgia	44	13	3210	Worth
-Hawaii	82	15	10	Hawaii
-Hawaii	82	15	30	Honolulu
-Hawaii	82	15	70	Kauai
-Hawaii	82	15	90	Maui
-Hawaii	82	15	110	Unknown
-Hawaii	82	15	9997	Lanai
-Hawaii	82	15	9997	Molokai
-Hawaii	82	15	9997	Niihau
-Hawaii	82	15	9997	Oahu
+Hawaii	99	15	10	Hawaii
+Hawaii	99	15	30	Honolulu
+Hawaii	99	15	70	Kauai
+Hawaii	99	15	90	Maui
+Hawaii	99	15	110	Unknown
+Hawaii	99	15	9997	Lanai
+Hawaii	99	15	9997	Molokai
+Hawaii	99	15	9997	Niihau
+Hawaii	99	15	9997	Oahu
 Idaho	63	16	10	Ada
 Idaho	63	16	30	Adams
 Idaho	63	16	35	Alturas

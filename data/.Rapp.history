@@ -1,0 +1,2 @@
+load("/Users/jason/Dropbox/github/amnesty/data/power_p_values_bin.rds")
+load("/Users/jason/Dropbox/github/amnesty/data/pardon_link.rds")
