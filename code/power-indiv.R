@@ -17,28 +17,6 @@ grid.bin <- expand.grid("r.prob"=r.prob, "s.size"=s.size)
 rv <- delegates.rd$taxprop.60 # running variable to sample from 
 cutoff <- 20000 # define cutoff
 
-SimRD <- function(r.prob,delta, s.size, rv, cutoff){
-  # Simulate data
-  design <-data.frame("rv"=sample(rv, s.size, replace=TRUE),
-                      "response"=NA)
-  if(!is.null(r.prob)){
-    design$response[design$rv >= cutoff] <- rbinom(nrow(design[design$rv >= cutoff,]), 1, 0.1 + r.prob)
-    design$response[design$rv < cutoff] <- rbinom(nrow(design[design$rv < cutoff,]), 1, 0.1)
-  }
-  if(!is.null(delta)){
-    design$response[design$rv >= cutoff] <- rnorm(nrow(design[design$rv >= cutoff,]), 3000+delta, sd=25000)
-    design$response[design$rv < cutoff] <- rnorm(nrow(design[design$rv < cutoff,]), 3000, sd=25000)
-  } 
-  # Fit the model
-  fit <- rdrobust(design$response, 
-                  design$rv,
-                  c=cutoff,
-                  bwselect="CCT",
-                  kernel="uniform")
-  # Return p value
-  return(summary(fit)$coef[12]) 
-}
-
 p.vals.wealth <- replicate(L,
                            sapply(1:nrow(grid.wealth), function(i){
                              SimRD(r.prob=NULL,

@@ -5,7 +5,7 @@
 # Define simulation parameters
 alpha <- 0.05
 L <- 1000 # no. iterations 
-delta <- seq(0.1,0.7,0.1) # effect size for continuous 
+delta <- seq(0.1,0.4,0.05) # effect size for continuous 
 
 # Create grid for parameters
 grid.cont <- expand.grid("delta"=delta)
@@ -17,12 +17,10 @@ slave.60 <- merge(slave.60, census.county.1860[c("County","State","wmtot")], by.
 cutoff <- 20000 # define cutoff
 county.df <- ddply(slave.60, .(county,state), summarize,  excepted=sum(taxprop>=cutoff), wmtot=mean(wmtot))
 
-county.df$excepted.p <- county.df$excepted/county.df$wmtot
+county.df$compliers <- rbinom(nrow(county.df), county.df$excepted, 0.9)
+county.df$compliers[is.na(county.df$compliers)] <- 0
 
-county.df$beta <- rbinom(nrow(county.df), county.df$excepted, 0.9)/county.df$wmtot
-county.df$beta[is.na(county.df$beta)] <- 0
-
-county.df <- county.df[!is.na(county.df$excepted.p),] # remove LA county with missing pop. total
+county.df <- county.df[!is.na(county.df$excepted),] # remove LA county with missing pop. total
 
 p.vals.cont <- replicate(L,
                            sapply(1:nrow(grid.cont), function(i){
@@ -39,7 +37,7 @@ grid.cont$power <- apply(p.vals.cont.array, 2, function (x) length(which(x < alp
 power.plot.cont <- ggplot(data=grid.cont, aes(x=delta, 
                                                   y=power)) +
   geom_line() +
-  scale_x_continuous(breaks=delta, labels = c("10%","20%","30%","40%","50","60%","70%")) +
+  scale_x_continuous(breaks=delta, labels = c("10%","15%","20%","25%","30","35%","40%")) +
   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
