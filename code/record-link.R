@@ -223,15 +223,3 @@ link.1860.1870 <- link.1860.1870[ , !(names(link.1860.1870) %in% drops)]
 
 # Write linked sample to file
 write.csv(link.1860.1870, paste0(data.directory,"linked-sample-60-70.csv"))
-
-write.csv(link.1860.1870[c("pid","StableURL","self_residence_place_state","self_residence_place_county","self_empty_name_given","self_empty_name_surname",
-                           "pid.1870","StableURL.1870", "self_residence_place_state.1870", "self_residence_place_county.1870", "self_empty_name_given.1870",
-                           "self_empty_name_surname.1870")][link.1860.1870$self_residence_place_state=="Alabama",], paste0(data.directory,"linked-sample-60-70-AL.csv"))
-
-write.csv(link.1860.1870[c("pid","StableURL","self_residence_place_state","self_residence_place_county","self_empty_name_given","self_empty_name_surname",
-                           "pid.1870","StableURL.1870", "self_residence_place_state.1870", "self_residence_place_county.1870", "self_empty_name_given.1870",
-                           "self_empty_name_surname.1870")][link.1860.1870$self_residence_place_state=="Georgia",], paste0(data.directory,"linked-sample-60-70-GA.csv"))
-
-write.csv(link.1860.1870[c("pid","StableURL","self_residence_place_state","self_residence_place_county","self_empty_name_given","self_empty_name_surname",
-                           "pid.1870","StableURL.1870", "self_residence_place_state.1870", "self_residence_place_county.1870", "self_empty_name_given.1870",
-                           "self_empty_name_surname.1870")][link.1860.1870$self_residence_place_state=="Florida",], paste0(data.directory,"linked-sample-60-70-FL.csv"))
