@@ -1,3 +1,3 @@
 #!/bin/bash
 
-R --no-save < main.R
+R --no-save < code/main.R
