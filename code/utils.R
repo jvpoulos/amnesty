@@ -1,3 +1,28 @@
+# Create function for plot theme
+ThemeBw1 <- function(base_size = 11, base_family = "") {
+  theme_grey(base_size = base_size, base_family = base_family) %+replace%
+    theme(
+      axis.text.x =       element_text(size = base_size*.9, colour = "black",  hjust = .5 , vjust=1),
+      axis.text.y =       element_text(size = base_size, colour = "black", hjust = 0 , vjust=.5 ), # changes position of X axis text
+      axis.ticks =        element_blank(),
+      axis.title.y =      element_text(size = base_size,angle=90,vjust=.01,hjust=.1),
+      legend.position = "top"
+    )
+}
+
+# Summary figure for estimates
+ForestPlot <- function(d, xlab, ylab){
+  # Forest plot for summary figure
+  p <- ggplot(d, aes(x=x, y=y, ymin=y.lo, ymax=y.hi,colour=Analysis)) + 
+    geom_pointrange(size=1, alpha=0.4) + 
+    coord_flip() +
+    geom_hline(aes(yintercept=0), lty=2) +
+    theme(legend.position="top") +
+    ylab(xlab) +
+    xlab(ylab) #switch because of the coord_flip() above
+  return(p)
+}
+
 Capwords <- function(s, strict = FALSE) {
   cap <- function(s) paste(toupper(substring(s, 1, 1)),
                            {s <- substring(s, 2); if(strict) tolower(s) else s},
@@ -12,6 +37,11 @@ FreqFunc <- function(x, n){
 Mode <- function(x) {
   ux <- unique(x)
   ux[which.max(tabulate(match(x, ux)))]
+}
+
+NormalizeIt <- function(x){
+  x[!is.na(x)] <- (x[!is.na(x)]-min(x[!is.na(x)]))/(max(x[!is.na(x)])-min(x[!is.na(x)]))
+  return(x)
 }
 
 StFirst <- function(first) {

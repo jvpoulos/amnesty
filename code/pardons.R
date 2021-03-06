@@ -3,7 +3,7 @@
 ########################
 
 # Import data
-pardons.99 <- read.csv(paste0(data.directory,"pardons-exec-doc-99.csv"), header=TRUE, stringsAsFactors=FALSE)
+pardons.99 <- read.csv("data/pardons-exec-doc-99.csv", header=TRUE, stringsAsFactors=FALSE)
 
 # Row-bind columns
 pardons <- data.frame("name"=c(pardons.99$name1,pardons.99$name2,pardons.99$name3),

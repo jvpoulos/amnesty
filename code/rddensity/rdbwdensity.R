@@ -4,7 +4,7 @@
 ################################################################################
 #!version 0.1  31Mar2015
 
-source(paste0(code.directory,"rddensity/rddensity_fun.R"))
+source("code/rddensity/rddensity_fun.R")
 
 rdbwdensity <- function(X, c=0, p=2, kernel="", fitselect="", vce="", print.screen=TRUE) {
   

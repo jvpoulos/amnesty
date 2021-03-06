@@ -4,8 +4,8 @@
 
 ## 100% Sample
 # Load 1860 100% sample
-unzip(paste0(data.directory, "ipums-1860-100-sample.csv.zip"), exdir=data.directory) # unzip sample
-ipums.60 <- read.csv(paste0(data.directory,"ipums-1860-100-sample.csv"),header=TRUE, sep = ",") 
+unzip("data/ipums-1860-100-sample.csv.zip", exdir="data/") # unzip sample
+ipums.60 <- read.csv("data/ipums-1860-100-sample.csv",header=TRUE, sep = ",") 
 
 # Clean
 ipums.60 <- CleanIpums(ipums.60, complete = TRUE)
@@ -13,17 +13,17 @@ ipums.60 <- CleanIpums(ipums.60, complete = TRUE)
 ## Slavepums
 
 # Load flat and aux slave files
-unzip(paste0(data.directory, "slavepums-60-flat.csv.zip"), exdir=data.directory) # unzip sample
-unzip(paste0(data.directory, "slavepums-60-aux.csv.zip"), exdir=data.directory) # unzip sample
+unzip("data/slavepums-60-flat.csv.zip", exdir="data/") # unzip sample
+unzip("data/slavepums-60-aux.csv.zip", exdir="data/") # unzip sample
 
-slave.60.flat <- read.csv(paste0(data.directory,"slavepums-60-flat.csv"),header=TRUE, sep = ",")
-slave.60.aux <- read.csv(paste0(data.directory,"slavepums-60-aux.csv"),header=TRUE, sep = ",")
+slave.60.flat <- read.csv("data/slavepums-60-flat.csv",header=TRUE, sep = ",")
+slave.60.aux <- read.csv("data/slavepums-60-aux.csv",header=TRUE, sep = ",")
 
 # Link by serial
 slave.60 <- merge(slave.60.flat, slave.60.aux, by=c("serial"), all.x=TRUE)
 
 # State and county names
-icpsrcnt <- read.delim(paste0(data.directory,"icpsrcnt.txt"), comment.char="#",
+icpsrcnt <- read.delim("data/icpsrcnt.txt", comment.char="#",
                        col.names=c('state',	'stateicp',	'statefips'	,'county.code',	'county.name'))
 
 slave.60 <- merge(slave.60, icpsrcnt, 
@@ -51,7 +51,7 @@ slave.60$first <- trimws(toupper(gsub("[^[:alpha:] ]", "",slave.60$sh1fn)))
 slave.60 <- CleanIpums(slave.60,complete=FALSE)
 
 # Remove female slaveholders
-female.names.1860 <- read.csv(paste0(data.directory,"female-names-1860.csv"))
+female.names.1860 <- read.csv("data/female-names-1860.csv")
 
 slave.60$female <- ifelse(slave.60$first %in% female.names.1860$x,1,0)
 
@@ -72,7 +72,7 @@ colnames(slave.60) <- c("slavepums.id","surname","first","middle.name","surname.
                         "first.length","first.initial","sound.surname","sound.first","n.slaves","state","county")
 
 ## Counties
-census.county.1860 <- read.csv(paste0(data.directory,"census-county-1860.csv"), stringsAsFactors=FALSE)
-icpsrcnt <- read.delim(paste0(data.directory,"icpsrcnt.txt"), comment.char="#")
+census.county.1860 <- read.csv("data/census-county-1860.csv", stringsAsFactors=FALSE)
+icpsrcnt <- read.delim("data/icpsrcnt.txt", comment.char="#")
 
 census.county.1860 <- merge(census.county.1860,icpsrcnt, by.x =c("state","county"), by.y = c("STATEICP","County.cod"))

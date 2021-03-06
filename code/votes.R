@@ -8,7 +8,7 @@ registerDoParallel(4)
 RNGkind("L'Ecuyer-CMRG")
 
 # Set location of files
-vote.directory <- paste0(data.directory, "votes/", sep="")
+vote.directory <- "data/votes/"
 
 # Import vote files and append data row-wise
 vote.files <- c("AL-votes.csv","AR-votes.csv", "GA-votes.csv", "LA-votes.csv", "MS-votes.csv", "NC-votes.csv", "TX-votes.csv", "VA-votes.csv")
@@ -49,5 +49,3 @@ votes$bloc <- gsub("S.White", "Southern White", votes$bloc)
 votes$bloc[votes$bloc==""] <- NA
 
 votes <- votes[grep("Southern White",votes$bloc),]
-
-

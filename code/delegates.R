@@ -2,8 +2,10 @@
 ### Merge southern white delegates with votes and pardons   ###
 ##############################################################
 
+train <- FALSE
+
 # Import southern white delegates
-delegates <- read.csv(paste0(data.directory,"southern-white-delegates.csv"),header=TRUE, sep = ",")
+delegates <- read.csv("data/southern-white-delegates.csv",header=TRUE, sep = ",")
 
 # Remove empty lines
 delegates <- subset(delegates, !name=="") 
@@ -172,10 +174,13 @@ votes$vid <- 1:nrow(votes) # create unique votes identifier
 r.pairs <- compare.linkage(delegates[c("first.name", "surname", "state", "sound.first","sound.surname")],
                            votes[c("first.name", "surname", "state", "sound.first","sound.surname")])
 
-#min.train <- getMinimalTrain(r.pairs,nEx=10) 
-#min.train <- editMatch(min.train)
-#saveRDS(min.train, paste0(data.directory,"min_train_delegates.rds"))
-min.train <- readRDS(paste0(data.directory,"min_train_delegates.rds"))
+if(train){
+  min.train <- getMinimalTrain(r.pairs,nEx=10)
+  min.train <- editMatch(min.train)
+  saveRDS(min.train, "data/min_train_delegates.rds")
+}else{
+  min.train <- readRDS("data/min_train_delegates.rds")
+}
 
 model <- trainSupv(min.train, method = "svm")
 result <- classifySupv(model, newdata = r.pairs)
@@ -228,11 +233,6 @@ df.train$is.match[df.train$match.id %in% train.matches] <-1
 X.train <-df.train[c("jaro.surname","jaro.first","exact.surname","exact.first.name")]
 X.test <-df.test[c("jaro.surname","jaro.first","exact.surname","exact.first.name")]
 
-Mode <- function(x) {
-  ux <- unique(x)
-  ux[which.max(tabulate(match(x, ux)))]
-}
-
 jaro.first.mode <- Mode(X.train$jaro.first) # impute missing data with training mode
 exact.first.mode <- Mode(X.train$exact.first.name)
 X.train$jaro.first[is.na(X.train$jaro.first)] <- jaro.first.mode
@@ -244,25 +244,27 @@ X.test$exact.first.name[is.na(X.test$exact.first)] <- exact.first.mode
 # Create outcomes vector
 Y.train <- as.matrix(df.train$is.match)
 
-# Train 
-# set.seed(42)
-# fitSL.link <- SuperLearner(Y=Y.train[,1],
-#                            X=data.frame(X.train),
-#                            SL.library=SL.library.class,
-#                            family="binomial") # glmnet response is 2-level factor
-
-# Save prediciton model
-#saveRDS(fitSL.link, file = paste0(data.directory,"pardon_link.rds"))
-
-# Print summary table
-fitSL.link <- readRDS(paste0(data.directory,"pardon_link.rds"))
+if(train){
+  # Train 
+  set.seed(42)
+  fitSL.link <- SuperLearner(Y=Y.train[,1],
+                             X=data.frame(X.train),
+                             SL.library=SL.library.class,
+                             family="binomial") # glmnet response is 2-level factor
+  
+  # Save prediciton model
+  saveRDS(fitSL.link, file = "data/pardon_link.rds")
+}else{
+  # Print summary table
+  fitSL.link <- readRDS("data/pardon_link.rds")
+}
 
 # Use response model to predict test
 link.pred.test <- predict(fitSL.link, data.frame(X.test))$pred
 
 # Add predictions to test data
 X.test$match.prob <- as.numeric(link.pred.test) # match probability 
-X.test$match <- ifelse(X.test$match.prob>0,1,0) 
+X.test$match <- ifelse(X.test$match.prob>0.5,1,0) 
 
 # Merge training, test matches to delegates
 train.matches.did <- df.train$did[df.train$is.match==1]
@@ -277,10 +279,6 @@ delegates$pardon[delegates$did %in% c(train.matches.did, test.matches.did)] <- 1
 delegates.rd <- subset(delegates, !is.na(taxprop.60))
 
 # Normalize continuous variables to 0-1
-NormalizeIt <- function(x){
-  x[!is.na(x)] <- (x[!is.na(x)]-min(x[!is.na(x)]))/(max(x[!is.na(x)])-min(x[!is.na(x)]))
-  return(x)
-}
 
 vars.cont <- c("overall","per.black","age")
 delegates.rd[,vars.cont]<- sapply(vars.cont, function(i){

@@ -2,100 +2,50 @@
 ### RD estimates     ###
 ########################
 
-# Summary figure for estimates
-ForestPlot <- function(d, xlab, ylab){
-  # Forest plot for summary figure
-  p <- ggplot(d, aes(x=x, y=y, ymin=y.lo, ymax=y.hi,colour=Analysis)) + 
-    geom_pointrange(size=1, alpha=0.4) + 
-    coord_flip() +
-    geom_hline(aes(x=0), lty=2) +
-    theme(legend.position="top") +
-    ylab(xlab) +
-    xlab(ylab) #switch because of the coord_flip() above
-  return(p)
-}
-
 # Create vector for responsement variables
-response.vars <- c("persprop.70","realprop.70","taxprop.70","future","protest","overall","econ","gov","misc","race","suffrage")
+response.vars <- c("persprop.70","realprop.70","taxprop.70","persprop.d","realprop.d","taxprop.d","future","protest","overall")
 
 # Apply rdrobust over responses
 
-cct.response.srd <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i], 
+mserd.response.srd <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i], 
                                                                delegates.rd$taxprop.60,
-                                                               c=cutoff,
-                                                               all=TRUE,
-                                                               bwselect="CCT",
-                                                               kernel="uniform")) 
-
-ik.response.srd <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i], 
-                                                          delegates.rd$taxprop.60,
-                                                          c=cutoff,
-                                                          all=TRUE,
-                                                          bwselect="IK",
-                                                          kernel="uniform")) 
-
-cv.response.srd <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i], 
-                                                          delegates.rd$taxprop.60,
-                                                          c=cutoff,
-                                                          all=TRUE,
-                                                          bwselect="CV",
-                                                          kernel="uniform")) 
-
+                                                               c=cutoff)) 
 
 # Create data for plot
-response.dat <- data.frame(x = c("Personal property value",
-                                 "Real estate value",
-                                 "Total census wealth",
-                                 "Ex-post officeholder",
-                                 "Protested adoption of constitution",
-                                 "RSS: overall",
-                                 "RSS: economics",
-                                 "RSS: gov. structure",
-                                 "RSS: misc.",
-                                 "RSS: race",
-                                 "RSS: suffrage"),
-                           y = c(sapply(cct.response.srd, "[[", "coef")[3,], # CCT: robust estimates
-                                 sapply(cct.response.srd, "[[", "coef")[3,]/beta,
-                                 sapply(ik.response.srd, "[[", "coef")[1,],  # IK: conventional estimates
-                                 sapply(ik.response.srd, "[[", "coef")[1,]/beta,
-                                 sapply(cv.response.srd, "[[", "coef")[1,], # CV: conventional estimates
-                                 sapply(cv.response.srd, "[[", "coef")[1,]/beta),
-                           y.lo = c(sapply(cct.response.srd, "[[", "ci")[3,], # CCT: robust CIs
-                                    sapply(cct.response.srd, "[[", "ci")[3,]/beta,
-                                    sapply(ik.response.srd, "[[", "ci")[1,], # IK: conventional CIs
-                                    sapply(ik.response.srd, "[[", "ci")[1,]/beta,
-                                    sapply(cv.response.srd, "[[", "ci")[1,], # CV: conventional CIs
-                                    sapply(cv.response.srd, "[[", "ci")[1,]/beta),
-                           y.hi = c(sapply(cct.response.srd, "[[", "ci")[5,],
-                                    sapply(cct.response.srd, "[[", "ci")[5,]/beta,
-                                    sapply(ik.response.srd, "[[", "ci")[4,],
-                                    sapply(ik.response.srd, "[[", "ci")[4,]/beta,
-                                    sapply(cv.response.srd, "[[", "ci")[4,],
-                                    sapply(cv.response.srd, "[[", "ci")[4,]/beta))
+response.dat <- data.frame(x = c(paste0("Personal property value in 1870,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("persprop.70")]))), nsmall=0, big.mark=",")),
+                                 paste0("Real estate value in 1870,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("realprop.70")]))), nsmall=0, big.mark=",")),
+                                 paste0("Total census wealth in 1870,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("taxprop.70")]))), nsmall=0, big.mark=",")),
+                                 paste0("Change in personal property value, 1860-1870,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("persprop.d")]))), nsmall=0, big.mark=",")),
+                                 paste0("Change in real estate value, 1860-1870,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("realprop.d")]))), nsmall=0, big.mark=",")),
+                                 paste0("Change in total census wealth, 1860-1870,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("taxprop.d")]))), nsmall=0, big.mark=",")),
+                                 paste0("Ex-post officeholder,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("future")]))), nsmall=0, big.mark=",")),
+                                 paste0("Protested constitution,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("protest")]))), nsmall=0, big.mark=",")),
+                                 paste0("Republican support score,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("overall")]))), nsmall=0, big.mark=","))),
+                           y = c(sapply(mserd.response.srd, "[[", "coef")[3,], # mserd: robust estimates
+                                 sapply(mserd.response.srd, "[[", "coef")[3,]/beta),
+                           y.lo = c(sapply(mserd.response.srd, "[[", "ci")[3,], # mserd: robust CIs
+                                    sapply(mserd.response.srd, "[[", "ci")[3,]/beta),
+                           y.hi = c(sapply(mserd.response.srd, "[[", "ci")[5,],
+                                    sapply(mserd.response.srd, "[[", "ci")[5,]/beta))
 
-response.dat$Method <- c(rep("CCT",length(response.vars), each=2),
-                         rep("IK",length(response.vars), each=2),
-                         rep("CV",length(response.vars), each=2))
+response.dat$x <- as.factor(response.dat$x)
 
-response.dat$Analysis <- rep(rep(c("ITT","TOT"),each=length(response.vars)),3)
+response.dat$Analysis <- rep(rep(c("ITT","TOT"),each=length(response.vars)),1)
 
-# Plot forest plot
-suppressWarnings(response.dat$x <- factor(response.dat$x, levels=rev(response.dat$x))) # reverse order
+# Plot forest plots
 
-pdf(paste0(data.directory,"plots/rd_estimates_bin.pdf"), width=11.69, height=8.27)
-ForestPlot(response.dat[response.dat$x != "Real estate value" & 
-                          response.dat$x != "Personal property value" &
-                          response.dat$x != "Total census wealth",],
+ForestPlot(response.dat[c(7:9,16:18),],
            xlab="Treatment effect estimate",ylab="") +
+  scale_x_discrete(limits = rev(levels(drop.levels(response.dat$x[response.dat$x %in% response.dat[c(7:9,16:18),]$x])))) +
   scale_y_continuous(breaks = c(-1,0,1), labels = c("-1", "0", "1")) + 
-  facet_grid(.~Method) 
-dev.off() 
+  ggtitle("Reconstruction delegates") + theme(plot.title = element_text(hjust = 0.5))
 
-pdf(paste0(data.directory,"plots/rd_estimates_wealth.pdf"), width=11.69, height=8.27)
-ForestPlot(response.dat[response.dat$x == "Real estate value" | 
-                          response.dat$x == "Personal property value" |
-                          response.dat$x == "Total census wealth",],
+ggsave("data/plots/rd_estimates_bin.png", plot=last_plot(), scale=1.25)
+
+ForestPlot(response.dat[-c(7:9,16:18),],
            xlab="Treatment effect estimate",ylab="1870 census wealth (1860$)") +
+  scale_x_discrete(limits = rev(levels(drop.levels(response.dat$x[response.dat$x %in% response.dat[-c(7:9,16:18),]$x])))) +
   scale_y_continuous(breaks = c(-10000,0,10000,20000,30000), labels = c("-10,000","0","10,000","20,000","30,000")) + 
-  facet_grid(.~Method)
-dev.off() 
+  ggtitle("Reconstruction delegates") + theme(plot.title = element_text(hjust = 0.5))
+
+ggsave("data/plots/rd_estimates_wealth.png", plot=last_plot(), scale=1.25)

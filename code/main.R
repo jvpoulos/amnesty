@@ -1,48 +1,44 @@
-run.descriptive <- FALSE
-run.power <-FALSE
-
 # Libraries
-require(reshape2)
-require(RecordLinkage)
-require(ggplot2)
-require(rdrobust)
-require(doParallel)
-require(data.table)
-require(caret)
+library(reshape2)
+library(RecordLinkage)
+library(ggplot2)
+library(rdrobust)
+library(doParallel)
+library(data.table)
+library(caret)
+library(phonics)
+library(readxl)
+library(dplyr)
 
-if(run.descriptive){
-  require(reporttools)
-  require(weights)
-  require(plyr)
-  require(gridExtra)
-  require(reshape)
-  require(scales)
-}
+library(reporttools)
+library(weights)
+library(plyr)
+library(gridExtra)
+library(reshape)
+library(scales)
 
-# Set directories
-data.directory <- "~/Dropbox/github/amnesty/data/"
-code.directory <- "~/Dropbox/github/amnesty/code/"
+source("code/utils.R")
+source("code/SuperLearner.R")
 
-setwd(code.directory)
+# Prepare data
 
-# Source scripts (in order)
-source("utils.R")
-source("SuperLearner.R")
-source("pardons")
-source("votes.R")
-source("delegates.R") 
-source("rd-plots.R") 
-source("rd-balance.R") # req. rddensity.R, rddensity_fun.R, and rdbwdensity.R
-source("rd-estimates.R") 
+source("code/pardons.R") # pardon grants data
+source("code/votes.R") # delegate votes
+source("code/delegates.R") # Merge southern white delegates with votes and pardons (loads trained model)
 
-if(run.descriptive){
-  source("ipums-1860.R")
-  source("ipums-1870.R")
-  source("record-link.R")
-  source("descriptive.R")
-}
+source("code/slaveholders-1860.R") # 1860 slaveholders (loads trained model)
 
-if(run.power){
-  source("power-indiv.R")
-  source("power-county.R")
-}
+# RD plots and estimates
+source("code/rd-plots.R") # RD plots
+source("code/rd-balance.R") # RD balance plot for delegates
+source("code/rd-balance-slaveholders.R") # RD balance plot for 1860 slaveholders
+source("code/rd-estimates.R") # RD estimates for delegates
+source("code/rd-estimates-slaveholders.R") # RD estimates for 1860 slaveholders
+
+## Descriptive plots
+source("code/ipums-1860.R")
+source("code/ipums-1870.R")
+source("code/record-link.R") # defaults to no train
+source("code/descriptive.R")
+
+save.image("data/amnesty.RData")

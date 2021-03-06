@@ -1,5 +1,7 @@
 ## Link 1860 100% sample and slave sample to 1870 Census
 
+train <- FALSE
+
 # Merge by soundex surname, first initial, state and county
 
 ipums.60 <- transform(ipums.60,merge.id=paste0(ipums.60$sound.surname, ipums.60$first.initial, " ", ipums.60$county, ", ", ipums.60$state))
@@ -75,18 +77,20 @@ X.slave.test$jaro.first[is.na(X.slave.test$jaro.first)] <- jaro.first.mode
 Y.slave.train <- as.matrix(df.slave.train$is.link)
 
 # Train 
-# set.seed(42)
-# fitSL.slave.link <- SuperLearner(Y=Y.slave.train[,1],
-#                            X=data.frame(X.slave.train),
-#                            SL.library=SL.library.class,
-#                            family="binomial") # glmnet response is 2-level factor
-# 
-# #Save pred model
-# saveRDS(fitSL.slave.link, file = paste0(data.directory,"ipums-slave-link.rds"))
-
-# Print summary table
-fitSL.slave.link <- readRDS(paste0(data.directory,"ipums-slave-link.rds"))
-fitSL.slave.link
+if(train){
+  set.seed(42)
+  fitSL.slave.link <- SuperLearner(Y=Y.slave.train[,1],
+                                   X=data.frame(X.slave.train),
+                                   SL.library=SL.library.class,
+                                   family="binomial") # glmnet response is 2-level factor
+  
+  #Save pred model
+  saveRDS(fitSL.slave.link, file = paste0("data/ipums-slave-link.rds"))
+}else{
+  # Print summary table
+  fitSL.slave.link <- readRDS("data/ipums-slave-link.rds")
+  fitSL.slave.link
+}
 
 # Use response model to predict test
 slave.link.pred.test <- predict(fitSL.slave.link, data.frame(X.slave.test))$pred
@@ -181,18 +185,20 @@ X.test <-df.test[features]
 Y.train <- as.matrix(df.train$is.link)
 
 # Train 
-# set.seed(42)
-# fitSL.link <- SuperLearner(Y=Y.train[,1],
-#                            X=data.frame(X.train),
-#                            SL.library=SL.library.class,
-#                            family="binomial") # glmnet response is 2-level factor
-# 
-# #Save pred model
-# saveRDS(fitSL.link, file = paste0(data.directory,"ipums-link.rds"))
+if(train){
+  set.seed(42)
+  fitSL.link <- SuperLearner(Y=Y.train[,1],
+                             X=data.frame(X.train),
+                             SL.library=SL.library.class,
+                             family="binomial") # glmnet response is 2-level factor
 
-# Print summary table
-fitSL.link <- readRDS(paste0(data.directory,"ipums-link.rds"))
-fitSL.link
+  #Save pred model
+  saveRDS(fitSL.link, file = "data/ipums-link.rds")
+}else{
+  # Print summary table
+  fitSL.link <- readRDS("data/ipums-link.rds")
+  fitSL.link
+}
 
 # Use response model to predict test
 link.pred.test <- predict(fitSL.link, data.frame(X.test))$pred
@@ -206,7 +212,7 @@ df.test$is.link[df.test$link.id %in% df.test$link.id[X.test$is.link==1]] <-1
 # Merge training, test links to ipums
 link.df <- rbind(df.train[df.train$is.link==1,], df.test[df.test$is.link==1,])
 link.df <- link.df[!duplicated(link.df$pid.x),] # remove 1860 dups
-                        
+
 # Subset and rename 1870 vars
 link.df <- subset(link.df, select=c("pid.x","StableURL.y","pid.y","self_empty_name_surname.y", "self_empty_name_given.y", "self_residence_place_state.y", 
                                     "self_residence_place_county.y","self_residence_place_city.y","self_residence_info_age.y"))
@@ -222,4 +228,4 @@ drops <- c("sound.surname","first.initial","state","county","surname","first","m
 link.1860.1870 <- link.1860.1870[ , !(names(link.1860.1870) %in% drops)]
 
 # Write linked sample to file
-write.csv(link.1860.1870, paste0(data.directory,"linked-sample-60-70.csv"))
+write.csv(link.1860.1870, "data/linked-sample-60-70.csv")

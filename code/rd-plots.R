@@ -2,112 +2,121 @@
 ### RD plots     ###
 ########################
 
-options(scipen=999) # turn of scientific notation
+options(scipen=999) # turn off scientific notation
 
-# Data-driven plots
-RdPlot <- function(data=delegates.rd,y.var,x.var="taxprop.60",xlab="",poly=3,
-                   ylab,upperend=upper,ylim=NULL,continuous=FALSE){
-  # Data-driven regression discontinuity plots
-  if(continuous){
-  rdplot(y=data[,y.var],
-         x=data[,x.var],
-         c=cutoff,
-         p=poly, 
-         x.label=xlab,
-         y.label=ylab,
-         upperend=upper,
-         y.lim=ylim,
-         title="",
-         xaxt="n",
-         yaxt="n",
-         cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
-   box(bty='L')
-   axis(side=1, at=axTicks(1), labels=formatC(axTicks(1), format="d", big.mark=','))
-   axis(side=2, at=axTicks(2), labels=formatC(axTicks(2), format="d", big.mark=','))
-   text(x=10,y=-upper, paste("N=", nrow(data[!is.na(data[,y.var]),]), sep=""),cex=1.5)
-   } else{
-     rdplot(y=data[,y.var],
-            x=data[,x.var],
-            c=cutoff,
-            p=poly,
-            x.label=xlab,
-            y.label=ylab,
-            upperend=upper,
-            y.lim=ylim,
-            title="",
-            xaxt="n",
-            cex.lab=1.5, cex.axis=1.5, cex.main=1.5, cex.sub=1.5)
-     box(bty='L')
-     axis(side=1, at=axTicks(1), labels=formatC(axTicks(1), format="d", big.mark=','))
-     text(x=10,y=0, paste("N=", nrow(data[!is.na(data[,y.var]),]), sep=""),cex=1.5)
-  }
-}
+source("code/RdPlot.R")
 
-pdf(paste0(data.directory,"plots/realprop_70.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="realprop.70",
+# Delegates sample
+
+RdPlot(data=delegates.rd,
+       y.var="realprop.70",
        ylab="1870 real estate value (1860$)",
-       ylim = c(-upper,upper),
+       title="Reconstruction delegates",
        continuous=TRUE) 
-dev.off() 
+ggsave("data/plots/realprop_70.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/persprop_70.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="persprop.70",
+RdPlot(data=delegates.rd,
+       y.var="persprop.70",
        ylab="1870 personal property value (1860$)",
-       ylim = c(-upper,upper),
+       title="Reconstruction delegates",
        continuous=TRUE) 
-dev.off() 
+ggsave("data/plots/persprop_70.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/taxprop_70.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="taxprop.70",
+RdPlot(data=delegates.rd,
+       y.var="taxprop.70",
        ylab="1870 taxable property value (1860$)",
-       ylim = c(-upper,upper),
+       title="Reconstruction delegates",
        continuous=TRUE) 
-dev.off() 
+ggsave("data/plots/taxprop_70.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/future.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="future",
+RdPlot(data=delegates.rd,
+       y.var="realprop.d",
+       ylab="Change in real estate value, 1860-1870 (1860$)",
+       title="Reconstruction delegates",
+       continuous=TRUE) 
+ggsave("data/plots/realprop_d.png", plot=last_plot(), scale=1.25)
+
+RdPlot(data=delegates.rd,
+       y.var="persprop.d",
+       ylab="Change in personal property value, 1860-1870 (1860$)",
+       title="Reconstruction delegates",
+       continuous=TRUE) 
+ggsave("data/plots/persprop_d.png", plot=last_plot(), scale=1.25)
+
+RdPlot(data=delegates.rd,
+       y.var="taxprop.d",
+       ylab="Change in taxable property value, 1860-1870 (1860$)",
+       title="Reconstruction delegates",
+       continuous=TRUE) 
+ggsave("data/plots/taxprop_d.png", plot=last_plot(), scale=1.25)
+
+RdPlot(data=delegates.rd,
+       y.var="future",
        ylab="Ex-post officeholder",
+       title="Reconstruction delegates",
        ylim= c(0,1))
-dev.off() 
+ggsave("data/plots/future.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/overall.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="overall",
-       ylab="RSS: overall",
+RdPlot(data=delegates.rd,
+       y.var="overall",
+       ylab="Republican support score",
+       title="Reconstruction delegates",
        ylim= c(0,1))
-dev.off() 
+ggsave("data/plots/overall.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/race.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="race",
-       ylab="RSS: race",
+RdPlot(data=delegates.rd,
+       y.var="protest",
+       ylab="Protested constitution",
+       title="Reconstruction delegates",
        ylim= c(0,1))
-dev.off() 
+ggsave("data/plots/protest.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/misc.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="misc",
-       ylab="RSS: misc.",
-       ylim= c(0,1))
-dev.off() 
+# 1860 slaveholders sample
 
-pdf(paste0(data.directory,"plots/gov.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="gov",
-       ylab="RSS: gov. structure",
-       ylim= c(0,1))
-dev.off() 
+RdPlot(data=slaveholders.60.rd,
+       y.var="Real Estate 1870",
+       x.var="taxprop",
+       ylab="1870 real estate value (1860$)",
+       title="1860 slaveholders in the 1870 Census",
+       continuous=TRUE) 
+ggsave("data/plots/realprop_70_slaveholders.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/suffrage.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="suffrage",
-       ylab="RSS: suffrage",
-       ylim= c(0,1))
-dev.off() 
+RdPlot(data=slaveholders.60.rd,
+       y.var="Personal Estate 1870",
+       x.var="taxprop",
+       ylab="1870 personal property value (1860$)",
+       title="1860 slaveholders in the 1870 Census",
+       continuous=TRUE) 
+ggsave("data/plots/persprop_70_slaveholders.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/econ.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="econ",
-       ylab="RSS: economics",
-       ylim= c(0,1))
-dev.off() 
+RdPlot(data=slaveholders.60.rd,
+       y.var="taxprop.1870",
+       x.var="taxprop",
+       ylab="1870 taxable property value (1860$)",
+       title="1860 slaveholders in the 1870 Census",
+       continuous=TRUE) 
+ggsave("data/plots/taxprop_70_slaveholders.png", plot=last_plot(), scale=1.25)
 
-pdf(paste0(data.directory,"plots/protest.pdf"), width=11.69, height=8.27)
-RdPlot(y.var="protest",
-       ylab="Protested adoption of state constitution",
-       ylim= c(0,1))
-dev.off() 
+RdPlot(data=slaveholders.60.rd,
+       y.var="realprop.d",
+       x.var="taxprop",
+       ylab="Change in real estate value, 1860-1870 (1860$)",
+       title="1860 slaveholders in the 1870 Census",
+       continuous=TRUE) 
+ggsave("data/plots/realprop_d_slaveholders.png", plot=last_plot(), scale=1.25)
+
+RdPlot(data=slaveholders.60.rd,
+       y.var="persprop.d",
+       x.var="taxprop",
+       ylab="Change in personal property value, 1860-1870 (1860$)",
+       title="1860 slaveholders in the 1870 Census",
+       continuous=TRUE) 
+ggsave("data/plots/persprop_d_slaveholders.png", plot=last_plot(), scale=1.25)
+
+RdPlot(data=slaveholders.60.rd,
+       y.var="taxprop.d",
+       x.var="taxprop",
+       ylab="Change in taxable property value, 1860-1870 (1860$)",
+       title="1860 slaveholders in the 1870 Census",
+       continuous=TRUE) 
+ggsave("data/plots/taxprop_d_slaveholders.png", plot=last_plot(), scale=1.25)
