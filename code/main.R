@@ -2,6 +2,7 @@
 library(reshape2)
 library(RecordLinkage)
 library(ggplot2)
+options(bitmapType = 'cairo', device = 'png')
 library(rdrobust)
 library(doParallel)
 library(data.table)

@@ -5,14 +5,17 @@ Code and data for the paper "Amnesty Policy and Elite Persistence in the Postbel
 Prerequsites
 ------
 
-* **R** >= 3.5.0 (tested on 3.6.3)
+* **R** >= 3.5.0 (tested on 4.0.2)
 
 * package-list.R # required **R** packages
 
+* requires X11 and png graphics capabilities. Open **R** and type `capabilities()` to check. 
 
-Contents
+Instructions
 ------
 
-* `code/main.R`: prepare data; RD estimates and plots; descriptive plots
+1. Make directory for plots: `mkdir data/plots`
 
-* `code/power-indiv.R`: individual-level power analysis (defaults to no run)
+2. `chmod +x code/main.sh` and run from the command line. `code/main.R` prepares data and outputs RD plots, RD estimates, and descriptive plots. By default, it uses trained models for record linkage. 
+
+3. The file `code/power-indiv.R` performs individual-level power analysis. Defaults to run. 

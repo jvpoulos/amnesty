@@ -2,21 +2,31 @@
 ### Power analysis                ###
 #####################################
 
-run.power <- FALSE
+library(ggplot2)
+library(gridExtra)
+library(rdrobust)
+
+load("data/amnesty.RData") # load saved data
+
+source("code/utils.R")
+
+run.power <- TRUE
 
 # Define simulation parameters
 alpha <- 0.05
 L <- 100 # no. iterations 
-r.prob <- c(0.005,0.0125,0.025,0.05,0.1) # effect size for binary
-delta <- c(100,500,1000,5000,10000) # effect size for continuous 
-s.size <- c(1000, 5000, 13000, 35000) # sample size
+r.prob <- c(0.1,0.2, 0.3, 0.5, 0.7) # effect size for binary
+delta <- c(1000,5000,10000,15000,20000) # effect size for continuous 
+s.size.continuous <- c(400, 2500, 5000) # sample size
+s.size.binary <- c(400,2500,5000) 
 
 # Create grid for parameters
-grid.wealth <- expand.grid("delta"=delta, "s.size"=s.size)
-grid.bin <- expand.grid("r.prob"=r.prob, "s.size"=s.size)
+grid.wealth <- expand.grid("delta"=delta, "s.size"=s.size.continuous)
+grid.bin <- expand.grid("r.prob"=r.prob, "s.size"=s.size.binary)
 
 # Define RD parameters
-rv <- delegates.rd$taxprop.60 # running variable to sample from 
+rv <- slaveholders.60.rd$taxprop # running variable to sample from 
+
 cutoff <- 20000 # define cutoff
 
 if(run.power){
@@ -57,8 +67,8 @@ power.plot.wealth <- ggplot(data=grid.wealth, aes(x=s.size,
                                                   group = as.factor(delta), 
                                                   colour = as.factor(delta))) +
   geom_line() +
-  scale_colour_discrete(name = "Effect size", labels=c("$100","$500","$1,000","$5,000","$10,000")) +
-  scale_x_continuous(breaks=s.size, labels = c("1,000", "5,000", "13,000", "35,000")) +
+  scale_colour_discrete(name = "Effect size", labels=c("$1,000","$5,000","$10,000","$15,000","$20,000")) +
+  scale_x_continuous(breaks=s.size.continuous, labels = c("400", "2,500", "5,000")) +
   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
   ylab("") +
@@ -70,8 +80,8 @@ power.plot.bin <- ggplot(data=grid.bin, aes(x=s.size,
                                             group = as.factor(r.prob), 
                                             colour = as.factor(r.prob))) +
   geom_line() +
-  scale_colour_discrete(name = "Effect size", labels=c("1.25%","5%", "2.5%","5%","10%")) +
-  scale_x_continuous(breaks=s.size, labels = c("1,000", "5,000", "13,000", "35,000")) +
+  scale_colour_discrete(name = "Effect size", labels=c("10%","20%","30%","50%", "70%")) +
+  scale_x_continuous(breaks=s.size.binary, labels = c("400", "2,500", "5,000")) + 
   scale_y_continuous(breaks=c(0.25,0.50,0.75,0.8,1), labels = c("25%", "50%", "75%","80%","100%")) +
   geom_hline(yintercept = 0.8, colour="black", linetype = "longdash") +
   ylab("") +

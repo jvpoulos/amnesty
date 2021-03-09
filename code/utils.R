@@ -191,31 +191,7 @@ SimRD <- function(r.prob,delta, s.size, rv, cutoff){
   # Fit the model
   fit <- rdrobust(design$response, 
                   design$rv,
-                  c=cutoff,
-                  bwselect="CCT",
-                  kernel="uniform")
+                  c=cutoff)
   # Return p value
-  return(summary(fit)$coef[12]) 
-}
-
-SimRegression <- function(delta, county.df){
-  # Simulate data
-  design <-data.frame("county"=county.df$county,
-                      "state"=county.df$state,
-                      "county.state" = paste(county.df$county,county.df$state),
-                      "excepted"=county.df$excepted,
-                      "compliers"=county.df$compliers,
-                      "wmtot"=county.df$wmtot,
-                      "response.1860" = NA,
-                      "response"=NA)
-  
-  design$response.1860 <- rnorm(nrow(design), 0.5,0.1)
-  
-  design$response <- rnorm(nrow(design), design$response.1860 + scale(design$excepted)*delta,0.1)
-  
-  # Fit the model
-  fit <- lm(response ~ excepted + compliers + response.1860 + wmtot + factor(county), data = design)
-  
-  # Return p value
-  return(summary(fit)$coef[,4]['excepted']) 
+  return(fit$pv[3,]) 
 }
