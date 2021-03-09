@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --job-name="amnesty_main"
+#SBATCH -e amnesty_main.err
+#SBATCH -p scavenger
+#SBATCH -c 6
+#SBATCH --mem=25G
+
+# Load R
+module load R/4.0.3-rhel8
+
+#Run the job
+./code/main.sh

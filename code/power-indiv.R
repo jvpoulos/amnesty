@@ -38,7 +38,7 @@ if(run.power){
                                      rv, cutoff)}))
   
   p.vals.wealth.array <- t(sapply(1:L, function(i) array(p.vals.wealth[,i])))  # rows: iterations
-  saveRDS(p.vals.wealth.array, "power_p_values_wealth_indiv.rds")
+  saveRDS(p.vals.wealth.array, "data/power_p_values_wealth_indiv.rds")
 } else{
   p.vals.wealth.array <- readRDS("data/power_p_values_wealth_indiv.rds")
 }
@@ -54,7 +54,7 @@ if(run.power){
                                   rv, cutoff)}))
   
   p.vals.bin.array <- t(sapply(1:L, function(i) array(p.vals.bin[,i])))
-  saveRDS(p.vals.bin.array, "power_p_values_bin.rds")
+  saveRDS(p.vals.bin.array, "data/power_p_values_bin.rds")
 } else{
   p.vals.bin.array<- readRDS("data/power_p_values_bin_indiv.rds")
 }
