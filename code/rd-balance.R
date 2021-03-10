@@ -81,6 +81,6 @@ dens.plot <- ggplot(dens.dat, aes(x=cutoff, y=y)) +
   coord_flip() +
   scale_x_continuous(name="Value of total census wealth used as cutoff (1860$)",breaks=c(0,cutoff/2,cutoff,cutoff*2,cutoff*3),labels=c("0","10,000","20,000","30,000","40,000")) +
   scale_y_continuous(name="p-value",breaks=c(0,0.05,0.10,1),labels=c("0","0.05","0.10","1")) + 
-  ThemeBw1() + ggtitle(paste0("Reconstruction delegates, N=",format(nrow(delegates.rd), nsmall=0, big.mark=","))) + theme(plot.title = element_text(hjust = 0.5))
+  ggtitle(paste0("Reconstruction delegates, N=",format(nrow(delegates.rd), nsmall=0, big.mark=","))) + theme(plot.title = element_text(hjust = 0.5)) # ThemeBw1() + 
 
 ggsave("data/plots/density-plot.png", dens.plot, scale=1.25)
