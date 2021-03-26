@@ -17,7 +17,6 @@ ForestPlot <- function(d, xlab, ylab){
     geom_pointrange(size=1, alpha=0.4) + 
     coord_flip() +
     geom_hline(aes(yintercept=0), lty=2) +
-    theme(legend.position="top") +
     ylab(xlab) +
     xlab(ylab) #switch because of the coord_flip() above
   return(p)
