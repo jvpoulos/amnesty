@@ -18,7 +18,7 @@ realprop.plot <- ggplot(wealth.dens[wealth.dens$variable=="realprop",],
   geom_density(alpha=.3) + 
   scale_x_continuous(limits = c(1,50000), labels = c("0", "10,000", "20,000", "30,000", "40,000", "50,000")) +
   ylab("") +
-  xlab("Real estate value in 1860 (1860$)") 
+  xlab("Real estate value in 1860 (1860$)")
 
 persprop.plot <- ggplot(wealth.dens[wealth.dens$variable=="persprop",], 
                         aes(x = value, y= ..scaled.., fill=Sample)) + 
@@ -34,9 +34,21 @@ taxprop.plot <- ggplot(wealth.dens[wealth.dens$variable=="taxprop",],
   ylab("") +
   xlab("Total census wealth in 1860 (1860$)")
 
+# extract legend
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)}
+
+mylegend <-g_legend(taxprop.plot)
+
 # Combine plots
-ggsave("data/plots/wealth-plots.png", plot=grid.arrange(realprop.plot, persprop.plot,taxprop.plot,
-                                                        ncol=1, nrow=3, left="Scaled density", bottom="") , scale=1.25)
+ggsave("data/plots/wealth-plots.png", plot=grid.arrange(realprop.plot + theme(legend.position = "none"), 
+                                                        persprop.plot + theme(legend.position = "none"),
+                                                        taxprop.plot + theme(legend.position = "none"),
+                                                        mylegend,
+                                                        ncol=2, nrow=2, left="Scaled density", bottom="") , scale=1.25)
 
 ## Create summary table for delegates
 pretreat.vars <- c("age","confederate","dem","former","unionist",

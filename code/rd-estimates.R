@@ -2,14 +2,66 @@
 ### RD estimates     ###
 ########################
 
-# Create vector for responsement variables
-response.vars <- c("persprop.70","realprop.70","taxprop.70","future","protest","overall") # "persprop.d","realprop.d","taxprop.d",
+# Create vector for response variables
+response.vars <- c("persprop.70","realprop.70","taxprop.70","future","protest","overall")
+
+# Create vector for pretreatment variables for subgroup analysis
+pretreat.vars.subgroup <- c("confederate","dem","former","unionist")
 
 # Apply rdrobust over responses
 
 mserd.response.srd <- lapply(response.vars, function(i) rdrobust(delegates.rd[,i], 
                                                                delegates.rd$taxprop.60,
                                                                c=cutoff)) 
+
+# Sub-group analyses
+
+mserd.future.confederate <- rdrobust(delegates.rd[delegates.rd$confederate==1,][,"future"],  
+                                               delegates.rd$taxprop.60[delegates.rd$confederate==1],
+                                               c=cutoff)
+mserd.future.confederate$coef[3] # ITT
+mserd.future.confederate$ci[3,] 
+
+beta.confederate <- sum(delegates.rd[delegates.rd$confederate==1,]$tot)/sum(delegates.rd[delegates.rd$confederate==1,]$treat) # compliance rate
+
+mserd.future.confederate$coef[3]/beta.confederate # TOT
+mserd.future.confederate$ci[3,]/beta.confederate 
+
+mserd.future.dem <- rdrobust(delegates.rd[delegates.rd$dem==1,][,"future"],  
+                                     delegates.rd$taxprop.60[delegates.rd$dem==1],
+                                     c=cutoff)
+mserd.future.dem$coef[3] # ITT
+mserd.future.dem$ci[3,] 
+
+beta.dem <- sum(delegates.rd[delegates.rd$dem==1,]$tot)/sum(delegates.rd[delegates.rd$dem==1,]$treat) # compliance rate
+
+mserd.future.dem$coef[3]/beta.dem # TOT
+mserd.future.dem$ci[3,]/beta.dem 
+
+mserd.future.former <- rdrobust(delegates.rd[delegates.rd$former==1,][,"future"],  
+                             delegates.rd$taxprop.60[delegates.rd$former==1],
+                             c=cutoff)
+
+mserd.future.former$coef[3] # ITT
+mserd.future.former$ci[3,] 
+
+beta.former <- sum(delegates.rd[delegates.rd$former==1,]$tot)/sum(delegates.rd[delegates.rd$former==1,]$treat) # compliance rate
+
+mserd.future.former$coef[3]/beta.former # TOT
+mserd.future.former$ci[3,]/beta.former 
+
+mserd.future.unionist <- rdrobust(delegates.rd[delegates.rd$unionist==1,][,"future"],  
+                                delegates.rd$taxprop.60[delegates.rd$unionist==1],
+                                c=cutoff)
+summary(mserd.future.unionist)
+
+mserd.future.unionist$coef[3] # ITT
+mserd.future.unionist$ci[3,] 
+
+beta.unionist <- sum(delegates.rd[delegates.rd$unionist==1,]$tot)/sum(delegates.rd[delegates.rd$unionist==1,]$treat) # compliance rate
+
+mserd.future.unionist$coef[3]/beta.unionist # TOT
+mserd.future.unionist$ci[3,]/beta.unionist 
 
 # Create data for plot
 response.dat <- data.frame(x = c(paste0("Personal property value,\n N=",format(as.numeric(nrow(na.omit(delegates.rd[c("persprop.70")]))), nsmall=0, big.mark=",")),
