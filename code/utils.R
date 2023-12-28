@@ -1,5 +1,5 @@
 # Create function for plot theme
-ThemeBw1 <- function(base_size = 11, base_family = "") {
+ThemeBw1 <- function(base_size = 16, base_family = "") {
   theme_grey(base_size = base_size, base_family = base_family) %+replace%
     theme(
       axis.text.x =       element_text(size = base_size*.9, colour = "black",  hjust = .5 , vjust=1),
@@ -7,6 +7,18 @@ ThemeBw1 <- function(base_size = 11, base_family = "") {
       axis.ticks =        element_blank(),
       axis.title.y =      element_text(size = base_size,angle=90,vjust=.01,hjust=.1),
       legend.position = "top"
+    )
+}
+
+ThemeBw2 <- function(base_size = 16, base_family = "") {
+  theme_grey(base_size = base_size, base_family = base_family) %+replace%
+    theme(
+      axis.text.x =       element_text(size = base_size*.9, colour = "black",  hjust = .5 , vjust=1),
+      axis.text.y =       element_text(size = base_size, colour = "black", hjust = 0 , vjust=.5 ), # changes position of X axis text
+      axis.ticks =        element_blank(),
+      axis.title.y =      element_text(margin = unit(c(0, 3, 0, 0), "mm"), size = base_size,angle=90,vjust=.01,hjust=0.5),
+      legend.position = "top",
+      plot.title = element_text(margin = unit(c(0, 0, 3, 0), "mm"),hjust = 0.5)
     )
 }
 

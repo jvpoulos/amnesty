@@ -1,6 +1,20 @@
 # amnesty
-Code and data for the paper "Amnesty Policy and Elite Persistence in the Postbellum South: Evidence from a Regression Discontinuity Design"
+Code and data for the paper ["Amnesty Policy and Elite Persistence in the Postbellum South: Evidence from a Regression Discontinuity Design"](https://www.nowpublishers.com/article/Details/HPE-0013)
 
+Please cite the paper if you use this code for academic research:
+
+```
+@article{poulos2021amnesty,
+  title={Amnesty Policy and Elite Persistence in the Postbellum South: Evidence from a Regression Discontinuity Design},
+  author={Poulos, Jason},
+  journal={Journal of Historical Political Economy},
+  volume={1},
+  number={3},
+  pages={353--375},
+  year={2021},
+  publisher={Now Publishers, Inc.}
+}
+```
 
 Prerequsites
 ------
